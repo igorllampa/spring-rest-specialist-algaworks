@@ -1,0 +1,9 @@
+spring.profiles.active=prod,production
+server.port=18080
+
+#notificador.email.host=smtp.l2sistemas.com.br
+#notificador.email.porta=465
+
+
+parametro.impressora.modelo=elginI9
+parametro.impressora.porta=COM10

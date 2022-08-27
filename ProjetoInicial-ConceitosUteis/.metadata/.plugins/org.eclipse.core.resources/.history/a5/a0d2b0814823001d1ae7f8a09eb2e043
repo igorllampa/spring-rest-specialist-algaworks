@@ -1,0 +1,5 @@
+package com.lampasw.algafood.listener;
+
+public class NotificacaoServer {
+
+}

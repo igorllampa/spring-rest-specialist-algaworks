@@ -1,0 +1,5 @@
+package com.lampasw.algafood.di.service;
+
+public class ClienteAtivadoEvent {
+
+}

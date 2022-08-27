@@ -1,0 +1,5 @@
+spring.profiles.active=dev
+server.port=18080
+
+notificador.email.host=smtp.l2sistemas.com.br
+notificador.email.port=465

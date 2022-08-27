@@ -1,0 +1,13 @@
+package com.lampasw.algafood.di.service;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class ConfigurarionService {
+
+	@Bean(initMethod = "init", destroyMethod = "destroy")
+	public AtivacaoClienteService ativacaoClienteService() {
+		return new AtivacaoClienteService();
+	}
+}

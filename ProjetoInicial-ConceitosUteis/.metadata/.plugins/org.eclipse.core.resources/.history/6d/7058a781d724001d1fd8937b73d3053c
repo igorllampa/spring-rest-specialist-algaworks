@@ -1,0 +1,5 @@
+package com.lampasw.algafood.di.notificacao;
+
+public class NotificadorProperties {
+
+}
