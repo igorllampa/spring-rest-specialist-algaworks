@@ -5,21 +5,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Entity
-@Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Cozinha {
-	
-	@EqualsAndHashCode.Include
-	@Id	
+@Data
+public class Estado {
+
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@EqualsAndHashCode.Include
 	private Long id;
-			
+	
 	@Column(nullable = false)
-	private String nome;	
+	private String nome;
 }

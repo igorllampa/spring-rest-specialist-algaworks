@@ -3,6 +3,7 @@ package com.lampasw.algafood.domain.model;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,11 +24,13 @@ public class Restaurante {
 	@EqualsAndHashCode.Include
 	private Long id;
 	
+	@Column(nullable = false)
 	private String nome;
 		
+	@Column(name = "taxa_frete", nullable = false)
 	private BigDecimal taxaFrete;
 	
 	@ManyToOne
-	@JoinColumn(name = "cozinha_id")
+	@JoinColumn(name = "cozinha_id", nullable = false)
 	private Cozinha cozinha;
 }
