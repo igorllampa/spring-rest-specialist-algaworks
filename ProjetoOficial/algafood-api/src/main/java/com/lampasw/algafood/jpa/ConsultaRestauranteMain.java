@@ -23,7 +23,7 @@ public class ConsultaRestauranteMain {
 		RestauranteRepository restauranteRepository = applicationContext.getBean(RestauranteRepository.class);
 		CozinhaRepository cozinhaRepository = applicationContext.getBean(CozinhaRepository.class);
 				
-		Cozinha cozinha = cozinhaRepository.porId(1L);
+		Cozinha cozinha = cozinhaRepository.buscar(1L);
 		
 		Restaurante restaurante1 = new Restaurante();
 		restaurante1.setNome("MC Donalds");

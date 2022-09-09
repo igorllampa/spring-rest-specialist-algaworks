@@ -8,7 +8,9 @@ import org.springframework.context.ApplicationContext;
 
 import com.lampasw.algafood.AlgafoodApiApplication;
 import com.lampasw.algafood.domain.model.Cozinha;
+import com.lampasw.algafood.domain.model.FormaDePagamento;
 import com.lampasw.algafood.domain.repository.CozinhaRepository;
+import com.lampasw.algafood.domain.repository.FormaDePagamentoRepository;
 
 public class ConsultaFormaDePagamentoMain {
 
@@ -16,48 +18,35 @@ public class ConsultaFormaDePagamentoMain {
 		ApplicationContext applicationContext = new SpringApplicationBuilder(AlgafoodApiApplication.class)
 				.web(WebApplicationType.NONE)
 				.run(args);
-		
-		CozinhaRepository cozinhaRepository = applicationContext.getBean(CozinhaRepository.class);
-		
-		Cozinha cozinha1 = new Cozinha();
-		cozinha1.setNome("Japonesa");
-		cozinhaRepository.adicionar(cozinha1);
-		
-		Cozinha cozinha2 = new Cozinha();
-		cozinha2.setNome("Portuguesa");
-		cozinhaRepository.adicionar(cozinha2);
 					
-		List<Cozinha> cozinhas = cozinhaRepository.todas();
+		FormaDePagamentoRepository formaDePagamentoRepository = applicationContext.getBean(FormaDePagamentoRepository.class);
 		
-		for (Cozinha cozinha : cozinhas) {
-			System.out.println(cozinha.getNome());
-		}		
+		FormaDePagamento forma1 = new FormaDePagamento();
+		forma1.setDescricao("Cartão de Débito");
+		formaDePagamentoRepository.adicionar(forma1);
 		
-		Cozinha cozinhaBusca = cozinhaRepository.porId(1L);
-		System.out.println(cozinhaBusca.getId() + " - " + cozinhaBusca.getNome());
+		FormaDePagamento forma2 = new FormaDePagamento();
+		forma2.setDescricao("Boleto Bancário");
+		formaDePagamentoRepository.adicionar(forma2);
 		
+		for (FormaDePagamento forma : formaDePagamentoRepository.todas()) {
+			System.out.printf("%d - %s \n", forma.getId(), forma.getDescricao());			
+		}
+								
 		
-		cozinhaBusca.setNome(cozinhaBusca.getNome() + " - UPDATED");
-		cozinhaRepository.adicionar(cozinhaBusca);
+		FormaDePagamento formaDePagamentoBusca = formaDePagamentoRepository.porId(1L);
+		formaDePagamentoBusca.setDescricao(formaDePagamentoBusca.getDescricao()+ " - Updatede");
+		formaDePagamentoRepository.adicionar(formaDePagamentoBusca);
 		
-		cozinhas = cozinhaRepository.todas();
-		
-		for (Cozinha cozinha : cozinhas) {
-			System.out.println(cozinha.getNome());
-			
-			if (cozinha.getId() <= 4) {
-				cozinhaRepository.remover(cozinha);
-			}
+		for(FormaDePagamento forma : formaDePagamentoRepository.todas()) {
+			System.out.printf("%d - %s \n", forma.getId(), forma.getDescricao());
 		}
 		
-		cozinhas = cozinhaRepository.todas();
-		for (Cozinha cozinha : cozinhas) {
-			System.out.println(cozinha.getNome());
-			
-			if (cozinha.getId() <= 4) {
-				cozinhaRepository.remover(cozinha);
-			}
-		}					
-	}
+		formaDePagamentoRepository.remover(formaDePagamentoRepository.porId(1L));
+		
+		for(FormaDePagamento forma : formaDePagamentoRepository.todas()) {
+			System.out.printf("%d - %s \n", forma.getId(), forma.getDescricao());			
+		}
+}
 	
 }

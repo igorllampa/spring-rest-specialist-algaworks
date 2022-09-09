@@ -7,8 +7,12 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
 
 import com.lampasw.algafood.AlgafoodApiApplication;
+import com.lampasw.algafood.domain.model.Cidade;
 import com.lampasw.algafood.domain.model.Cozinha;
+import com.lampasw.algafood.domain.model.Estado;
+import com.lampasw.algafood.domain.repository.CidadeRepository;
 import com.lampasw.algafood.domain.repository.CozinhaRepository;
+import com.lampasw.algafood.domain.repository.EstadoRepository;
 
 public class ConsultaCidadeMain {
 
@@ -17,47 +21,39 @@ public class ConsultaCidadeMain {
 				.web(WebApplicationType.NONE)
 				.run(args);
 		
-		CozinhaRepository cozinhaRepository = applicationContext.getBean(CozinhaRepository.class);
+		CidadeRepository cidadeRepository = applicationContext.getBean(CidadeRepository.class);
+		EstadoRepository estadoRepository = applicationContext.getBean(EstadoRepository.class);
+				
+		Estado estado = new Estado();		
+		estado.setNome("Bahia");
+		estadoRepository.adicionar(estado);
+				
+		Estado estadoBahia = estadoRepository.porId(3L);
+		Cidade cidade1 = new Cidade();
+		cidade1.setNome("Porto Seguro");
+		cidade1.setEstado(estadoBahia);		
+		cidadeRepository.adicionar(cidade1);
+							
+		for (Cidade cidade : cidadeRepository.todas()) {
+			System.out.println(cidade.getNome() + " - " + cidade.getEstado().getNome());
+		}
+				
+		Cidade cidadeBusca = cidadeRepository.porId(2L);
+		cidadeBusca.setNome(cidadeBusca.getNome() + " - Updated");
+		cidadeRepository.adicionar(cidadeBusca);
 		
-		Cozinha cozinha1 = new Cozinha();
-		cozinha1.setNome("Japonesa");
-		cozinhaRepository.adicionar(cozinha1);
-		
-		Cozinha cozinha2 = new Cozinha();
-		cozinha2.setNome("Portuguesa");
-		cozinhaRepository.adicionar(cozinha2);
-					
-		List<Cozinha> cozinhas = cozinhaRepository.todas();
-		
-		for (Cozinha cozinha : cozinhas) {
-			System.out.println(cozinha.getNome());
-		}		
-		
-		Cozinha cozinhaBusca = cozinhaRepository.porId(1L);
-		System.out.println(cozinhaBusca.getId() + " - " + cozinhaBusca.getNome());
-		
-		
-		cozinhaBusca.setNome(cozinhaBusca.getNome() + " - UPDATED");
-		cozinhaRepository.adicionar(cozinhaBusca);
-		
-		cozinhas = cozinhaRepository.todas();
-		
-		for (Cozinha cozinha : cozinhas) {
-			System.out.println(cozinha.getNome());
-			
-			if (cozinha.getId() <= 4) {
-				cozinhaRepository.remover(cozinha);
+		for (Cidade cidade : cidadeRepository.todas()) {
+			System.out.printf("%s - %s \n", cidade.getNome(), cidade.getEstado().getNome());			
+		}					
+				
+		for (Cidade cidade : cidadeRepository.todas()) {
+			if(cidade.getId() >= 2) {
+				cidadeRepository.remover(cidade);
 			}
 		}
 		
-		cozinhas = cozinhaRepository.todas();
-		for (Cozinha cozinha : cozinhas) {
-			System.out.println(cozinha.getNome());
-			
-			if (cozinha.getId() <= 4) {
-				cozinhaRepository.remover(cozinha);
-			}
-		}					
-	}
-	
+		for(Cidade cidade : cidadeRepository.todas()) {
+			System.out.printf("%d - %s - %s \n", cidade.getId(), cidade.getNome(), cidade.getEstado().getNome());
+		}				
+	}	
 }

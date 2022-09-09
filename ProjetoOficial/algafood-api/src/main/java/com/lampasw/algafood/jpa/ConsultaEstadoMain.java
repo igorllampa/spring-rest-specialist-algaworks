@@ -8,7 +8,9 @@ import org.springframework.context.ApplicationContext;
 
 import com.lampasw.algafood.AlgafoodApiApplication;
 import com.lampasw.algafood.domain.model.Cozinha;
+import com.lampasw.algafood.domain.model.Estado;
 import com.lampasw.algafood.domain.repository.CozinhaRepository;
+import com.lampasw.algafood.domain.repository.EstadoRepository;
 
 public class ConsultaEstadoMain {
 
@@ -17,47 +19,37 @@ public class ConsultaEstadoMain {
 				.web(WebApplicationType.NONE)
 				.run(args);
 		
-		CozinhaRepository cozinhaRepository = applicationContext.getBean(CozinhaRepository.class);
+		EstadoRepository estadoRepository = applicationContext.getBean(EstadoRepository.class);
 		
-		Cozinha cozinha1 = new Cozinha();
-		cozinha1.setNome("Japonesa");
-		cozinhaRepository.adicionar(cozinha1);
+		Estado estado1 = new Estado();
+		estado1.setNome("Espírito Santo");
+		estadoRepository.adicionar(estado1);
 		
-		Cozinha cozinha2 = new Cozinha();
-		cozinha2.setNome("Portuguesa");
-		cozinhaRepository.adicionar(cozinha2);
-					
-		List<Cozinha> cozinhas = cozinhaRepository.todas();
+		Estado estado2 = new Estado();
+		estado2.setNome("Rio Grande do Sul");
+		estadoRepository.adicionar(estado2);
 		
-		for (Cozinha cozinha : cozinhas) {
-			System.out.println(cozinha.getNome());
-		}		
-		
-		Cozinha cozinhaBusca = cozinhaRepository.porId(1L);
-		System.out.println(cozinhaBusca.getId() + " - " + cozinhaBusca.getNome());
-		
-		
-		cozinhaBusca.setNome(cozinhaBusca.getNome() + " - UPDATED");
-		cozinhaRepository.adicionar(cozinhaBusca);
-		
-		cozinhas = cozinhaRepository.todas();
-		
-		for (Cozinha cozinha : cozinhas) {
-			System.out.println(cozinha.getNome());
-			
-			if (cozinha.getId() <= 4) {
-				cozinhaRepository.remover(cozinha);
-			}
+		Estado estado3 = new Estado();
+		estado3.setNome("Santa Catarina");
+		estadoRepository.adicionar(estado3);
+						
+		for(Estado estado : estadoRepository.todos()) {
+			System.out.printf("%d - %s \n", estado.getId(), estado.getNome());
 		}
 		
-		cozinhas = cozinhaRepository.todas();
-		for (Cozinha cozinha : cozinhas) {
-			System.out.println(cozinha.getNome());
-			
-			if (cozinha.getId() <= 4) {
-				cozinhaRepository.remover(cozinha);
-			}
-		}					
+		Estado estadoBusca = estadoRepository.porId(4L);
+		estadoBusca.setNome("Rio G. do Sul - Updated");
+		estadoRepository.adicionar(estadoBusca);
+		
+		for(Estado estado : estadoRepository.todos()) {
+			System.out.printf("%d - %s \n", estado.getId(), estado.getNome());
+		}
+		
+		estadoRepository.remover(estadoRepository.porId(4L));
+		
+		for(Estado estado : estadoRepository.todos()) {
+			System.out.printf("%d - %s \n", estado.getId(), estado.getNome());					
+		}			
 	}
 	
 }

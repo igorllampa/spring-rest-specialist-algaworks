@@ -21,11 +21,11 @@ public class ConsultaCozinhaMain {
 		
 		Cozinha cozinha1 = new Cozinha();
 		cozinha1.setNome("Japonesa");
-		cozinhaRepository.adicionar(cozinha1);
+		cozinhaRepository.salvar(cozinha1);
 		
 		Cozinha cozinha2 = new Cozinha();
 		cozinha2.setNome("Portuguesa");
-		cozinhaRepository.adicionar(cozinha2);
+		cozinhaRepository.salvar(cozinha2);
 					
 		List<Cozinha> cozinhas = cozinhaRepository.todas();
 		
@@ -33,12 +33,12 @@ public class ConsultaCozinhaMain {
 			System.out.println(cozinha.getNome());
 		}		
 		
-		Cozinha cozinhaBusca = cozinhaRepository.porId(1L);
+		Cozinha cozinhaBusca = cozinhaRepository.buscar(1L);
 		System.out.println(cozinhaBusca.getId() + " - " + cozinhaBusca.getNome());
 		
 		
 		cozinhaBusca.setNome(cozinhaBusca.getNome() + " - UPDATED");
-		cozinhaRepository.adicionar(cozinhaBusca);
+		cozinhaRepository.salvar(cozinhaBusca);
 		
 		cozinhas = cozinhaRepository.todas();
 		
@@ -46,7 +46,7 @@ public class ConsultaCozinhaMain {
 			System.out.println(cozinha.getNome());
 			
 			if (cozinha.getId() <= 4) {
-				cozinhaRepository.remover(cozinha);
+				//cozinhaRepository.remover(cozinha);
 			}
 		}
 		
@@ -55,7 +55,7 @@ public class ConsultaCozinhaMain {
 			System.out.println(cozinha.getNome());
 			
 			if (cozinha.getId() <= 4) {
-				cozinhaRepository.remover(cozinha);
+				//cozinhaRepository.remover(cozinha);
 			}
 		}					
 	}

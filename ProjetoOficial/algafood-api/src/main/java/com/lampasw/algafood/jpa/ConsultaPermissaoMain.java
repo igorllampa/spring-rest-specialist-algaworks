@@ -8,7 +8,9 @@ import org.springframework.context.ApplicationContext;
 
 import com.lampasw.algafood.AlgafoodApiApplication;
 import com.lampasw.algafood.domain.model.Cozinha;
+import com.lampasw.algafood.domain.model.Permissao;
 import com.lampasw.algafood.domain.repository.CozinhaRepository;
+import com.lampasw.algafood.domain.repository.PermissaoRepository;
 
 public class ConsultaPermissaoMain {
 
@@ -17,47 +19,36 @@ public class ConsultaPermissaoMain {
 				.web(WebApplicationType.NONE)
 				.run(args);
 		
-		CozinhaRepository cozinhaRepository = applicationContext.getBean(CozinhaRepository.class);
 		
-		Cozinha cozinha1 = new Cozinha();
-		cozinha1.setNome("Japonesa");
-		cozinhaRepository.adicionar(cozinha1);
+		PermissaoRepository permissaoRepository = applicationContext.getBean(PermissaoRepository.class);
 		
-		Cozinha cozinha2 = new Cozinha();
-		cozinha2.setNome("Portuguesa");
-		cozinhaRepository.adicionar(cozinha2);
-					
-		List<Cozinha> cozinhas = cozinhaRepository.todas();
+		Permissao permissao1 = new Permissao();
+		permissao1.setNome("Acesso Financeiro");
+		permissao1.setDescricao("Permite acesso às funcionalidades financeira do sistema");
+		permissaoRepository.adicionar(permissao1);
 		
-		for (Cozinha cozinha : cozinhas) {
-			System.out.println(cozinha.getNome());
-		}		
+		Permissao permissao2 = new Permissao();
+		permissao2.setNome("Acesso aos relatórios");
+		permissao2.setDescricao("Permite acesso aos relatórios do sistema");
+		permissaoRepository.adicionar(permissao2);
 		
-		Cozinha cozinhaBusca = cozinhaRepository.porId(1L);
-		System.out.println(cozinhaBusca.getId() + " - " + cozinhaBusca.getNome());
-		
-		
-		cozinhaBusca.setNome(cozinhaBusca.getNome() + " - UPDATED");
-		cozinhaRepository.adicionar(cozinhaBusca);
-		
-		cozinhas = cozinhaRepository.todas();
-		
-		for (Cozinha cozinha : cozinhas) {
-			System.out.println(cozinha.getNome());
-			
-			if (cozinha.getId() <= 4) {
-				cozinhaRepository.remover(cozinha);
-			}
+		for(Permissao permissao : permissaoRepository.todas()) {
+			System.out.printf("%d - %s - %s \n", permissao.getId(), permissao.getNome(), permissao.getDescricao());
 		}
 		
-		cozinhas = cozinhaRepository.todas();
-		for (Cozinha cozinha : cozinhas) {
-			System.out.println(cozinha.getNome());
-			
-			if (cozinha.getId() <= 4) {
-				cozinhaRepository.remover(cozinha);
-			}
-		}					
+		Permissao permissaoBusca = permissaoRepository.porId(1L);
+		permissaoBusca.setNome(permissaoBusca.getNome() + " - Updated" );
+		permissaoBusca = permissaoRepository.adicionar(permissaoBusca);
+		
+		for(Permissao permissao : permissaoRepository.todas()) {
+			System.out.printf("%d - %s - %s\n", permissao.getId(), permissao.getNome(), permissao.getDescricao());
+		}
+		
+		permissaoRepository.remover(permissaoBusca);
+		
+		for (Permissao permissao : permissaoRepository.todas()) {
+			System.out.printf("%d - %s - %s\n", permissao.getId(), permissao.getNome(), permissao.getDescricao());
+		}
 	}
 	
 }
