@@ -23,31 +23,31 @@ public class ConsultaEstadoMain {
 		
 		Estado estado1 = new Estado();
 		estado1.setNome("Espírito Santo");
-		estadoRepository.adicionar(estado1);
+		estadoRepository.salvar(estado1);
 		
 		Estado estado2 = new Estado();
 		estado2.setNome("Rio Grande do Sul");
-		estadoRepository.adicionar(estado2);
+		estadoRepository.salvar(estado2);
 		
 		Estado estado3 = new Estado();
 		estado3.setNome("Santa Catarina");
-		estadoRepository.adicionar(estado3);
+		estadoRepository.salvar(estado3);
 						
-		for(Estado estado : estadoRepository.todos()) {
+		for(Estado estado : estadoRepository.listar()) {
 			System.out.printf("%d - %s \n", estado.getId(), estado.getNome());
 		}
 		
-		Estado estadoBusca = estadoRepository.porId(4L);
+		Estado estadoBusca = estadoRepository.buscar(4L);
 		estadoBusca.setNome("Rio G. do Sul - Updated");
-		estadoRepository.adicionar(estadoBusca);
+		estadoRepository.salvar(estadoBusca);
 		
-		for(Estado estado : estadoRepository.todos()) {
+		for(Estado estado : estadoRepository.listar()) {
 			System.out.printf("%d - %s \n", estado.getId(), estado.getNome());
 		}
 		
-		estadoRepository.remover(estadoRepository.porId(4L));
+		//estadoRepository.remover(estadoRepository.buscar(4L));
 		
-		for(Estado estado : estadoRepository.todos()) {
+		for(Estado estado : estadoRepository.listar()) {
 			System.out.printf("%d - %s \n", estado.getId(), estado.getNome());					
 		}			
 	}

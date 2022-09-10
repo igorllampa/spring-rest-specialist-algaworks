@@ -29,31 +29,31 @@ public class ConsultaRestauranteMain {
 		restaurante1.setNome("MC Donalds");
 		restaurante1.setTaxaFrete(new BigDecimal(10.15));
 		restaurante1.setCozinha(cozinha);
-		restauranteRepository.adicionar(restaurante1);
+		restauranteRepository.salvar(restaurante1);
 		
 		Restaurante restaurante2 = new Restaurante();
 		restaurante2.setNome("Burger King");
 		restaurante2.setTaxaFrete(new BigDecimal(18.95));
 		restaurante2.setCozinha(cozinha);
-		restauranteRepository.adicionar(restaurante2);
+		restauranteRepository.salvar(restaurante2);
 		
-		for (Restaurante restaurante : restauranteRepository.todos()) {
+		for (Restaurante restaurante : restauranteRepository.listar()) {
 			System.out.println(restaurante.getId() + " - " + restaurante.getNome() + " - " + restaurante.getTaxaFrete() + " - " + restaurante.getCozinha().getNome());
 		}
 					
-		Restaurante restauranteBusca = restauranteRepository.porId(1L);
+		Restaurante restauranteBusca = restauranteRepository.buscar(1L);
 		System.out.println(restauranteBusca.getId() + " - " + restauranteBusca.getNome() + " - " + restauranteBusca.getTaxaFrete() + " - " + restauranteBusca.getCozinha().getNome());
 		
 		
 		restauranteBusca.setNome(restauranteBusca.getNome() + " - Monte Verde - MG");
-		System.out.println("Atualização:" + restauranteRepository.adicionar(restauranteBusca).toString()); 
+		System.out.println("Atualização:" + restauranteRepository.salvar(restauranteBusca).toString()); 
 		
-		for (Restaurante restaurante : restauranteRepository.todos()) {
+		for (Restaurante restaurante : restauranteRepository.listar()) {
 			if (restaurante.getId() >= 3)
 				restauranteRepository.remover(restaurante);
 		}
 		
-		for (Restaurante restaurante : restauranteRepository.todos()) {
+		for (Restaurante restaurante : restauranteRepository.listar()) {
 			System.out.println(restaurante.getId() + " - " + restaurante.getNome() + " - " + restaurante.getTaxaFrete() + " - " + restaurante.getCozinha().getNome());
 		}
 		

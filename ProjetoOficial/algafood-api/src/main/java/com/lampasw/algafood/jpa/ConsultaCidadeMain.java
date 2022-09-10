@@ -26,33 +26,33 @@ public class ConsultaCidadeMain {
 				
 		Estado estado = new Estado();		
 		estado.setNome("Bahia");
-		estadoRepository.adicionar(estado);
+		estadoRepository.salvar(estado);
 				
-		Estado estadoBahia = estadoRepository.porId(3L);
+		Estado estadoBahia = estadoRepository.buscar(3L);
 		Cidade cidade1 = new Cidade();
 		cidade1.setNome("Porto Seguro");
 		cidade1.setEstado(estadoBahia);		
-		cidadeRepository.adicionar(cidade1);
+		cidadeRepository.salvar(cidade1);
 							
-		for (Cidade cidade : cidadeRepository.todas()) {
+		for (Cidade cidade : cidadeRepository.listar()) {
 			System.out.println(cidade.getNome() + " - " + cidade.getEstado().getNome());
 		}
 				
-		Cidade cidadeBusca = cidadeRepository.porId(2L);
+		Cidade cidadeBusca = cidadeRepository.buscar(2L);
 		cidadeBusca.setNome(cidadeBusca.getNome() + " - Updated");
-		cidadeRepository.adicionar(cidadeBusca);
+		cidadeRepository.salvar(cidadeBusca);
 		
-		for (Cidade cidade : cidadeRepository.todas()) {
+		for (Cidade cidade : cidadeRepository.listar()) {
 			System.out.printf("%s - %s \n", cidade.getNome(), cidade.getEstado().getNome());			
 		}					
 				
-		for (Cidade cidade : cidadeRepository.todas()) {
+		for (Cidade cidade : cidadeRepository.listar()) {
 			if(cidade.getId() >= 2) {
-				cidadeRepository.remover(cidade);
+				//cidadeRepository.remover(cidade);
 			}
 		}
 		
-		for(Cidade cidade : cidadeRepository.todas()) {
+		for(Cidade cidade : cidadeRepository.listar()) {
 			System.out.printf("%d - %s - %s \n", cidade.getId(), cidade.getNome(), cidade.getEstado().getNome());
 		}				
 	}	
