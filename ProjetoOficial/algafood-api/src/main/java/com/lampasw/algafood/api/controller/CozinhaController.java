@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,10 +42,15 @@ public class CozinhaController {
 		return cozinhaRepository.todas();
 	}
 	
+	@GetMapping("/listar-por-nome")
+	public List<Cozinha> buscarPorNome(@RequestParam String nome){
+		return cozinhaRepository.consultarPorNome(nome);
+	}
+	
 	@GetMapping(produces = MediaType.APPLICATION_XML_VALUE)
 	public CozinhasXmlWrapper listarXml(){
 		return new CozinhasXmlWrapper(cozinhaRepository.todas());
-	}	
+	}		
 	
 	@GetMapping("/{cozinhaId}")
 	//@ResponseStatus(code = HttpStatus.OK)

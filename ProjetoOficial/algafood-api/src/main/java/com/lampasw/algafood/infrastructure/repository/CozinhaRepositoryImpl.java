@@ -8,11 +8,12 @@ import javax.transaction.Transactional;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import com.lampasw.algafood.domain.model.Cozinha;
 import com.lampasw.algafood.domain.repository.CozinhaRepository;
 
-@Component
+@Repository
 public class CozinhaRepositoryImpl implements CozinhaRepository {
 	
 	@PersistenceContext
@@ -24,6 +25,13 @@ public class CozinhaRepositoryImpl implements CozinhaRepository {
 				.getResultList();		
 	}
 		
+	@Override
+	public List<Cozinha> consultarPorNome(String nome) {
+		return manager.createQuery("from Cozinha where nome like :nome", Cozinha.class)
+				.setParameter("nome", "%"+nome+"%")
+				.getResultList();
+	}
+	
 	@Transactional
 	@Override
 	public Cozinha salvar(Cozinha cozinha) {

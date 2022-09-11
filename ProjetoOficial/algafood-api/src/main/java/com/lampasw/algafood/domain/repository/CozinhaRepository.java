@@ -7,7 +7,8 @@ import com.lampasw.algafood.domain.model.Cozinha;
 public interface CozinhaRepository {
 
 	List<Cozinha> todas();
-	Cozinha buscar (Long id);
+	List<Cozinha> consultarPorNome(String nome);	
+	Cozinha buscar (Long id);		
 	Cozinha salvar (Cozinha cozinha);
 	void remover(Long id);
 }
