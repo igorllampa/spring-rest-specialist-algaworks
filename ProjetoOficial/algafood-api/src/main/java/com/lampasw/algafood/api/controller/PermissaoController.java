@@ -21,6 +21,6 @@ public class PermissaoController {
 	
 	@GetMapping
 	public List<Permissao> listar(){
-		return permissaoRepository.todas();
+		return permissaoRepository.findAll();
 	}
 }

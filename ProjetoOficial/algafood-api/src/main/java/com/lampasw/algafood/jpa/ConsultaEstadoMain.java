@@ -1,15 +1,13 @@
 package com.lampasw.algafood.jpa;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
 
 import com.lampasw.algafood.AlgafoodApiApplication;
-import com.lampasw.algafood.domain.model.Cozinha;
 import com.lampasw.algafood.domain.model.Estado;
-import com.lampasw.algafood.domain.repository.CozinhaRepository;
 import com.lampasw.algafood.domain.repository.EstadoRepository;
 
 public class ConsultaEstadoMain {
@@ -23,31 +21,31 @@ public class ConsultaEstadoMain {
 		
 		Estado estado1 = new Estado();
 		estado1.setNome("Espírito Santo");
-		estadoRepository.salvar(estado1);
+		estadoRepository.save(estado1);
 		
 		Estado estado2 = new Estado();
 		estado2.setNome("Rio Grande do Sul");
-		estadoRepository.salvar(estado2);
+		estadoRepository.save(estado2);
 		
 		Estado estado3 = new Estado();
 		estado3.setNome("Santa Catarina");
-		estadoRepository.salvar(estado3);
+		estadoRepository.save(estado3);
 						
-		for(Estado estado : estadoRepository.listar()) {
+		for(Estado estado : estadoRepository.findAll()) {
 			System.out.printf("%d - %s \n", estado.getId(), estado.getNome());
 		}
 		
-		Estado estadoBusca = estadoRepository.buscar(4L);
-		estadoBusca.setNome("Rio G. do Sul - Updated");
-		estadoRepository.salvar(estadoBusca);
+		Optional<Estado> estadoBusca = estadoRepository.findById(4L);
+		estadoBusca.get().setNome("Rio G. do Sul - Updated");
+		estadoRepository.save(estadoBusca.get());
 		
-		for(Estado estado : estadoRepository.listar()) {
+		for(Estado estado : estadoRepository.findAll()) {
 			System.out.printf("%d - %s \n", estado.getId(), estado.getNome());
 		}
 		
 		//estadoRepository.remover(estadoRepository.buscar(4L));
 		
-		for(Estado estado : estadoRepository.listar()) {
+		for(Estado estado : estadoRepository.findAll()) {
 			System.out.printf("%d - %s \n", estado.getId(), estado.getNome());					
 		}			
 	}

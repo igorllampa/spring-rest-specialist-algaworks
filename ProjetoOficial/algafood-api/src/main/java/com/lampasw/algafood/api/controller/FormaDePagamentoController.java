@@ -21,6 +21,6 @@ public class FormaDePagamentoController {
 	
 	@GetMapping
 	public List<FormaDePagamento> listar(){
-		return formaDePagamentoRepository.todas();
+		return formaDePagamentoRepository.findAll();
 	}	
 }

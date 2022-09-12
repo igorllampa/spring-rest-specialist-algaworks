@@ -2,6 +2,7 @@ package com.lampasw.algafood.jpa;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -23,40 +24,42 @@ public class ConsultaRestauranteMain {
 		RestauranteRepository restauranteRepository = applicationContext.getBean(RestauranteRepository.class);
 		CozinhaRepository cozinhaRepository = applicationContext.getBean(CozinhaRepository.class);
 				
-		Cozinha cozinha = cozinhaRepository.buscar(1L);
+		Optional<Cozinha> cozinha = cozinhaRepository.findById(1L);
 		
 		Restaurante restaurante1 = new Restaurante();
 		restaurante1.setNome("MC Donalds");
 		restaurante1.setTaxaFrete(new BigDecimal(10.15));
-		restaurante1.setCozinha(cozinha);
-		restauranteRepository.salvar(restaurante1);
+		restaurante1.setCozinha(cozinha.get());
+		restauranteRepository.save(restaurante1);
 		
 		Restaurante restaurante2 = new Restaurante();
 		restaurante2.setNome("Burger King");
 		restaurante2.setTaxaFrete(new BigDecimal(18.95));
-		restaurante2.setCozinha(cozinha);
-		restauranteRepository.salvar(restaurante2);
+		restaurante2.setCozinha(cozinha.get());
+		restauranteRepository.save(restaurante2);
 		
-		for (Restaurante restaurante : restauranteRepository.listar()) {
+		for (Restaurante restaurante : restauranteRepository.findAll()) {
 			System.out.println(restaurante.getId() + " - " + restaurante.getNome() + " - " + restaurante.getTaxaFrete() + " - " + restaurante.getCozinha().getNome());
 		}
 					
-		Restaurante restauranteBusca = restauranteRepository.buscar(1L);
-		System.out.println(restauranteBusca.getId() + " - " + restauranteBusca.getNome() + " - " + restauranteBusca.getTaxaFrete() + " - " + restauranteBusca.getCozinha().getNome());
+		Optional<Restaurante> restauranteBusca = restauranteRepository.findById(1L);
+		System.out.println(restauranteBusca.get().getId() + " - " + 
+						   restauranteBusca.get().getNome() + " - " + 
+						   restauranteBusca.get().getTaxaFrete() + " - " + 
+						   restauranteBusca.get().getCozinha().getNome());
 		
 		
-		restauranteBusca.setNome(restauranteBusca.getNome() + " - Monte Verde - MG");
-		System.out.println("Atualização:" + restauranteRepository.salvar(restauranteBusca).toString()); 
+		restauranteBusca.get().setNome(restauranteBusca.get().getNome() + " - Monte Verde - MG");
+		System.out.println("Atualização:" + restauranteRepository.save(restauranteBusca.get()).toString()); 
 		
-		for (Restaurante restaurante : restauranteRepository.listar()) {
+		for (Restaurante restaurante : restauranteRepository.findAll()) {
 			if (restaurante.getId() >= 3)
-				restauranteRepository.remover(restaurante);
+				restauranteRepository.delete(restaurante);
 		}
 		
-		for (Restaurante restaurante : restauranteRepository.listar()) {
+		for (Restaurante restaurante : restauranteRepository.findAll()) {
 			System.out.println(restaurante.getId() + " - " + restaurante.getNome() + " - " + restaurante.getTaxaFrete() + " - " + restaurante.getCozinha().getNome());
-		}
-		
+		}	
 	}
 	
 }

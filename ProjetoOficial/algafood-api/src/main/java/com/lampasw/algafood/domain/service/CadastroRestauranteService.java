@@ -1,5 +1,7 @@
 package com.lampasw.algafood.domain.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,14 +23,11 @@ public class CadastroRestauranteService {
 	public Restaurante salvar(Restaurante restaurante) {
 		
 		Long cozinhaId = restaurante.getCozinha().getId();
-		Cozinha cozinha = cozinhaRepository.buscar(cozinhaId);
-		
-		if(cozinha == null) {
-			throw new EntidadeNaoEncontradaException(
-					String.format("A cozinha nro %d não existe. Por favor, verifique.", cozinhaId));
-		}
-		
+		Cozinha cozinha = cozinhaRepository.findById(cozinhaId)
+				.orElseThrow( () -> new EntidadeNaoEncontradaException(
+						String.format("A cozinha nro %d não existe. Por favor, verifique.", cozinhaId)));
+				
 		restaurante.setCozinha(cozinha);
-		return restauranteRepository.salvar(restaurante);								
+		return restauranteRepository.save(restaurante);								
 	}
 }

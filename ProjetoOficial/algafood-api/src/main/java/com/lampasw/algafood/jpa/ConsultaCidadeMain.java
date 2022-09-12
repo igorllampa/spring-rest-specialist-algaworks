@@ -1,6 +1,6 @@
 package com.lampasw.algafood.jpa;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -8,10 +8,8 @@ import org.springframework.context.ApplicationContext;
 
 import com.lampasw.algafood.AlgafoodApiApplication;
 import com.lampasw.algafood.domain.model.Cidade;
-import com.lampasw.algafood.domain.model.Cozinha;
 import com.lampasw.algafood.domain.model.Estado;
 import com.lampasw.algafood.domain.repository.CidadeRepository;
-import com.lampasw.algafood.domain.repository.CozinhaRepository;
 import com.lampasw.algafood.domain.repository.EstadoRepository;
 
 public class ConsultaCidadeMain {
@@ -26,33 +24,33 @@ public class ConsultaCidadeMain {
 				
 		Estado estado = new Estado();		
 		estado.setNome("Bahia");
-		estadoRepository.salvar(estado);
+		estadoRepository.save(estado);
 				
-		Estado estadoBahia = estadoRepository.buscar(3L);
+		Optional<Estado> estadoBahia = estadoRepository.findById(3L);
 		Cidade cidade1 = new Cidade();
 		cidade1.setNome("Porto Seguro");
-		cidade1.setEstado(estadoBahia);		
-		cidadeRepository.salvar(cidade1);
+		cidade1.setEstado(estadoBahia.get());		
+		cidadeRepository.save(cidade1);
 							
-		for (Cidade cidade : cidadeRepository.listar()) {
+		for (Cidade cidade : cidadeRepository.findAll()) {
 			System.out.println(cidade.getNome() + " - " + cidade.getEstado().getNome());
 		}
 				
-		Cidade cidadeBusca = cidadeRepository.buscar(2L);
-		cidadeBusca.setNome(cidadeBusca.getNome() + " - Updated");
-		cidadeRepository.salvar(cidadeBusca);
+		Optional<Cidade> cidadeBusca = cidadeRepository.findById(2L);
+		cidadeBusca.get().setNome(cidadeBusca.get().getNome() + " - Updated");
+		cidadeRepository.save(cidadeBusca.get());
 		
-		for (Cidade cidade : cidadeRepository.listar()) {
+		for (Cidade cidade : cidadeRepository.findAll()) {
 			System.out.printf("%s - %s \n", cidade.getNome(), cidade.getEstado().getNome());			
 		}					
 				
-		for (Cidade cidade : cidadeRepository.listar()) {
+		for (Cidade cidade : cidadeRepository.findAll()) {
 			if(cidade.getId() >= 2) {
 				//cidadeRepository.remover(cidade);
 			}
 		}
 		
-		for(Cidade cidade : cidadeRepository.listar()) {
+		for(Cidade cidade : cidadeRepository.findAll()) {
 			System.out.printf("%d - %s - %s \n", cidade.getId(), cidade.getNome(), cidade.getEstado().getNome());
 		}				
 	}	

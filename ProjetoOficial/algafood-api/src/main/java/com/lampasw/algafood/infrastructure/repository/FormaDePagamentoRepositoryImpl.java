@@ -13,8 +13,9 @@ import com.lampasw.algafood.domain.model.FormaDePagamento;
 import com.lampasw.algafood.domain.repository.FormaDePagamentoRepository;
 
 @Repository
-public class FormaDePagamentoRepositoryImpl implements FormaDePagamentoRepository {
-	
+public class FormaDePagamentoRepositoryImpl /*implements FormaDePagamentoRepository*/ {
+
+	/*
 	@PersistenceContext
 	private EntityManager manager;
 	
@@ -43,5 +44,5 @@ public class FormaDePagamentoRepositoryImpl implements FormaDePagamentoRepositor
 	public FormaDePagamento porId(Long id) {
 		return manager.find(FormaDePagamento.class, id);
 	}	
-
+	*/
 }

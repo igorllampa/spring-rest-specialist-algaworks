@@ -1,6 +1,7 @@
 package com.lampasw.algafood.jpa;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -21,26 +22,26 @@ public class ConsultaCozinhaMain {
 		
 		Cozinha cozinha1 = new Cozinha();
 		cozinha1.setNome("Japonesa");
-		cozinhaRepository.salvar(cozinha1);
+		cozinhaRepository.save(cozinha1);
 		
 		Cozinha cozinha2 = new Cozinha();
 		cozinha2.setNome("Portuguesa");
-		cozinhaRepository.salvar(cozinha2);
+		cozinhaRepository.save(cozinha2);
 					
-		List<Cozinha> cozinhas = cozinhaRepository.todas();
+		List<Cozinha> cozinhas = cozinhaRepository.findAll();
 		
 		for (Cozinha cozinha : cozinhas) {
 			System.out.println(cozinha.getNome());
 		}		
 		
-		Cozinha cozinhaBusca = cozinhaRepository.buscar(1L);
-		System.out.println(cozinhaBusca.getId() + " - " + cozinhaBusca.getNome());
-		
-		
-		cozinhaBusca.setNome(cozinhaBusca.getNome() + " - UPDATED");
-		cozinhaRepository.salvar(cozinhaBusca);
-		
-		cozinhas = cozinhaRepository.todas();
+		Optional<Cozinha> cozinhaBusca = cozinhaRepository.findById(1L);
+		if (cozinhaBusca.isPresent()) {
+			System.out.println(cozinhaBusca.get().getId() + " - " + cozinhaBusca.get().getNome());
+			cozinhaBusca.get().setNome(cozinhaBusca.get().getNome() + " - UPDATED");
+			cozinhaRepository.save(cozinhaBusca.get());
+		}		
+					
+		cozinhas = cozinhaRepository.findAll();
 		
 		for (Cozinha cozinha : cozinhas) {
 			System.out.println(cozinha.getNome());
@@ -50,7 +51,7 @@ public class ConsultaCozinhaMain {
 			}
 		}
 		
-		cozinhas = cozinhaRepository.todas();
+		cozinhas = cozinhaRepository.findAll();
 		for (Cozinha cozinha : cozinhas) {
 			System.out.println(cozinha.getNome());
 			

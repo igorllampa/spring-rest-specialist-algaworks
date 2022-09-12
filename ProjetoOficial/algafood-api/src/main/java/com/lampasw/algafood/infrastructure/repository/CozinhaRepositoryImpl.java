@@ -1,20 +1,12 @@
 package com.lampasw.algafood.infrastructure.repository;
 
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
-
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import com.lampasw.algafood.domain.model.Cozinha;
-import com.lampasw.algafood.domain.repository.CozinhaRepository;
-
 @Repository
-public class CozinhaRepositoryImpl implements CozinhaRepository {
+public class CozinhaRepositoryImpl /*implements CozinhaRepository*/ {
+
+	/*
+	//This methods were developed without Spring Data Jpa, using directly JPQL at the implementation
 	
 	@PersistenceContext
 	private EntityManager manager;
@@ -54,5 +46,5 @@ public class CozinhaRepositoryImpl implements CozinhaRepository {
 	public Cozinha buscar(Long id) {
 		return manager.find(Cozinha.class, id);
 	}	
-
+	*/
 }

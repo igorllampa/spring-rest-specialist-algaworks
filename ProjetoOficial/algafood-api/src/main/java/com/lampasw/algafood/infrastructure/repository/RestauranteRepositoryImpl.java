@@ -15,8 +15,9 @@ import com.lampasw.algafood.domain.repository.CozinhaRepository;
 import com.lampasw.algafood.domain.repository.RestauranteRepository;
 
 @Repository
-public class RestauranteRepositoryImpl implements RestauranteRepository {
+public class RestauranteRepositoryImpl /*implements RestauranteRepository*/ {
 	
+	/*
 	@PersistenceContext
 	private EntityManager manager;
 	
@@ -44,5 +45,6 @@ public class RestauranteRepositoryImpl implements RestauranteRepository {
 	@Override
 	public Restaurante buscar(Long id) {
 		return manager.find(Restaurante.class, id);
-	}	
+	}
+	*/	
 }

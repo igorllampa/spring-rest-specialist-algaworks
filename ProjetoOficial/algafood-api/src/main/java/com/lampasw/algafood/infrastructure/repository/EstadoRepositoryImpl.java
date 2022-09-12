@@ -14,8 +14,9 @@ import com.lampasw.algafood.domain.model.Estado;
 import com.lampasw.algafood.domain.repository.EstadoRepository;
 
 @Repository
-public class EstadoRepositoryImpl implements EstadoRepository {
-	
+public class EstadoRepositoryImpl /*implements EstadoRepository*/ {
+
+	/*
 	@PersistenceContext
 	private EntityManager manager;
 	
@@ -44,5 +45,6 @@ public class EstadoRepositoryImpl implements EstadoRepository {
 	@Override
 	public Estado buscar(Long id) {
 		return manager.find(Estado.class, id);
-	}	
+	}
+	*/	
 }
