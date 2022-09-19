@@ -17,3 +17,7 @@ insert into permissao (nome, descricao) values ('Cadastro de cidade', 'Permite q
 
 insert into forma_de_pagamento (descricao) values ('Pix');
 insert into forma_de_pagamento (descricao) values ('Cartão Crédito');
+
+insert into restaurante_forma_de_pagamento (restaurante_id, forma_de_pagamento_id) values (1, 1);
+insert into restaurante_forma_de_pagamento (restaurante_id, forma_de_pagamento_id) values (1, 2);
+insert into restaurante_forma_de_pagamento (restaurante_id, forma_de_pagamento_id) values (2, 2);

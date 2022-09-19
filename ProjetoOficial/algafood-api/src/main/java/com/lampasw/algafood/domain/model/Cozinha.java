@@ -1,5 +1,8 @@
 package com.lampasw.algafood.domain.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,8 +32,12 @@ public class Cozinha {
 	//@JsonProperty("cozinhaId")
 	private Long id;
 			
-	//@JsonIgnore //Não exibe este campo no retorno da Api
+	//@JsonIgnore //Apenas não exibe este campo no retorno da Api
 	//@JsonProperty("cozinhaTitulo")
 	@Column(nullable = false)
 	private String nome;	
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "cozinha")
+	private List<Restaurante> restaurante = new ArrayList<>(); 
 }
