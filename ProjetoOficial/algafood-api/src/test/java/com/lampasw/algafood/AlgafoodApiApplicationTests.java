@@ -1,4 +1,4 @@
-package lampasw.algafood;
+package com.lampasw.algafood;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
