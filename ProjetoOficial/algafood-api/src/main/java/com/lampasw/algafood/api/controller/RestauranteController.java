@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lampasw.algafood.domain.exception.EntidadeNaoEncontradaException;
+import com.lampasw.algafood.domain.exception.NegocioException;
 import com.lampasw.algafood.domain.model.Restaurante;
 import com.lampasw.algafood.domain.repository.RestauranteRepository;
 import com.lampasw.algafood.domain.service.CadastroRestauranteService;
@@ -113,8 +114,12 @@ public class RestauranteController {
 		
 	@PostMapping	
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public Restaurante salvar(@RequestBody Restaurante restaurante) {		
-		return cadastroRestaurante.salvar(restaurante);		
+	public Restaurante salvar(@RequestBody Restaurante restaurante) {
+		try {
+			return cadastroRestaurante.salvar(restaurante);
+		}catch (EntidadeNaoEncontradaException e) {
+			throw new NegocioException(e.getMessage());
+		}		
 	}
 	
 	@PutMapping("/{restauranteId}")
@@ -125,7 +130,11 @@ public class RestauranteController {
 		BeanUtils.copyProperties(restaurante, restauranteAtual, 
 				"id", "formasDePagamento", "endereco", "dataCadastro");	
 		
-		return cadastroRestaurante.salvar(restauranteAtual);												 		
+		try {
+			return cadastroRestaurante.salvar(restauranteAtual);
+		}catch (EntidadeNaoEncontradaException e) {
+			throw new NegocioException(e.getMessage());
+		}
 	}	
 	
 	@PatchMapping("/{restauranteId}")
