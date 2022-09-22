@@ -13,6 +13,9 @@ import com.lampasw.algafood.domain.repository.EstadoRepository;
 @Service
 public class CadastroEstadoService {
 
+	private static final String MSG_ESTADO_EM_USO = "O estado %d está em uso";
+	private static final String MSG_ESTADO_NAO_ENCONTRADO = "O estado %d não foi encontrado";
+	
 	@Autowired
 	private EstadoRepository estadoRepository;
 
@@ -24,9 +27,15 @@ public class CadastroEstadoService {
 		try {
 			estadoRepository.deleteById(estadoId);
 		}catch (EmptyResultDataAccessException e) {
-			throw new EntidadeNaoEncontradaException("O estado não foi encontrado");
+			throw new EntidadeNaoEncontradaException(String.format(MSG_ESTADO_NAO_ENCONTRADO, estadoId));
 		}catch (DataIntegrityViolationException e) {
-			throw new EntidadeEmUsoException("O estado está em uso");
+			throw new EntidadeEmUsoException(String.format(MSG_ESTADO_EM_USO, estadoId));
 		}
+	}
+	
+	public Estado buscarOuFalhar(Long estadoId) {		
+		return estadoRepository.findById(estadoId)
+				.orElseThrow(() -> new EntidadeNaoEncontradaException(
+						String.format(MSG_ESTADO_NAO_ENCONTRADO, estadoId)));
 	}
 }
