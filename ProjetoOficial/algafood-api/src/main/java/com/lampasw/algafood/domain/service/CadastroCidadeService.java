@@ -5,6 +5,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.lampasw.algafood.domain.exception.CidadeNaoEncontradaException;
 import com.lampasw.algafood.domain.exception.EntidadeEmUsoException;
 import com.lampasw.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.lampasw.algafood.domain.model.Cidade;
@@ -13,8 +14,6 @@ import com.lampasw.algafood.domain.repository.CidadeRepository;
 
 @Service
 public class CadastroCidadeService {
-
-	private static final String MSG_CIDADE_NAO_EXISTE = "A cidade de código %d não existe";
 
 	private static final String MSG_CIDADE_EM_USO = "A cidade de código %d está em uso.";
 
@@ -41,13 +40,12 @@ public class CadastroCidadeService {
 		}catch (DataIntegrityViolationException e) {
 			throw new EntidadeEmUsoException(String.format(MSG_CIDADE_EM_USO, cidadeId));
 		}catch (EmptyResultDataAccessException e) {
-			throw new EntidadeNaoEncontradaException(String.format(MSG_CIDADE_NAO_EXISTE, cidadeId));
+			throw new CidadeNaoEncontradaException(cidadeId);
 		}			
 	}
 	
 	public Cidade buscarOuFalhar(Long cidadeId) {
 		return cidadeRepository.findById(cidadeId)
-				.orElseThrow(() -> new EntidadeNaoEncontradaException(
-						String.format(MSG_CIDADE_NAO_EXISTE, cidadeId)));
+				.orElseThrow(() -> new CidadeNaoEncontradaException(cidadeId));
 	}
 }
