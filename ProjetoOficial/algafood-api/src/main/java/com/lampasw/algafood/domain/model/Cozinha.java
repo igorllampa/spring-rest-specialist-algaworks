@@ -9,12 +9,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.lampasw.algafood.Groups;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -25,7 +28,8 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @JsonRootName("gastronomia")
 public class Cozinha {
-	
+		
+	@NotNull(groups = Groups.CozinhaId.class)
 	@EqualsAndHashCode.Include
 	@Id	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
@@ -34,6 +38,7 @@ public class Cozinha {
 			
 	//@JsonIgnore //Apenas não exibe este campo no retorno da Api
 	//@JsonProperty("cozinhaTitulo")
+	@NotBlank
 	@Column(nullable = false)
 	private String nome;	
 	

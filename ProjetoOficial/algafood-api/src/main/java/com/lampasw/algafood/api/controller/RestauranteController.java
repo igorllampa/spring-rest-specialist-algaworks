@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.BeanUtils;
@@ -15,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.util.ReflectionUtils;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lampasw.algafood.Groups;
 import com.lampasw.algafood.domain.exception.CozinhaNaoEncontradaException;
 import com.lampasw.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.lampasw.algafood.domain.exception.NegocioException;
@@ -121,7 +124,7 @@ public class RestauranteController {
 		
 	@PostMapping	
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public Restaurante salvar(@RequestBody Restaurante restaurante) {
+	public Restaurante salvar(@RequestBody @Valid Restaurante restaurante) {
 		try {
 			return cadastroRestaurante.salvar(restaurante);
 		}catch (CozinhaNaoEncontradaException e) {
@@ -130,7 +133,7 @@ public class RestauranteController {
 	}
 	
 	@PutMapping("/{restauranteId}")
-	public Restaurante atualizar(@PathVariable Long restauranteId, @RequestBody Restaurante restaurante ){
+	public Restaurante atualizar(@PathVariable Long restauranteId, @RequestBody @Valid Restaurante restaurante ){
 		try {		
 			Restaurante restauranteAtual = cadastroRestaurante.buscarOuFalhar(restauranteId);			 
 			
