@@ -1,4 +1,4 @@
-package com.lampasw.algafood;
+package com.lampasw.algafood.core.validation;
 
 public interface Groups {
 

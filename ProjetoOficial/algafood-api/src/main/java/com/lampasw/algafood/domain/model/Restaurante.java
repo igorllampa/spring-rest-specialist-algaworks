@@ -30,7 +30,10 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.lampasw.algafood.Groups;
+import com.lampasw.algafood.core.validation.Groups;
+import com.lampasw.algafood.core.validation.Multiplo;
+import com.lampasw.algafood.core.validation.TaxaFrete;
+import com.lampasw.algafood.core.validation.ValorZeroIncluiDescricao;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -38,6 +41,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
+@ValorZeroIncluiDescricao(valorField = "taxaFrete", descricaoField = "nome", descricaoObrigatoria = "Frete Grátis")
 public class Restaurante {
 
 	@Id
@@ -50,7 +54,9 @@ public class Restaurante {
 	private String nome;
 		
 	@Column(name = "taxa_frete", nullable = false)
-	@PositiveOrZero
+	//@PositiveOrZero
+	@TaxaFrete
+	@Multiplo(numero = 5)
 	@NotNull
 	private BigDecimal taxaFrete;
 			
