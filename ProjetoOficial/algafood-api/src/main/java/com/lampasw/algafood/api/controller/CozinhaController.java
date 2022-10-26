@@ -22,7 +22,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lampasw.algafood.api.assembler.CozinhaInputDisassembler;
+import com.lampasw.algafood.api.assembler.CozinhaModelAssembler;
+import com.lampasw.algafood.api.model.CozinhaModel;
 import com.lampasw.algafood.api.model.CozinhasXmlWrapper;
+import com.lampasw.algafood.api.model.input.CozinhaInput;
 import com.lampasw.algafood.domain.exception.EntidadeEmUsoException;
 import com.lampasw.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.lampasw.algafood.domain.model.Cozinha;
@@ -39,14 +43,20 @@ public class CozinhaController {
 	@Autowired
 	private CadastroCozinhaService cadastroCozinha;//Use autowired or use injection with the class controller
 	
+	@Autowired
+	private CozinhaModelAssembler cozinhaModelAssembler;
+	
+	@Autowired
+	private CozinhaInputDisassembler cozinhaInputDisassembler;
+	
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Cozinha> listar(){
-		return cozinhaRepository.findAll();
+	public List<CozinhaModel> listar(){
+		return cozinhaModelAssembler.toCollectionModel(cozinhaRepository.findAll());
 	}
 	
 	@GetMapping("/listar-por-nome")
-	public List<Cozinha> buscarPorNome(@RequestParam String nome){
-		return cozinhaRepository.findByNomeContains(nome);
+	public List<CozinhaModel> buscarPorNome(@RequestParam String nome){
+		return cozinhaModelAssembler.toCollectionModel(cozinhaRepository.findByNomeContains(nome));
 	}
 	
 	@GetMapping("/exists-por-nome")
@@ -60,24 +70,24 @@ public class CozinhaController {
 	}		
 	
 	@GetMapping("/{cozinhaId}")
-	public Cozinha buscar(@PathVariable Long cozinhaId) {
-		return cadastroCozinha.buscarOuFalhar(cozinhaId);	
+	public CozinhaModel buscar(@PathVariable Long cozinhaId) {
+		return cozinhaModelAssembler.toModel(cadastroCozinha.buscarOuFalhar(cozinhaId));	
 	}
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Cozinha adicionar(@RequestBody @Valid Cozinha cozinha) {
-		return cadastroCozinha.salvar(cozinha);
+	public CozinhaModel adicionar(@RequestBody @Valid CozinhaInput cozinhaInput) {
+		return cozinhaModelAssembler.toModel(cadastroCozinha.salvar(cozinhaInputDisassembler.toDomainObject(cozinhaInput)));
 	}
 	
 	@PutMapping("/{cozinhaId}")
-	public Cozinha atualizar(@RequestBody @Valid Cozinha cozinha, @PathVariable Long cozinhaId) {
+	public CozinhaModel atualizar(@RequestBody @Valid CozinhaInput cozinhaInput, @PathVariable Long cozinhaId) {
 				
-		Cozinha cozinhaAtual = cadastroCozinha.buscarOuFalhar(cozinhaId);
+		Cozinha cozinhaAtual = cadastroCozinha.buscarOuFalhar(cozinhaId);	
 		
-		BeanUtils.copyProperties(cozinha, cozinhaAtual, "id");
+		cozinhaInputDisassembler.copyToDomainObject(cozinhaInput, cozinhaAtual);
 		
-		return cadastroCozinha.salvar(cozinhaAtual);		
+		return cozinhaModelAssembler.toModel(cadastroCozinha.salvar( cozinhaAtual ));		
 	}
 	
 	@DeleteMapping("/{cozinhaId}")

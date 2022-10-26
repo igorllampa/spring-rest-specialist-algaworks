@@ -1,7 +1,7 @@
 package com.lampasw.algafood.domain.model;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,19 +17,16 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import javax.validation.Valid;
-import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PositiveOrZero;
 import javax.validation.groups.ConvertGroup;
 import javax.validation.groups.Default;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.lampasw.algafood.core.validation.Groups;
 import com.lampasw.algafood.core.validation.Multiplo;
 import com.lampasw.algafood.core.validation.TaxaFrete;
@@ -37,6 +34,7 @@ import com.lampasw.algafood.core.validation.ValorZeroIncluiDescricao;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import net.bytebuddy.implementation.bind.annotation.IgnoreForBinding;
 
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -60,36 +58,32 @@ public class Restaurante {
 	@NotNull
 	private BigDecimal taxaFrete;
 			
+	
 	@Valid
 	@ConvertGroup(from = Default.class, to = Groups.CozinhaId.class)
-	@NotNull
-	@JsonIgnoreProperties("hibernateLazyInitializer")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@NotNull	
+	//@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne()
 	@JoinColumn(name = "cozinha_id", nullable = false)	
 	private Cozinha cozinha;
-	
-	@JsonIgnore
+		
 	@Embedded
 	private Endereco endereco;
-	
-	@JsonIgnore
+		
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name="restaurante_forma_de_pagamento",
 			   joinColumns = @JoinColumn(name = "restaurante_id"),
 			   inverseJoinColumns = @JoinColumn(name = "forma_de_pagamento_id"))
 	private List<FormaDePagamento> formasDePagamento = new ArrayList<>();
-	
-	@JsonIgnore
+		
 	@CreationTimestamp
 	@Column(nullable = false, columnDefinition = "datetime")	
-	private LocalDateTime dataCadastro;
-	
-	@JsonIgnore
+	private OffsetDateTime dataCadastro;
+		
 	@UpdateTimestamp
 	@Column(nullable = false, columnDefinition = "datetime")	
-	private LocalDateTime dataAtualizacao;
+	private OffsetDateTime dataAtualizacao;
 	
-	@OneToMany(mappedBy = "restaurante")
-	@JsonIgnore
-	private List<Produto> produtos = new ArrayList<>();
+	@OneToMany(mappedBy = "restaurante")	
+	private List<Produto> produtos = new ArrayList<>();	
 }
