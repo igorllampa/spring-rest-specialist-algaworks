@@ -11,7 +11,7 @@ import com.lampasw.algafood.domain.model.Cozinha;
 public class CozinhaInputDisassembler {
 
 	@Autowired
-	ModelMapper modelMapper;
+	private ModelMapper modelMapper;
 	
 	public Cozinha toDomainObject(CozinhaInput cozinhaInput) {							
 		return modelMapper.map(cozinhaInput, Cozinha.class);		

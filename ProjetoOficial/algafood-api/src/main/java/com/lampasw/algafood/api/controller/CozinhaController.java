@@ -51,12 +51,16 @@ public class CozinhaController {
 	
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<CozinhaModel> listar(){
-		return cozinhaModelAssembler.toCollectionModel(cozinhaRepository.findAll());
+		List<Cozinha> cozinhas = cozinhaRepository.findAll();
+		
+		return cozinhaModelAssembler.toCollectionModel(cozinhas);
 	}
 	
 	@GetMapping("/listar-por-nome")
 	public List<CozinhaModel> buscarPorNome(@RequestParam String nome){
-		return cozinhaModelAssembler.toCollectionModel(cozinhaRepository.findByNomeContains(nome));
+		List<Cozinha> cozinhas = cozinhaRepository.findByNomeContains(nome);
+		
+		return cozinhaModelAssembler.toCollectionModel(cozinhas);
 	}
 	
 	@GetMapping("/exists-por-nome")
@@ -71,13 +75,20 @@ public class CozinhaController {
 	
 	@GetMapping("/{cozinhaId}")
 	public CozinhaModel buscar(@PathVariable Long cozinhaId) {
-		return cozinhaModelAssembler.toModel(cadastroCozinha.buscarOuFalhar(cozinhaId));	
+		Cozinha cozinha = cadastroCozinha.buscarOuFalhar(cozinhaId);
+		
+		return cozinhaModelAssembler.toModel(cozinha);	
 	}
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public CozinhaModel adicionar(@RequestBody @Valid CozinhaInput cozinhaInput) {
-		return cozinhaModelAssembler.toModel(cadastroCozinha.salvar(cozinhaInputDisassembler.toDomainObject(cozinhaInput)));
+		
+		Cozinha cozinha = cozinhaInputDisassembler.toDomainObject(cozinhaInput);
+		
+		cozinha = cadastroCozinha.salvar(cozinha);			
+		
+		return cozinhaModelAssembler.toModel(cozinha);
 	}
 	
 	@PutMapping("/{cozinhaId}")
@@ -87,7 +98,9 @@ public class CozinhaController {
 		
 		cozinhaInputDisassembler.copyToDomainObject(cozinhaInput, cozinhaAtual);
 		
-		return cozinhaModelAssembler.toModel(cadastroCozinha.salvar( cozinhaAtual ));		
+		cadastroCozinha.salvar( cozinhaAtual );
+		
+		return cozinhaModelAssembler.toModel(cozinhaAtual);		
 	}
 	
 	@DeleteMapping("/{cozinhaId}")

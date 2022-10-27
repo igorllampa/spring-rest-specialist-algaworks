@@ -32,8 +32,7 @@ public class Cozinha {
 	private Long id;
 			
 	//@JsonIgnore //Apenas não exibe este campo no retorno da Api
-	//@JsonProperty("cozinhaTitulo")
-	@NotBlank
+	//@JsonProperty("cozinhaTitulo")	
 	@Column(nullable = false)
 	private String nome;	
 		

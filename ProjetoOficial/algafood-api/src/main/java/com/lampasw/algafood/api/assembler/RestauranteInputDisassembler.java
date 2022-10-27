@@ -12,7 +12,7 @@ import com.lampasw.algafood.domain.model.Restaurante;
 public class RestauranteInputDisassembler {
 
 	@Autowired
-	ModelMapper modelMapper;
+	private ModelMapper modelMapper;
 	
 	public Restaurante toDomainObject(RestauranteInput restauranteInput) {
 		
