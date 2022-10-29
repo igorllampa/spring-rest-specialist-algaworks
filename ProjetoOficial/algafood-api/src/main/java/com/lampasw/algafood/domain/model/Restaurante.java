@@ -47,21 +47,13 @@ public class Restaurante {
 	@EqualsAndHashCode.Include
 	private Long id;
 	
-	@Column(nullable = false)
-	@NotBlank
+	@Column(nullable = false)	
 	private String nome;
 		
-	@Column(name = "taxa_frete", nullable = false)
-	//@PositiveOrZero
-	@TaxaFrete
-	@Multiplo(numero = 5)
-	@NotNull
+	@Column(name = "taxa_frete", nullable = false)	
 	private BigDecimal taxaFrete;
-			
-	
-	@Valid
-	@ConvertGroup(from = Default.class, to = Groups.CozinhaId.class)
-	@NotNull	
+				
+	//@ConvertGroup(from = Default.class, to = Groups.CozinhaId.class)	
 	//@ManyToOne(fetch = FetchType.LAZY)
 	@ManyToOne()
 	@JoinColumn(name = "cozinha_id", nullable = false)	
@@ -69,7 +61,8 @@ public class Restaurante {
 		
 	@Embedded
 	private Endereco endereco;
-		
+	
+	private Boolean ativo = Boolean.TRUE;
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name="restaurante_forma_de_pagamento",
 			   joinColumns = @JoinColumn(name = "restaurante_id"),
@@ -85,5 +78,13 @@ public class Restaurante {
 	private OffsetDateTime dataAtualizacao;
 	
 	@OneToMany(mappedBy = "restaurante")	
-	private List<Produto> produtos = new ArrayList<>();	
+	private List<Produto> produtos = new ArrayList<>();
+	
+	public void ativar() {
+		setAtivo(true);
+	}
+	
+	public void inativar() {
+		setAtivo(false);
+	}
 }

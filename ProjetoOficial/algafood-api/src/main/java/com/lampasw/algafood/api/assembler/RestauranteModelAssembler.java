@@ -31,8 +31,8 @@ public class RestauranteModelAssembler {
 //		restauranteModel.setTaxaFrete(restaurante.getTaxaFrete());
 //		restauranteModel.setCozinha(cozinhaModel);
 		
-		modelMapper.createTypeMap(Restaurante.class, RestauranteModel.class)
-				.addMapping(Restaurante::getNome, RestauranteModel::setDescricao);
+//		modelMapper.createTypeMap(Restaurante.class, RestauranteModel.class)
+//				.addMapping(Restaurante::getNome, RestauranteModel::setDescricao);
 		
 		//Using ModelMapper to automatize the process of mapping objects
 		return modelMapper.map(restaurante, RestauranteModel.class);			

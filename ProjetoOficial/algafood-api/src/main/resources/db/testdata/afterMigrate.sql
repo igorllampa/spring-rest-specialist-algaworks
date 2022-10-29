@@ -37,8 +37,8 @@ insert into estado (nome) values ('Minas Gerais');
 insert into cidade (nome, estado_id) values ('Campos do Jordão', 1);
 insert into cidade (nome, estado_id) values ('Camanducaia-Monte Verde', 2);
 
-insert into restaurante (nome, taxa_frete, cozinha_id, endereco_cep, endereco_logradouro, endereco_numero, endereco_complemento, endereco_bairro, endereco_cidade_id, data_cadastro, data_atualizacao) values ('Nápoles', 18.10, 3, '15910000', 'Rua dos Testes', '123', 'Rota dos Restaurantes', 'Bairro dos testes', '1', utc_timestamp, utc_timestamp);
-insert into restaurante (nome, taxa_frete, cozinha_id, endereco_cep, endereco_logradouro, endereco_numero, endereco_complemento, endereco_bairro, endereco_cidade_id, data_cadastro, data_atualizacao) values ('Trattoria Salvador', 52.10, 3, '15910000', 'Rua dos Testes', '123', 'Rota dos Restaurantes', 'Bairro dos testes', '1', utc_timestamp, utc_timestamp);
+insert into restaurante (nome, taxa_frete, cozinha_id, endereco_cep, endereco_logradouro, endereco_numero, endereco_complemento, endereco_bairro, endereco_cidade_id, data_cadastro, data_atualizacao, ativo) values ('Nápoles', 18.10, 3, '15910000', 'Rua dos Testes', '123', 'Rota dos Restaurantes', 'Bairro dos testes', '1', utc_timestamp, utc_timestamp, true);
+insert into restaurante (nome, taxa_frete, cozinha_id, endereco_cep, endereco_logradouro, endereco_numero, endereco_complemento, endereco_bairro, endereco_cidade_id, data_cadastro, data_atualizacao, ativo) values ('Trattoria Salvador', 52.10, 3, '15910000', 'Rua dos Testes', '123', 'Rota dos Restaurantes', 'Bairro dos testes', '1', utc_timestamp, utc_timestamp, true);
 
 insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('X-Tudo', 'Teste de dev.', 10.90, 1, 1);
 insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('X-Salada', 'Teste de dev.', 1.90, 1, 1);
