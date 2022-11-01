@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.lampasw.algafood.api.model.input.RestauranteInput;
+import com.lampasw.algafood.domain.model.Cidade;
 import com.lampasw.algafood.domain.model.Cozinha;
 import com.lampasw.algafood.domain.model.Restaurante;
 
@@ -31,7 +32,11 @@ public class RestauranteInputDisassembler {
 	}
 	
 	public void copyToDomainObject(RestauranteInput restauranteInput, Restaurante restaurante) {
-		//restaurante.setCozinha(new Cozinha());
+		restaurante.setCozinha(new Cozinha());
+		
+		if (restaurante.getEndereco() != null) {
+			restaurante.getEndereco().setCidade(new Cidade());
+		}
 		
 		modelMapper.map(restauranteInput, restaurante);
 	}

@@ -36,6 +36,7 @@ import com.lampasw.algafood.api.assembler.RestauranteModelAssembler;
 import com.lampasw.algafood.api.model.RestauranteModel;
 import com.lampasw.algafood.api.model.input.RestauranteInput;
 import com.lampasw.algafood.core.validation.ValidacaoException;
+import com.lampasw.algafood.domain.exception.CidadeNaoEncontradaException;
 import com.lampasw.algafood.domain.exception.CozinhaNaoEncontradaException;
 import com.lampasw.algafood.domain.exception.NegocioException;
 import com.lampasw.algafood.domain.model.Cozinha;
@@ -143,7 +144,7 @@ public class RestauranteController {
 		try {			
 			Restaurante restaurante = restauranteInputDisassembler.toDomainObject(restauranteInput);
 			return restauranteModelAssembler.toModel(cadastroRestaurante.salvar(restaurante));
-		}catch (CozinhaNaoEncontradaException e) {
+		}catch (CozinhaNaoEncontradaException | CidadeNaoEncontradaException e) {
 			throw new NegocioException(e.getMessage());
 		}		
 	}
@@ -161,7 +162,7 @@ public class RestauranteController {
 			//		"id", "formasDePagamento", "endereco", "dataCadastro");	
 					
 			return restauranteModelAssembler.toModel(cadastroRestaurante.salvar(restauranteAtual));
-		}catch (CozinhaNaoEncontradaException e) {
+		}catch (CozinhaNaoEncontradaException | CidadeNaoEncontradaException e) {
 			throw new NegocioException(e.getMessage());
 		}
 	}	
