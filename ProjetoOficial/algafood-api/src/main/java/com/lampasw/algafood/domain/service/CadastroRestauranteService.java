@@ -3,10 +3,12 @@ package com.lampasw.algafood.domain.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.lampasw.algafood.domain.exception.RestauranteNaoEncontradoException;
 import com.lampasw.algafood.domain.model.Cidade;
 import com.lampasw.algafood.domain.model.Cozinha;
+import com.lampasw.algafood.domain.model.FormaDePagamento;
 import com.lampasw.algafood.domain.model.Restaurante;
 import com.lampasw.algafood.domain.repository.RestauranteRepository;
 
@@ -21,6 +23,9 @@ public class CadastroRestauranteService {
 
 	@Autowired
 	private CadastroCidadeService cadastroCidade;
+
+	@Autowired
+	private CadastroFormaDePagamentoService cadastroFormaDePagamento;
 	
 	@Transactional
 	public Restaurante salvar(Restaurante restaurante) {
@@ -52,5 +57,21 @@ public class CadastroRestauranteService {
 	public Restaurante buscarOuFalhar(Long restauranteId) {
 		return restauranteRepository.findById(restauranteId).orElseThrow(() -> 
 			new RestauranteNaoEncontradoException(restauranteId));
+	}
+	
+	@Transactional
+	public void desassociarFormaDePagamento(Long restauranteId, Long formaDePagamentoId) {
+		Restaurante restaurante = buscarOuFalhar(restauranteId);
+		FormaDePagamento formaDePagamento = cadastroFormaDePagamento.buscarOuFalhar(formaDePagamentoId);		
+		
+		restaurante.removerFormaDePagamento(formaDePagamento);		
+	}
+	
+	@Transactional 
+	public void adicionarFormaDePagamento(Long restauranteId, Long formaDePagamentoId) {
+		Restaurante restaurante = buscarOuFalhar(restauranteId);
+		FormaDePagamento formaDePagamento = cadastroFormaDePagamento.buscarOuFalhar(formaDePagamentoId);
+		
+		restaurante.adicionarFormaDePagamento(formaDePagamento);
 	}
 }

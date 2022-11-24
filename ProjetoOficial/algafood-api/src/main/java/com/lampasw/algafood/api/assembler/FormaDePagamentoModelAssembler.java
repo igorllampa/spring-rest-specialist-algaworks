@@ -1,5 +1,6 @@
 package com.lampasw.algafood.api.assembler;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,7 +21,7 @@ public class FormaDePagamentoModelAssembler {
 		return modelMapper.map(formaDePagamento, FormaDePagamentoModel.class);
 	}
 	
-	public List<FormaDePagamentoModel> toCollectionModel(List<FormaDePagamento> formasDePagamento){
+	public List<FormaDePagamentoModel> toCollectionModel(Collection<FormaDePagamento> formasDePagamento){
 		return formasDePagamento.stream()
 			.map(formaDePagamento -> toModel(formaDePagamento))
 			.collect(Collectors.toList());

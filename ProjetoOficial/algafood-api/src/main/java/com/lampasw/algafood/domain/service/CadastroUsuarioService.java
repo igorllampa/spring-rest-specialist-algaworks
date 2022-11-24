@@ -1,5 +1,7 @@
 package com.lampasw.algafood.domain.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -22,7 +24,16 @@ public class CadastroUsuarioService {
 		
 	
 	@Transactional
-	public Usuario salvar(Usuario usuario) {		
+	public Usuario salvar(Usuario usuario) {	
+		
+		usuarioRepository.detach(usuario);//Desacopla a entidade usuario do contexto de persistencia do JPA
+		
+		Optional<Usuario> usuarioExistente = usuarioRepository.findByEmail(usuario.getEmail());
+		
+		if (usuarioExistente.isPresent() && !usuario.equals(usuarioExistente.get())) {
+			throw new NegocioException(String.format("Já existe um usuário cadastrado com o email %s.", usuario.getEmail()));
+		}
+		
 		return usuarioRepository.save(usuario);		
 	}
 	

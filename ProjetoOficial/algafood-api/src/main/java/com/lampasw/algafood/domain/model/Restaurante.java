@@ -3,7 +3,9 @@ package com.lampasw.algafood.domain.model;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -67,7 +69,7 @@ public class Restaurante {
 	@JoinTable(name="restaurante_forma_de_pagamento",
 			   joinColumns = @JoinColumn(name = "restaurante_id"),
 			   inverseJoinColumns = @JoinColumn(name = "forma_de_pagamento_id"))
-	private List<FormaDePagamento> formasDePagamento = new ArrayList<>();
+	private Set<FormaDePagamento> formasDePagamento = new HashSet<>();
 		
 	@CreationTimestamp
 	@Column(nullable = false, columnDefinition = "datetime")	
@@ -86,5 +88,13 @@ public class Restaurante {
 	
 	public void inativar() {
 		setAtivo(false);
+	}
+	
+	public boolean adicionarFormaDePagamento(FormaDePagamento formaDePagamento) {
+		return getFormasDePagamento().add(formaDePagamento);
+	}
+	
+	public boolean removerFormaDePagamento(FormaDePagamento formaDePagamento) {
+		return getFormasDePagamento().remove(formaDePagamento);
 	}
 }

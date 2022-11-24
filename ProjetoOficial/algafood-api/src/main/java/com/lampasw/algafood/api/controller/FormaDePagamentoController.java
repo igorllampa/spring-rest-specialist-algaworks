@@ -20,7 +20,7 @@ import com.lampasw.algafood.api.model.FormaDePagamentoModel;
 import com.lampasw.algafood.api.model.input.FormaDePagamentoInput;
 import com.lampasw.algafood.domain.model.FormaDePagamento;
 import com.lampasw.algafood.domain.repository.FormaDePagamentoRepository;
-import com.lampasw.algafood.domain.service.CadastroFormaDePagamento;
+import com.lampasw.algafood.domain.service.CadastroFormaDePagamentoService;
 
 @RestController
 @RequestMapping("formas-pagamento")
@@ -30,7 +30,7 @@ public class FormaDePagamentoController {
 	FormaDePagamentoRepository formaDePagamentoRepository;
 	
 	@Autowired
-	CadastroFormaDePagamento cadastroFormaDePagamento;
+	CadastroFormaDePagamentoService cadastroFormaDePagamento;
 		
 	@Autowired
 	FormaDePagamentoModelAssembler formaDePagamentoModelAssembler;
