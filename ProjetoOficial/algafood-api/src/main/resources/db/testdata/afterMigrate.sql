@@ -37,8 +37,12 @@ insert into estado (nome) values ('Minas Gerais');
 insert into cidade (nome, estado_id) values ('Campos do Jordão', 1);
 insert into cidade (nome, estado_id) values ('Camanducaia-Monte Verde', 2);
 
-insert into restaurante (nome, taxa_frete, cozinha_id, endereco_cep, endereco_logradouro, endereco_numero, endereco_complemento, endereco_bairro, endereco_cidade_id, data_cadastro, data_atualizacao, ativo) values ('Nápoles', 18.10, 3, '15910000', 'Rua dos Testes', '123', 'Rota dos Restaurantes', 'Bairro dos testes', '1', utc_timestamp, utc_timestamp, true);
-insert into restaurante (nome, taxa_frete, cozinha_id, endereco_cep, endereco_logradouro, endereco_numero, endereco_complemento, endereco_bairro, endereco_cidade_id, data_cadastro, data_atualizacao, ativo) values ('Trattoria Salvador', 52.10, 3, '15910000', 'Rua dos Testes', '123', 'Rota dos Restaurantes', 'Bairro dos testes', '1', utc_timestamp, utc_timestamp, true);
+insert into restaurante (id, nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo, aberto, endereco_cidade_id, endereco_cep, endereco_logradouro, endereco_numero, endereco_bairro) values (1, 'Thai Gourmet', 10, 1, utc_timestamp, utc_timestamp, true, true, 1, '38400-999', 'Rua João Pinheiro', '1000', 'Centro');
+insert into restaurante (id, nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo, aberto) values (2, 'Thai Delivery', 9.50, 1, utc_timestamp, utc_timestamp, true, true);
+insert into restaurante (id, nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo, aberto) values (3, 'Tuk Tuk Comida Indiana', 15, 2, utc_timestamp, utc_timestamp, true, true);
+insert into restaurante (id, nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo, aberto) values (4, 'Java Steakhouse', 12, 3, utc_timestamp, utc_timestamp, true, true);
+insert into restaurante (id, nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo, aberto) values (5, 'Lanchonete do Tio Sam', 11, 4, utc_timestamp, utc_timestamp, true, true);
+insert into restaurante (id, nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo, aberto) values (6, 'Bar da Maria', 6, 4, utc_timestamp, utc_timestamp, true, true);              
 
 insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('X-Tudo', 'Teste de dev.', 10.90, 1, 1);
 insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('X-Salada', 'Teste de dev.', 1.90, 1, 1);
