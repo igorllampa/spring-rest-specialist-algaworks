@@ -10,7 +10,9 @@ import com.lampasw.algafood.domain.exception.EntidadeEmUsoException;
 import com.lampasw.algafood.domain.exception.FormaDePagamentoNaoEncontradaException;
 import com.lampasw.algafood.domain.exception.GrupoNaoEncontradoException;
 import com.lampasw.algafood.domain.model.Grupo;
+import com.lampasw.algafood.domain.model.Permissao;
 import com.lampasw.algafood.domain.repository.GrupoRepository;
+import com.lampasw.algafood.domain.repository.PermissaoRepository;
 
 @Service
 public class CadastroGrupoService {
@@ -18,8 +20,11 @@ public class CadastroGrupoService {
 	private static final String GRUPO_EM_USO = "Grupo de código %d não pode ser removido, pois está em uso";
 	
 	@Autowired
-	GrupoRepository grupoRepository;
+	private GrupoRepository grupoRepository;
 	
+	@Autowired
+	private CadastroPermissaoService cadastroPermissao;
+		
 	@Transactional
 	public Grupo salvar(Grupo grupo) {
 		return grupoRepository.save(grupo);
@@ -44,4 +49,20 @@ public class CadastroGrupoService {
 		return grupoRepository.findById(grupoId)
 				.orElseThrow(() -> new GrupoNaoEncontradoException(grupoId));
 	}
+	
+	@Transactional
+	public void associarPermissao(Long grupoId, Long permissaoId) {
+		Grupo grupo = buscarOuFalhar(grupoId);
+		Permissao permissao = cadastroPermissao.buscarOuFalhar(permissaoId);
+		
+		grupo.adicionarPermissao(permissao);
+	}
+	
+	@Transactional
+	public void desassociarPermissao(Long grupoId, Long permissaoId) {
+		Grupo grupo = buscarOuFalhar(grupoId);
+		Permissao permissao = cadastroPermissao.buscarOuFalhar(permissaoId);
+		
+		grupo.removerPermissao(permissao);
+	}	
 }

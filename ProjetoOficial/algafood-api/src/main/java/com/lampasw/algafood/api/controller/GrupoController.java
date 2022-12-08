@@ -71,7 +71,5 @@ public class GrupoController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover(@PathVariable Long grupoId) {
 		cadastroGrupo.remover(grupoId);
-	}
-	
-	
+	}	
 }
