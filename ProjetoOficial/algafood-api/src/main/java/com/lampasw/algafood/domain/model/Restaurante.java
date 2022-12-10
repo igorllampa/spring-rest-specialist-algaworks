@@ -15,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -73,7 +74,13 @@ public class Restaurante {
 			   joinColumns = @JoinColumn(name = "restaurante_id"),
 			   inverseJoinColumns = @JoinColumn(name = "forma_de_pagamento_id"))
 	private Set<FormaDePagamento> formasDePagamento = new HashSet<>();
-		
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name="restaurante_usuario_responsavel",
+			   joinColumns = @JoinColumn(name = "restaurante_id"),
+			   inverseJoinColumns = @JoinColumn(name = "usuario_id"))
+	private Set<Usuario> responsaveis = new HashSet<>();
+	
 	@CreationTimestamp
 	@Column(nullable = false, columnDefinition = "datetime")	
 	private OffsetDateTime dataCadastro;
@@ -107,5 +114,13 @@ public class Restaurante {
 	
 	public boolean removerFormaDePagamento(FormaDePagamento formaDePagamento) {
 		return getFormasDePagamento().remove(formaDePagamento);
+	}
+	
+	public boolean adicionarResponsavel(Usuario usuario) {
+		return getResponsaveis().add(usuario);
+	}
+	
+	public boolean removerResponsavel(Usuario usuario) {
+		return getResponsaveis().remove(usuario);
 	}
 }

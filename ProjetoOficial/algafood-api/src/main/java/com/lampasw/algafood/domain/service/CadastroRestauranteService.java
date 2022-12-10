@@ -10,6 +10,7 @@ import com.lampasw.algafood.domain.model.Cidade;
 import com.lampasw.algafood.domain.model.Cozinha;
 import com.lampasw.algafood.domain.model.FormaDePagamento;
 import com.lampasw.algafood.domain.model.Restaurante;
+import com.lampasw.algafood.domain.model.Usuario;
 import com.lampasw.algafood.domain.repository.RestauranteRepository;
 
 @Service
@@ -26,6 +27,10 @@ public class CadastroRestauranteService {
 
 	@Autowired
 	private CadastroFormaDePagamentoService cadastroFormaDePagamento;
+	
+	@Autowired
+	private CadastroUsuarioService cadastroUsuario;
+	
 	
 	@Transactional
 	public Restaurante salvar(Restaurante restaurante) {
@@ -85,5 +90,21 @@ public class CadastroRestauranteService {
 		FormaDePagamento formaDePagamento = cadastroFormaDePagamento.buscarOuFalhar(formaDePagamentoId);
 		
 		restaurante.adicionarFormaDePagamento(formaDePagamento);
+	}
+	
+	@Transactional
+	public void adicionarResponsavel(Long restauranteId, Long usuarioId) {
+		Restaurante restaurante = buscarOuFalhar(restauranteId);
+		Usuario usuario = cadastroUsuario.buscarOuFalhar(usuarioId); 
+		
+		restaurante.adicionarResponsavel(usuario);
+	}
+	
+	@Transactional
+	public void removerResponsavel(Long restauranteId, Long usuarioId) {
+		Restaurante restaurante = buscarOuFalhar(restauranteId);
+		Usuario usuario = cadastroUsuario.buscarOuFalhar(usuarioId);
+		
+		restaurante.removerResponsavel(usuario);
 	}
 }
