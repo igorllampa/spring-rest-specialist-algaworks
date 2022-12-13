@@ -13,6 +13,8 @@ delete from restaurante_forma_de_pagamento;
 delete from restaurante_usuario_responsavel;
 delete from usuario;
 delete from usuario_grupo;
+delete from item_pedido;
+delete from pedido;
 
 set foreign_key_checks = 1;
 
@@ -49,6 +51,10 @@ insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('X-T
 insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('X-Salada', 'Teste de dev.', 1.90, 1, 1);
 insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('X-Burguer', 'Teste de dev.', 15.00, 1, 2);
 insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('X-Ovo', 'Teste de dev.', 18.10, 0, 2);
+insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('X-Teste', 'Teste de dev.', 10.90, 1, 1);
+insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('X-a', 'Teste de dev.', 1.90, 1, 1);
+insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('X-B', 'Teste de dev.', 15.00, 1, 2);
+insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('X-C', 'Teste de dev.', 18.10, 0, 2);
 
 insert into permissao (nome, descricao) values ('Cadastro de restaurante', 'Permite que o usuário faça cadastros de restaurantes');
 insert into permissao (nome, descricao) values ('Cadastro de cidade', 'Permite que o usuário faça cadastros de cidades');
@@ -72,4 +78,26 @@ insert into usuario (id, nome, email, senha, data_cadastro) values
 
 insert into usuario_grupo(usuario_id, grupo_id) values (1, 1), (1, 2), (2, 2), (3, 3), (4, 2);
 
-insert into restaurante_usuario_responsavel (restaurante_id, usuario_id) values (1, 1), (1, 2), (2, 3), (3, 3), (4, 4); 
+insert into restaurante_usuario_responsavel (restaurante_id, usuario_id) values (1, 1), (1, 2), (2, 3), (3, 3), (4, 4);
+
+insert into pedido (id, restaurante_id, usuario_cliente_id, forma_de_pagamento_id, endereco_cidade_id, endereco_cep, 
+    				endereco_logradouro, endereco_numero, endereco_complemento, endereco_bairro,
+    				status, data_criacao, subtotal, taxa_frete, valor_total)
+			values (1, 1, 1, 1, 1, '38400-000', 'Rua Floriano Peixoto', '500', 'Apto 801', 'Brasil',
+					'CRIADO', utc_timestamp, 298.90, 10, 308.90);
+
+insert into item_pedido (id, pedido_id, produto_id, quantidade, preco_unitario, preco_total, observacao)
+				 values (1, 1, 1, 1, 78.9, 78.9, null);
+
+insert into item_pedido (id, pedido_id, produto_id, quantidade, preco_unitario, preco_total, observacao)
+				 values (2, 1, 2, 2, 110, 220, 'Menos picante, por favor');
+
+
+insert into pedido (id, restaurante_id, usuario_cliente_id, forma_de_pagamento_id, endereco_cidade_id, endereco_cep, 
+        			endereco_logradouro, endereco_numero, endereco_complemento, endereco_bairro,
+        			status, data_criacao, subtotal, taxa_frete, valor_total)
+			values (2, 4, 1, 2, 1, '38400-111', 'Rua Acre', '300', 'Casa 2', 'Centro',
+					'CRIADO', utc_timestamp, 79, 0, 79);
+
+insert into item_pedido (id, pedido_id, produto_id, quantidade, preco_unitario, preco_total, observacao)
+				 values (3, 2, 6, 1, 79, 79, 'Ao ponto'); 

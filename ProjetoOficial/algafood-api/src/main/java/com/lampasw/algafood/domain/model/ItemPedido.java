@@ -36,8 +36,5 @@ public class ItemPedido {
 	
 	@ManyToOne
 	@JoinColumn(nullable = false)
-	private Pedido pedido;
-	
-	
-	
+	private Pedido pedido;	
 }
