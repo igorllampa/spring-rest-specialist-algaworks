@@ -69,13 +69,13 @@ public class Restaurante {
 	
 	private Boolean aberto = Boolean.FALSE;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany//fetch = FetchType.EAGER
 	@JoinTable(name="restaurante_forma_de_pagamento",
 			   joinColumns = @JoinColumn(name = "restaurante_id"),
 			   inverseJoinColumns = @JoinColumn(name = "forma_de_pagamento_id"))
 	private Set<FormaDePagamento> formasDePagamento = new HashSet<>();
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany//fetch = FetchType.EAGER
 	@JoinTable(name="restaurante_usuario_responsavel",
 			   joinColumns = @JoinColumn(name = "restaurante_id"),
 			   inverseJoinColumns = @JoinColumn(name = "usuario_id"))
