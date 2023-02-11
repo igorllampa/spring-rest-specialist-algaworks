@@ -21,18 +21,19 @@ public class CadastroPedidoService {
 	}
 	
 	@Transactional
-	public void remover(Long pedidoId) {
+	public void remover(String codigoPedido) {
 					
-		try {		
-			pedidoRepository.deleteById(pedidoId);
+		try {	
+			Pedido pedido = buscarOuFalhar(codigoPedido);
+			pedidoRepository.deleteById(pedido.getId());
 			pedidoRepository.flush();
 		}catch (EmptyResultDataAccessException e) {
-            throw new PedidoNaoEncontradoException(pedidoId);        
+            throw new PedidoNaoEncontradoException(codigoPedido);        
         } 		
 	}
 	
-	public Pedido buscarOuFalhar(Long pedidoId) {
-		return pedidoRepository.findById(pedidoId)
-				.orElseThrow(() -> new PedidoNaoEncontradoException(pedidoId));
+	public Pedido buscarOuFalhar(String codigoPedido) {
+		return pedidoRepository.findByCodigo(codigoPedido)
+				.orElseThrow(() -> new PedidoNaoEncontradoException(codigoPedido));
 	}	
 }

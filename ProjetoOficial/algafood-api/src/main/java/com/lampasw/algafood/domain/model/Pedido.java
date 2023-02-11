@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
@@ -17,8 +18,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 
 import org.hibernate.annotations.CreationTimestamp;
+
+import com.lampasw.algafood.domain.exception.NegocioException;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -28,10 +32,14 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Pedido {
 
+	private static final String MSG_STATUS_NAO_PERMITIDO = "Status do pedido %s não pode ser alterado de %s para %s";
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@EqualsAndHashCode.Include
 	private Long id;
+
+	private String codigo;
 	
 	private BigDecimal subtotal;
 	
@@ -69,11 +77,43 @@ public class Pedido {
 	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
 	private List<ItemPedido> itens = new ArrayList<>();	
 	
-	public void calcularValorTotal() {
+	public void calcularValorTotal() {			
+		
+		getItens().forEach(ItemPedido::calcularPrecoTotal);
+		
 		this.subtotal = getItens().stream()
 				.map(item -> item.getPrecoTotal())
 				.reduce(BigDecimal.ZERO, BigDecimal::add);
 		
-		this.valorTotal = this.subtotal.add(this.taxaFrete);
+		this.valorTotal = this.subtotal.add(this.taxaFrete);			
+	}
+	
+	public void confirmar() {
+		setStatus(StatusPedido.CONFIRMADO);
+		setDataConfirmacao(OffsetDateTime.now());
+	}
+	
+	public void entregar() {
+		setStatus(StatusPedido.ENTREGUE);
+		setDataConfirmacao(OffsetDateTime.now());
+	}
+	
+	public void cancelar() {
+		setStatus(StatusPedido.CANCELADO);
+		setDataCancelamento(OffsetDateTime.now());
+	}
+	
+	private void setStatus(StatusPedido novoStatus) {
+		if(getStatus().naoPodeAlterarPara(novoStatus)) {		
+			throw new NegocioException(
+					String.format(MSG_STATUS_NAO_PERMITIDO, getCodigo(), 
+							getStatus().getDescricao(), novoStatus.getDescricao()));		
+		}
+		this.status = novoStatus;
+	}
+	
+	@PrePersist
+	private void gerarCodigo() {
+		setCodigo(UUID.randomUUID().toString());
 	}
 }

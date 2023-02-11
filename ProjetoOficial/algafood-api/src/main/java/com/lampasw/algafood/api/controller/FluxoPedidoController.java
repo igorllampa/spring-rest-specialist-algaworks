@@ -31,7 +31,7 @@ import com.lampasw.algafood.domain.service.EmissaoPedidoService;
 import com.lampasw.algafood.domain.service.FluxoPedidoService;
 
 @RestController
-@RequestMapping("/pedidos/{pedidoId}")
+@RequestMapping("/pedidos/{codigoPedido}")
 public class FluxoPedidoController {
 
 	@Autowired
@@ -39,19 +39,19 @@ public class FluxoPedidoController {
 	
 	@PutMapping("/confirmacao")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void confirmar(@PathVariable Long pedidoId) {
-		fluxoPedido.confirmar(pedidoId);
+	public void confirmar(@PathVariable String codigoPedido) {
+		fluxoPedido.confirmar(codigoPedido);
 	}
 	
 	@PutMapping("/entrega")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void entregar(@PathVariable Long pedidoId) {
-		fluxoPedido.entregar(pedidoId);		
+	public void entregar(@PathVariable String codigoPedido) {
+		fluxoPedido.entregar(codigoPedido);		
 	}
 	
 	@PutMapping("/cancelamento")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void cancelar(@PathVariable Long pedidoId) {
-		fluxoPedido.cancelar(pedidoId);		
+	public void cancelar(@PathVariable String codigoPedido) {
+		fluxoPedido.cancelar(codigoPedido);		
 	}
 }

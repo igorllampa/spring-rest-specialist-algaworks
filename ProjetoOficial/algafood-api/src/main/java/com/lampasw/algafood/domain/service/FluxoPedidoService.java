@@ -19,38 +19,20 @@ public class FluxoPedidoService {
 	private EmissaoPedidoService emissaoPedido;
 	
 	@Transactional
-	public void confirmar(Long pedidoId) {
-		Pedido pedido = emissaoPedido.buscarOuFalhar(pedidoId);
-		
-		if(!pedido.getStatus().equals(StatusPedido.CRIADO)) {
-			throw new NegocioException(String.format(MSG_STATUS_NAO_PERMITIDO, pedido.getId(), pedido.getStatus().getDescricao(), StatusPedido.CONFIRMADO.getDescricao()));
-		}
-		
-		pedido.setStatus(StatusPedido.CONFIRMADO);
-		pedido.setDataConfirmacao(OffsetDateTime.now());		
+	public void confirmar(String codigoPedido) {
+		Pedido pedido = emissaoPedido.buscarOuFalhar(codigoPedido);		
+		pedido.confirmar();		
 	}
 	
 	@Transactional
-	public void entregar(Long pedidoId) {
-		Pedido pedido = emissaoPedido.buscarOuFalhar(pedidoId);
-		
-		if(!pedido.getStatus().equals(StatusPedido.CONFIRMADO)) {
-			throw new NegocioException(String.format(MSG_STATUS_NAO_PERMITIDO, pedido.getId(), pedido.getStatus().getDescricao(), StatusPedido.ENTREGUE.getDescricao()));
-		}
-		
-		pedido.setStatus(StatusPedido.ENTREGUE);
-		pedido.setDataEntrega(OffsetDateTime.now());
+	public void entregar(String codigoPedido) {
+		Pedido pedido = emissaoPedido.buscarOuFalhar(codigoPedido);		
+		pedido.entregar();
 	}
 	
 	@Transactional
-	public void cancelar(Long pedidoId) {
-		Pedido pedido = emissaoPedido.buscarOuFalhar(pedidoId);
-		
-		if(!pedido.getStatus().equals(StatusPedido.CRIADO)) {
-			throw new NegocioException(String.format(MSG_STATUS_NAO_PERMITIDO, pedido.getId(), pedido.getStatus().getDescricao(), StatusPedido.CANCELADO.getDescricao()));
-		}
-		
-		pedido.setStatus(StatusPedido.CANCELADO);
-		pedido.setDataCancelamento(OffsetDateTime.now());
+	public void cancelar(String codigoPedido) {
+		Pedido pedido = emissaoPedido.buscarOuFalhar(codigoPedido);		
+		pedido.cancelar();
 	}
 }

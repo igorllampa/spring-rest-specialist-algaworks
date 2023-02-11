@@ -2,13 +2,9 @@ package com.lampasw.algafood.domain.exception;
 
 public class PedidoNaoEncontradoException extends EntidadeNaoEncontradaException {
 	
-	private static final long serialVersionUID = 1L;
-
-	public PedidoNaoEncontradoException(String mensagem) {
-		super(mensagem);
-	}
+	private static final long serialVersionUID = 1L;	
 	
-	public PedidoNaoEncontradoException(Long pedidoId) {
-		this(String.format("O pedido %d não foi encontrado.", pedidoId));
+	public PedidoNaoEncontradoException(String codigoPedido) {
+		super(String.format("O pedido %s não foi encontrado.", codigoPedido));
 	}
 }
