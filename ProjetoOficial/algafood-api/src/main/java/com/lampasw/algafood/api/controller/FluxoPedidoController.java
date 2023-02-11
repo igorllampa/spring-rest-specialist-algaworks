@@ -28,62 +28,30 @@ import com.lampasw.algafood.domain.model.Pedido;
 import com.lampasw.algafood.domain.model.Usuario;
 import com.lampasw.algafood.domain.repository.PedidoRepository;
 import com.lampasw.algafood.domain.service.EmissaoPedidoService;
+import com.lampasw.algafood.domain.service.FluxoPedidoService;
 
 @RestController
-@RequestMapping("/pedidos")
-public class PedidoController {
+@RequestMapping("/pedidos/{pedidoId}")
+public class FluxoPedidoController {
 
 	@Autowired
-	private PedidoRepository pedidoRepository;
+	private FluxoPedidoService fluxoPedido;
 	
-	@Autowired
-	private EmissaoPedidoService emissaoPedido;
-	
-	@Autowired
-	private PedidoModelAssembler pedidoModelAssembler;
-	
-	@Autowired
-	private PedidoResumoModelAssembler pedidoResumoModelAssembler;
-	
-	@Autowired
-	private PedidoInputDisassembler pedidoInputDisassembler;
-	
-	@GetMapping
-	public List<PedidoResumoModel> listar () {
-		return pedidoResumoModelAssembler.toCollectionModel(pedidoRepository.findAll());
+	@PutMapping("/confirmacao")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void confirmar(@PathVariable Long pedidoId) {
+		fluxoPedido.confirmar(pedidoId);
 	}
 	
-	@GetMapping("/{pedidoId}")
-	public PedidoModel buscar(@PathVariable Long pedidoId) {
-		return pedidoModelAssembler.toModel(emissaoPedido.buscarOuFalhar(pedidoId)); 
+	@PutMapping("/entrega")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void entregar(@PathVariable Long pedidoId) {
+		fluxoPedido.entregar(pedidoId);		
 	}
 	
-	@PostMapping
-	@ResponseStatus(HttpStatus.CREATED)
-	public PedidoModel adicionar(@RequestBody @Valid PedidoInput pedidoInput) {
-		try {
-	        Pedido novoPedido = pedidoInputDisassembler.toDomainObject(pedidoInput);
-
-	        // TODO pegar usuário autenticado
-	        novoPedido.setCliente(new Usuario());
-	        novoPedido.getCliente().setId(1L);
-
-	        novoPedido = emissaoPedido.emitir(novoPedido);
-
-	        return pedidoModelAssembler.toModel(novoPedido);
-	    } catch (EntidadeNaoEncontradaException e) {
-	        throw new NegocioException(e.getMessage(), e);
-	    }
+	@PutMapping("/cancelamento")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void cancelar(@PathVariable Long pedidoId) {
+		fluxoPedido.cancelar(pedidoId);		
 	}
-	
-	@PutMapping("/{pedidoId}")
-	public Pedido atualizar(@PathVariable Long pedidoId, @RequestBody @Valid Pedido pedido) {
-		return null;
-	}
-	
-	@DeleteMapping("{pedidoId}")
-	public void remover(@PathVariable Long pedidoId) {
-		
-	}
-	
 }

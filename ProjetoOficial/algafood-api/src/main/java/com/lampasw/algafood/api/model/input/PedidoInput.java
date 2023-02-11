@@ -1,15 +1,10 @@
 package com.lampasw.algafood.api.model.input;
 
-import java.math.BigDecimal;
-import java.time.OffsetDateTime;
 import java.util.List;
 
-import com.lampasw.algafood.domain.model.Endereco;
-import com.lampasw.algafood.domain.model.FormaDePagamento;
-import com.lampasw.algafood.domain.model.ItemPedido;
-import com.lampasw.algafood.domain.model.Restaurante;
-import com.lampasw.algafood.domain.model.StatusPedido;
-import com.lampasw.algafood.domain.model.Usuario;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,17 +13,20 @@ import lombok.Setter;
 @Setter
 public class PedidoInput {
 	
+	@Valid
+	@NotNull
+	private RestauranteIdInput restaurante;
 	
-	private BigDecimal taxaFrete;
-	private BigDecimal valorTotal;			
-	private OffsetDateTime dataCriacao;
-	private OffsetDateTime dataConfirmacao;
-	private OffsetDateTime dataCancelamento;
-	private OffsetDateTime dataEntrega;
-	private StatusPedido status;		
-	private Endereco enderecoEntrega;			
-	private FormaDePagamento formaDePagamento;				
-	private Restaurante restaurante;			
-	private Usuario cliente;		
-	private List<ItemPedido> itens;	
+	@Valid
+	@NotNull
+	private EnderecoInput enderecoEntrega;
+	
+	@Valid
+	@NotNull
+	private FormaDePagamentoIdInput formaDePagamento;	
+					
+	@Valid
+	@Size(min = 1)
+	@NotNull
+	private List<ItemPedidoInput> itens;	
 }
