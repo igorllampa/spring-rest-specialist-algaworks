@@ -13,6 +13,7 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.validation.BeanPropertyBindingResult;
@@ -29,12 +30,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lampasw.algafood.api.assembler.RestauranteInputDisassembler;
 import com.lampasw.algafood.api.assembler.RestauranteModelAssembler;
 import com.lampasw.algafood.api.model.RestauranteModel;
 import com.lampasw.algafood.api.model.input.RestauranteInput;
+import com.lampasw.algafood.api.model.view.RestauranteView;
 import com.lampasw.algafood.core.validation.ValidacaoException;
 import com.lampasw.algafood.domain.exception.CidadeNaoEncontradaException;
 import com.lampasw.algafood.domain.exception.CozinhaNaoEncontradaException;
@@ -66,10 +69,40 @@ public class RestauranteController {
 		this.restauranteModelAssembler = restauranteModelAssembler;
 		this.restauranteInputDisassembler = restauranteInputDisassembler;
 	}
-	
+		
 	@GetMapping
 	public List<RestauranteModel> listar(){
 		return restauranteModelAssembler.toCollectionModel(restauranteRepository.findAll());
+	}
+	
+	@JsonView(RestauranteView.Resumo.class)
+	@GetMapping(params = "projecao=resumo")
+	public List<RestauranteModel> listarResumido(){
+		return listar();
+	}
+	
+	@JsonView(RestauranteView.ApenasNome.class)
+	@GetMapping(params = "projecao=apenas-nome")
+	public List<RestauranteModel> listarApenasNomes(){
+		return listar();
+	}
+	
+	@GetMapping("/listagem-dinamica")
+	public MappingJacksonValue listarDinamicamente(@RequestParam(required = false) String projecao) {
+		List<Restaurante> restaurantes = restauranteRepository.findAll();
+		List<RestauranteModel> restaurantesModel = restauranteModelAssembler.toCollectionModel(restaurantes);
+		
+		MappingJacksonValue restaurantesWrapper = new MappingJacksonValue(restaurantesModel);
+		
+		restaurantesWrapper.setSerializationView(RestauranteView.Resumo.class);
+		
+		if ("apenas-nome".equals(projecao)) {
+			restaurantesWrapper.setSerializationView(RestauranteView.ApenasNome.class);
+		} else if ("completo".equals(projecao)) {
+			restaurantesWrapper.setSerializationView(null);
+		}
+		
+		return restaurantesWrapper;
 	}
 	
 	@GetMapping("/por-taxa-frete")
