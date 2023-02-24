@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,7 +31,9 @@ import com.lampasw.algafood.domain.exception.NegocioException;
 import com.lampasw.algafood.domain.model.Pedido;
 import com.lampasw.algafood.domain.model.Usuario;
 import com.lampasw.algafood.domain.repository.PedidoRepository;
+import com.lampasw.algafood.domain.repository.filter.PedidoFilter;
 import com.lampasw.algafood.domain.service.EmissaoPedidoService;
+import com.lampasw.algafood.infrastructure.repository.spec.PedidoSpecs;
 
 @RestController
 @RequestMapping("/pedidos")
@@ -67,8 +70,8 @@ public class PedidoController {
 //	}
 	
 	@GetMapping
-	public List<PedidoResumoModel> listar () {
-		return pedidoResumoModelAssembler.toCollectionModel(pedidoRepository.findAll());
+	public List<PedidoResumoModel> pesquisar (PedidoFilter pedidoFilter) {
+		return pedidoResumoModelAssembler.toCollectionModel(pedidoRepository.findAll(PedidoSpecs.usandoFiltro(pedidoFilter)));
 	}
 	
 	@GetMapping("/{codigoPedido}")
