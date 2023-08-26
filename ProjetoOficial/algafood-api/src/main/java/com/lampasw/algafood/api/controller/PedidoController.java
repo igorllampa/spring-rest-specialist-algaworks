@@ -5,8 +5,11 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,18 +17,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
-import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
+import com.google.common.collect.ImmutableMap;
 import com.lampasw.algafood.api.assembler.PedidoInputDisassembler;
 import com.lampasw.algafood.api.assembler.PedidoModelAssembler;
 import com.lampasw.algafood.api.assembler.PedidoResumoModelAssembler;
 import com.lampasw.algafood.api.model.PedidoModel;
 import com.lampasw.algafood.api.model.PedidoResumoModel;
 import com.lampasw.algafood.api.model.input.PedidoInput;
+import com.lampasw.algafood.core.data.PageableTranslator;
 import com.lampasw.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.lampasw.algafood.domain.exception.NegocioException;
 import com.lampasw.algafood.domain.model.Pedido;
@@ -70,8 +72,17 @@ public class PedidoController {
 //	}
 	
 	@GetMapping
-	public List<PedidoResumoModel> pesquisar (PedidoFilter pedidoFilter) {
-		return pedidoResumoModelAssembler.toCollectionModel(pedidoRepository.findAll(PedidoSpecs.usandoFiltro(pedidoFilter)));
+	public Page<PedidoResumoModel> pesquisar (PedidoFilter pedidoFilter, @PageableDefault(size = 10) Pageable pageable) {
+		
+		pageable = traduzirPageable(pageable);
+		
+		Page<Pedido> pedidosPage = pedidoRepository.findAll(PedidoSpecs.usandoFiltro(pedidoFilter), pageable);
+		
+		List<PedidoResumoModel> pedidosResumoModel = pedidoResumoModelAssembler.toCollectionModel(pedidosPage.getContent());
+		
+		Page<PedidoResumoModel> pedidoResumoModelPage = new PageImpl<>(pedidosResumoModel, pageable, pedidosPage.getTotalElements());
+		
+		return pedidoResumoModelPage;
 	}
 	
 	@GetMapping("/{codigoPedido}")
@@ -106,5 +117,15 @@ public class PedidoController {
 	public void remover(@PathVariable Long pedidoId) {
 		
 	}
+
+	private Pageable traduzirPageable(Pageable apiPageable) {
 	
+		var mapeamento = ImmutableMap.of(
+				"codigo", "codigo",
+				"restaurante.nome", "restaurante.nome",
+				"nomeCliente", "cliente.nome",
+				"valorTotal", "valorTotal");
+		
+		return PageableTranslator.translate(apiPageable, mapeamento);
+	}
 }

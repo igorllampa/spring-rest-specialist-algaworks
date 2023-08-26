@@ -26,7 +26,7 @@ public class SquigglyConfig {
 		var filterRegistration = new FilterRegistrationBean<SquigglyRequestFilter>();
 		filterRegistration.setFilter(new SquigglyRequestFilter());
 		filterRegistration.setOrder(1);
-		filterRegistration.setUrlPatterns(urlPatterns);
+		filterRegistration.setUrlPatterns(urlPatterns);		
 		
 		return filterRegistration;
 	}
