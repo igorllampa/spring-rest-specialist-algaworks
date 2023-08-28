@@ -30,10 +30,10 @@ import com.lampasw.algafood.api.model.input.PedidoInput;
 import com.lampasw.algafood.core.data.PageableTranslator;
 import com.lampasw.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.lampasw.algafood.domain.exception.NegocioException;
+import com.lampasw.algafood.domain.filter.PedidoFilter;
 import com.lampasw.algafood.domain.model.Pedido;
 import com.lampasw.algafood.domain.model.Usuario;
 import com.lampasw.algafood.domain.repository.PedidoRepository;
-import com.lampasw.algafood.domain.repository.filter.PedidoFilter;
 import com.lampasw.algafood.domain.service.EmissaoPedidoService;
 import com.lampasw.algafood.infrastructure.repository.spec.PedidoSpecs;
 

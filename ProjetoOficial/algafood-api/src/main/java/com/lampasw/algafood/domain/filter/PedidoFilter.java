@@ -1,4 +1,4 @@
-package com.lampasw.algafood.domain.repository.filter;
+package com.lampasw.algafood.domain.filter;
 
 import java.time.OffsetDateTime;
 
