@@ -15,6 +15,7 @@ delete from usuario;
 delete from usuario_grupo;
 delete from item_pedido;
 delete from pedido;
+delete from foto_produto;
 
 set foreign_key_checks = 1;
 
