@@ -1,27 +1,28 @@
 package com.lampasw.algafood.domain.service;
 
-import java.time.OffsetDateTime;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lampasw.algafood.domain.exception.NegocioException;
 import com.lampasw.algafood.domain.model.Pedido;
-import com.lampasw.algafood.domain.model.StatusPedido;
+import com.lampasw.algafood.domain.repository.PedidoRepository;
 
 @Service
 public class FluxoPedidoService {
-
-	private static final String MSG_STATUS_NAO_PERMITIDO = "Status do pedido %d não pode ser alterado de %s para %s";
+	
 	@Autowired
 	private EmissaoPedidoService emissaoPedido;
+	
+	@Autowired
+	private PedidoRepository pedidoRepository;
 	
 	@Transactional
 	public void confirmar(String codigoPedido) {
 		Pedido pedido = emissaoPedido.buscarOuFalhar(codigoPedido);		
-		pedido.confirmar();		
+		pedido.confirmar();	
+		
+		pedidoRepository.save(pedido);
 	}
 	
 	@Transactional
@@ -34,5 +35,7 @@ public class FluxoPedidoService {
 	public void cancelar(String codigoPedido) {
 		Pedido pedido = emissaoPedido.buscarOuFalhar(codigoPedido);		
 		pedido.cancelar();
+		
+		pedidoRepository.save(pedido);
 	}
 }

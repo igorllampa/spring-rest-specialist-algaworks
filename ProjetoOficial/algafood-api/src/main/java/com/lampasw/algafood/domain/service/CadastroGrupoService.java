@@ -7,12 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lampasw.algafood.domain.exception.EntidadeEmUsoException;
-import com.lampasw.algafood.domain.exception.FormaDePagamentoNaoEncontradaException;
 import com.lampasw.algafood.domain.exception.GrupoNaoEncontradoException;
 import com.lampasw.algafood.domain.model.Grupo;
 import com.lampasw.algafood.domain.model.Permissao;
 import com.lampasw.algafood.domain.repository.GrupoRepository;
-import com.lampasw.algafood.domain.repository.PermissaoRepository;
 
 @Service
 public class CadastroGrupoService {

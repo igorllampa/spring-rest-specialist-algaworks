@@ -8,14 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.lampasw.algafood.api.model.CidadeModel;
-import com.lampasw.algafood.api.model.CozinhaModel;
-import com.lampasw.algafood.api.model.EstadoModel;
-import com.lampasw.algafood.api.model.RestauranteModel;
-import com.lampasw.algafood.api.model.input.CozinhaIdInput;
-import com.lampasw.algafood.api.model.input.RestauranteInput;
 import com.lampasw.algafood.domain.model.Cidade;
-import com.lampasw.algafood.domain.model.Estado;
-import com.lampasw.algafood.domain.model.Restaurante;
 
 @Component
 public class CidadeModelAssembler {

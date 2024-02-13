@@ -136,7 +136,7 @@ public class CadastroRestauranteIT {
             .post()
         .then()
             .statusCode(HttpStatus.BAD_REQUEST.value())
-            .body("title", equalTo(DADOS_INVALIDOS_PROBLEM_TITLE));
+            .body("title", equalTo(VIOLACAO_DE_REGRA_DE_NEGOCIO_PROBLEM_TYPE));
     }
     
     @Test

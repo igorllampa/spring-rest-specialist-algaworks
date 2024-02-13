@@ -10,9 +10,6 @@ import org.springframework.stereotype.Component;
 import com.lampasw.algafood.api.model.PedidoModel;
 import com.lampasw.algafood.domain.model.Pedido;
 
-import lombok.Getter;
-import lombok.Setter;
-
 @Component
 public class PedidoModelAssembler {
 

@@ -1,20 +1,16 @@
 package com.lampasw.algafood.api.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,8 +27,6 @@ import com.lampasw.algafood.api.assembler.CozinhaModelAssembler;
 import com.lampasw.algafood.api.model.CozinhaModel;
 import com.lampasw.algafood.api.model.CozinhasXmlWrapper;
 import com.lampasw.algafood.api.model.input.CozinhaInput;
-import com.lampasw.algafood.domain.exception.EntidadeEmUsoException;
-import com.lampasw.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.lampasw.algafood.domain.model.Cozinha;
 import com.lampasw.algafood.domain.repository.CozinhaRepository;
 import com.lampasw.algafood.domain.service.CadastroCozinhaService;

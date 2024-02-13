@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.lampasw.algafood.domain.exception.CidadeNaoEncontradaException;
 import com.lampasw.algafood.domain.exception.EntidadeEmUsoException;
-import com.lampasw.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.lampasw.algafood.domain.model.Cidade;
 import com.lampasw.algafood.domain.model.Estado;
 import com.lampasw.algafood.domain.repository.CidadeRepository;

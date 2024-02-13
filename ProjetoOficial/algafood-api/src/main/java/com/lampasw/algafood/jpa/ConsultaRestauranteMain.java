@@ -1,7 +1,6 @@
 package com.lampasw.algafood.jpa;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.boot.WebApplicationType;

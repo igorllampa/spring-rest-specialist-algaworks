@@ -1,9 +1,7 @@
 package com.lampasw.algafood.api.controller;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -30,7 +28,6 @@ import com.lampasw.algafood.api.model.input.FotoProdutoInput;
 import com.lampasw.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.lampasw.algafood.domain.model.FotoProduto;
 import com.lampasw.algafood.domain.model.Produto;
-import com.lampasw.algafood.domain.repository.ProdutoRepository;
 import com.lampasw.algafood.domain.service.CadastroProdutoService;
 import com.lampasw.algafood.domain.service.CatalogoFotoProdutoService;
 import com.lampasw.algafood.domain.service.FotoStorageService;

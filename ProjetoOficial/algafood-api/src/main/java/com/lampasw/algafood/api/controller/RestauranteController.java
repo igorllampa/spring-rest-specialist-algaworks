@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.json.MappingJacksonValue;
@@ -43,7 +42,6 @@ import com.lampasw.algafood.domain.exception.CidadeNaoEncontradaException;
 import com.lampasw.algafood.domain.exception.CozinhaNaoEncontradaException;
 import com.lampasw.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.lampasw.algafood.domain.exception.NegocioException;
-import com.lampasw.algafood.domain.model.Cozinha;
 import com.lampasw.algafood.domain.model.Restaurante;
 import com.lampasw.algafood.domain.repository.RestauranteRepository;
 import com.lampasw.algafood.domain.service.CadastroRestauranteService;

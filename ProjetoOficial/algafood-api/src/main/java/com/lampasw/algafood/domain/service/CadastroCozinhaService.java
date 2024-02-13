@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.lampasw.algafood.domain.exception.CozinhaNaoEncontradaException;
 import com.lampasw.algafood.domain.exception.EntidadeEmUsoException;
-import com.lampasw.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.lampasw.algafood.domain.model.Cozinha;
 import com.lampasw.algafood.domain.repository.CozinhaRepository;
 

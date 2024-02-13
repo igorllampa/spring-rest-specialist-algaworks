@@ -1,7 +1,5 @@
 package com.lampasw.algafood.domain.repository;
 
-import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.lampasw.algafood.domain.model.Cidade;

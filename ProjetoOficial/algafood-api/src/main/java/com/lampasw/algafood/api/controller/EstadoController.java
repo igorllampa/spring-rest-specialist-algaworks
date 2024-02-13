@@ -1,13 +1,10 @@
 package com.lampasw.algafood.api.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,8 +19,6 @@ import com.lampasw.algafood.api.assembler.EstadoInputDisassembler;
 import com.lampasw.algafood.api.assembler.EstadoModelAssembler;
 import com.lampasw.algafood.api.model.EstadoModel;
 import com.lampasw.algafood.api.model.input.EstadoInput;
-import com.lampasw.algafood.domain.exception.EntidadeEmUsoException;
-import com.lampasw.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.lampasw.algafood.domain.model.Estado;
 import com.lampasw.algafood.domain.repository.EstadoRepository;
 import com.lampasw.algafood.domain.service.CadastroEstadoService;
