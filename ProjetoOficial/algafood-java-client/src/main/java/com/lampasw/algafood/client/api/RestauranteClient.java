@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 
 import com.lampasw.algafood.client.model.RestauranteResumoModel;
@@ -21,10 +22,14 @@ public class RestauranteClient {
 	
 	public List<RestauranteResumoModel> listar(){
 		
-		URI resourceUri = URI.create(url + RESOURCE_PATH);
-		
-		RestauranteResumoModel[] restaurantes = restTemplate.getForObject(resourceUri, RestauranteResumoModel[].class );
-		
-		return Arrays.asList(restaurantes);
+		try {
+			URI resourceUri = URI.create(url + RESOURCE_PATH);
+			
+			RestauranteResumoModel[] restaurantes = restTemplate.getForObject(resourceUri, RestauranteResumoModel[].class );
+			
+			return Arrays.asList(restaurantes);
+		}catch (RestClientResponseException e) {
+			throw new ClientApiException(e.getMessage(), e);
+		}
 	}
 }
