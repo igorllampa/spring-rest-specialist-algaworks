@@ -46,6 +46,7 @@ import com.lampasw.algafood.domain.model.Restaurante;
 import com.lampasw.algafood.domain.repository.RestauranteRepository;
 import com.lampasw.algafood.domain.service.CadastroRestauranteService;
 
+//@CrossOrigin(methods = {RequestMethod.OPTIONS, RequestMethod.PUT}, origins = "*")
 @RestController
 @RequestMapping("restaurantes")
 public class RestauranteController {
@@ -68,10 +69,24 @@ public class RestauranteController {
 		this.restauranteInputDisassembler = restauranteInputDisassembler;
 	}
 		
+	//@CrossOrigin(origins = {"http://www.matafome.local:8001", "http://www.algafood.local:8001", "http://localhost:8001"}) //Habilita apenas para essas três origens
+	//@CrossOrigin(origins = "*")//Habilita para todas as origens
+	//@CrossOrigin//Sem parametros tb habilita para todas as origens
 	@GetMapping
 	public List<RestauranteModel> listar(){
 		return restauranteModelAssembler.toCollectionModel(restauranteRepository.findAll());
 	}
+	
+//	@GetMapping
+//	public ResponseEntity<List<RestauranteModel>> listar(){
+//		List<RestauranteModel> restaurantesModel = restauranteModelAssembler.toCollectionModel(restauranteRepository.findAll());
+//		
+//		return ResponseEntity.ok()
+//				//.header(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "http://api.algafood.local:8001") //Insere a permissao especifica para requisicoes vindas dessa origem
+//				.header(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*") //Libera todas as origens
+//				.body(restaurantesModel);
+//	}
+	
 	
 	@JsonView(RestauranteView.Resumo.class)
 	@GetMapping(params = "projecao=resumo")
