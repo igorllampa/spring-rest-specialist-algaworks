@@ -1,9 +1,12 @@
 package com.lampasw.algafood.api.controller;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,9 +42,15 @@ public class FormaDePagamentoController {
 	FormaDePagamentoInputDisassembler formaDePagamentoInputDisassembler;
 	
 	@GetMapping
-	public List<FormaDePagamentoModel> listar(){
+	public ResponseEntity<List<FormaDePagamentoModel>> listar(){
 		List<FormaDePagamento> formasDePagamento = formaDePagamentoRepository.findAll();
-		return formaDePagamentoModelAssembler.toCollectionModel(formasDePagamento);
+		List<FormaDePagamentoModel> formasDePagamentoModel = formaDePagamentoModelAssembler
+				.toCollectionModel(formasDePagamento);
+		
+		return ResponseEntity.ok()
+				.cacheControl(CacheControl.maxAge(10, TimeUnit.SECONDS))
+				.body(formasDePagamentoModel);
+				
 	}
 	
 	@GetMapping("/{formaDePagamentoId}")
