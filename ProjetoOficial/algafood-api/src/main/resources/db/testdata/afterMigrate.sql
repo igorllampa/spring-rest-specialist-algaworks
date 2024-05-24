@@ -62,8 +62,9 @@ insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('X-C
 insert into permissao (nome, descricao) values ('Cadastro de restaurante', 'Permite que o usuário faça cadastros de restaurantes');
 insert into permissao (nome, descricao) values ('Cadastro de cidade', 'Permite que o usuário faça cadastros de cidades');
 
-insert into forma_de_pagamento (descricao) values ('Pix');
-insert into forma_de_pagamento (descricao) values ('Cartão Crédito');
+insert into forma_de_pagamento (descricao, data_atualizacao) values ('Pix', utc_timestamp);
+insert into forma_de_pagamento (descricao, data_atualizacao) values ('Cartão Crédito', utc_timestamp);
+insert into forma_de_pagamento (descricao, data_atualizacao) values ('Cartão Débito', utc_timestamp);
 
 insert into restaurante_forma_de_pagamento (restaurante_id, forma_de_pagamento_id) values (1, 1);
 insert into restaurante_forma_de_pagamento (restaurante_id, forma_de_pagamento_id) values (1, 2);
