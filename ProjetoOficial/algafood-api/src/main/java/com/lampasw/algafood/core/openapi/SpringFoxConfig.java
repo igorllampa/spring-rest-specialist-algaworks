@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.fasterxml.classmate.TypeResolver;
+import com.lampasw.algafood.api.exceptionhandler.Problem;
+
 import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -31,6 +34,9 @@ public class SpringFoxConfig implements WebMvcConfigurer {
 
 	@Bean
 	public Docket apiDocket() {
+		
+		TypeResolver typeResolver = new TypeResolver();
+		
 		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
 					.apis(RequestHandlerSelectors.basePackage("com.lampasw.algafood.api.controller"))
@@ -42,6 +48,7 @@ public class SpringFoxConfig implements WebMvcConfigurer {
 				.globalResponseMessage(RequestMethod.POST, globalPostPutResponseMessages())
 				.globalResponseMessage(RequestMethod.PUT, globalPostPutResponseMessages())
 				.globalResponseMessage(RequestMethod.DELETE, globalDeleteResponseMessages())
+				.additionalModels(typeResolver.resolve(Problem.class))
 				.apiInfo(apiInfo())
 				.tags(new Tag("Cidades", "Gerencia as cidades"));				
 	}
