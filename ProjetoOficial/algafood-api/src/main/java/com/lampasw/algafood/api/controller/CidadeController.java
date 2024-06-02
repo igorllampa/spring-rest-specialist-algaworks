@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.lampasw.algafood.api.assembler.CidadeInputDisassembler;
 import com.lampasw.algafood.api.assembler.CidadeModelAssembler;
+import com.lampasw.algafood.api.controller.openapi.CidadeControllerOpenApi;
 import com.lampasw.algafood.api.exceptionhandler.Problem;
 import com.lampasw.algafood.api.model.CidadeModel;
 import com.lampasw.algafood.api.model.input.CidadeInput;
@@ -27,16 +28,14 @@ import com.lampasw.algafood.domain.model.Cidade;
 import com.lampasw.algafood.domain.repository.CidadeRepository;
 import com.lampasw.algafood.domain.service.CadastroCidadeService;
 
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
-@Api(tags = "Cidades")
 @RestController
 @RequestMapping("cidades")
-public class CidadeController {
+public class CidadeController implements CidadeControllerOpenApi {
 
 	@Autowired
 	private CidadeRepository cidadeRepository;
@@ -65,7 +64,7 @@ public class CidadeController {
 		@ApiResponse(code = 404, message = "Cidade não encontrada", response = Problem.class)
 	})
 	@GetMapping("/{cidadeId}")
-	public CidadeModel buscar(@ApiParam(value = "ID de uma cidade", example = "0") @PathVariable Long cidadeId){
+	public CidadeModel buscar(@ApiParam(value = "ID de uma cidade", example = "0") Long cidadeId){
 		Cidade cidade = cadastroCidade.buscarOuFalhar(cidadeId); 
 		
 		return cidadeModelAssembler.toModel(cidade);		
