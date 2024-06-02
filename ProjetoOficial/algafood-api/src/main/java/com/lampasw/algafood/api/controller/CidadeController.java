@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.lampasw.algafood.api.assembler.CidadeInputDisassembler;
 import com.lampasw.algafood.api.assembler.CidadeModelAssembler;
-import com.lampasw.algafood.api.controller.openapi.CidadeControllerOpenApi;
 import com.lampasw.algafood.api.exceptionhandler.Problem;
 import com.lampasw.algafood.api.model.CidadeModel;
 import com.lampasw.algafood.api.model.input.CidadeInput;
+import com.lampasw.algafood.api.openapi.controller.CidadeControllerOpenApi;
 import com.lampasw.algafood.domain.exception.EstadoNaoEncontradoException;
 import com.lampasw.algafood.domain.exception.NegocioException;
 import com.lampasw.algafood.domain.model.Cidade;

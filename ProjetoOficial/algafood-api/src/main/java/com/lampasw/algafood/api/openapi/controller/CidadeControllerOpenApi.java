@@ -1,4 +1,4 @@
-package com.lampasw.algafood.api.controller.openapi;
+package com.lampasw.algafood.api.openapi.controller;
 
 import java.util.List;
 
