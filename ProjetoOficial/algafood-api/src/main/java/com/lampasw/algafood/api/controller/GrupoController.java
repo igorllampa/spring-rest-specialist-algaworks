@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.lampasw.algafood.api.assembler.GrupoInputDisassembler;
 import com.lampasw.algafood.api.assembler.GrupoModelAssembler;
+import com.lampasw.algafood.api.controller.openapi.GrupoControllerOpenApi;
 import com.lampasw.algafood.api.model.GrupoModel;
 import com.lampasw.algafood.api.model.input.GrupoInput;
 import com.lampasw.algafood.domain.model.Grupo;
@@ -24,7 +25,7 @@ import com.lampasw.algafood.domain.service.CadastroGrupoService;
 
 @RestController
 @RequestMapping("/grupos")
-public class GrupoController {
+public class GrupoController implements GrupoControllerOpenApi {
 
 	@Autowired
 	private GrupoRepository grupoRepository;
