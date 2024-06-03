@@ -27,13 +27,14 @@ import com.lampasw.algafood.api.assembler.CozinhaModelAssembler;
 import com.lampasw.algafood.api.model.CozinhaModel;
 import com.lampasw.algafood.api.model.CozinhasXmlWrapper;
 import com.lampasw.algafood.api.model.input.CozinhaInput;
+import com.lampasw.algafood.api.openapi.controller.CozinhaControllerOpenApi;
 import com.lampasw.algafood.domain.model.Cozinha;
 import com.lampasw.algafood.domain.repository.CozinhaRepository;
 import com.lampasw.algafood.domain.service.CadastroCozinhaService;
 
 @RestController
 @RequestMapping(value="cozinhas")
-public class CozinhaController {
+public class CozinhaController implements CozinhaControllerOpenApi {
 
 	@Autowired
 	private CozinhaRepository cozinhaRepository;//Use autowired or use injection with the class controller
