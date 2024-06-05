@@ -30,8 +30,7 @@ public class EnderecoInput {
 	@ApiModelProperty(example = "Barra Funda", required = true)
 	@NotBlank
 	private String bairro;
-	
-	@ApiModelProperty(example = "São Paulo", required = true)
+		
 	@Valid
 	@NotNull
 	private CidadeIdInput cidade;	
