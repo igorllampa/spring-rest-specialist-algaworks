@@ -27,6 +27,7 @@ import com.lampasw.algafood.api.assembler.PedidoResumoModelAssembler;
 import com.lampasw.algafood.api.model.PedidoModel;
 import com.lampasw.algafood.api.model.PedidoResumoModel;
 import com.lampasw.algafood.api.model.input.PedidoInput;
+import com.lampasw.algafood.api.openapi.controller.PedidoControllerOpenApi;
 import com.lampasw.algafood.core.data.PageableTranslator;
 import com.lampasw.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.lampasw.algafood.domain.exception.NegocioException;
@@ -42,7 +43,7 @@ import io.swagger.annotations.ApiImplicitParams;
 
 @RestController
 @RequestMapping("/pedidos")
-public class PedidoController {
+public class PedidoController implements PedidoControllerOpenApi {
 
 	@Autowired
 	private PedidoRepository pedidoRepository;
@@ -73,11 +74,7 @@ public class PedidoController {
 //		
 //		return pedidosWrapper;
 //	}
-	
-	@ApiImplicitParams({
-		@ApiImplicitParam(value = "Nomes da propriedades para filtrar na resposta, separados por vírgula",
-				name = "campos", paramType = "query", type = "string")
-	})
+		
 	@GetMapping
 	public Page<PedidoResumoModel> pesquisar (PedidoFilter pedidoFilter, @PageableDefault(size = 10) Pageable pageable) {
 		
@@ -91,11 +88,7 @@ public class PedidoController {
 		
 		return pedidoResumoModelPage;
 	}
-	
-	@ApiImplicitParams({
-		@ApiImplicitParam(value = "Nomes da propriedades para filtrar na resposta, separados por vírgula",
-				name = "campos", paramType = "query", type = "string")
-	})
+		
 	@GetMapping("/{codigoPedido}")
 	public PedidoModel buscar(@PathVariable String codigoPedido) {
 		return pedidoModelAssembler.toModel(emissaoPedido.buscarOuFalhar(codigoPedido)); 
