@@ -15,6 +15,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
@@ -38,25 +39,28 @@ public interface PedidoControllerOpenApi {
 		@ApiResponse(code = 400, message = "ID do pedido inválido", response = Problem.class),
 		@ApiResponse(code = 404, message = "Pedido não encontrada", response = Problem.class)
 	})
-	public PedidoModel buscar(String codigoPedido);
+	public PedidoModel buscar(@ApiParam(value = "ID de um pedido", example = "0") String codigoPedido);
 		
 	@ApiOperation("Adicionar um pedido")
 	@ApiResponses({
 		@ApiResponse(code = 201, message = "Pedido cadastrado")
 	})
-	public PedidoModel adicionar(PedidoInput pedidoInput);
+	public PedidoModel adicionar(
+			@ApiParam(name="corpo", value = "Representação de um novo pedido") PedidoInput pedidoInput);
 			
 	@ApiOperation("Atualizar um pedido por Id")
 	@ApiResponses({
 		@ApiResponse(code = 200, message = "Pedido atualizado"),
 		@ApiResponse(code = 404, message = "Pedido não encontrada", response = Problem.class)
 	})
-	public Pedido atualizar(Long pedidoId, Pedido pedido);
+	public Pedido atualizar(
+			@ApiParam(value = "ID de um pedido", example = "0") Long pedidoId, 
+			@ApiParam(name="corpo", value = "Representação de um pedido com os novos dados") Pedido pedido);
 		
 	@ApiOperation("Remover um pedido por Id")
 	@ApiResponses({
 		@ApiResponse(code = 204, message = "Pedido excluído"),
 		@ApiResponse(code = 404, message = "Pedido não encontrado", response = Problem.class)
 	})
-	public void remover(Long pedidoId);
+	public void remover(@ApiParam(value = "ID de um pedido", example = "0") Long pedidoId);
 }
