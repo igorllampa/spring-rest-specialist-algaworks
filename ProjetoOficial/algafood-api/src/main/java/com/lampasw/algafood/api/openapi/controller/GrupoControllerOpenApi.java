@@ -33,8 +33,8 @@ public interface GrupoControllerOpenApi {
 	
 	@ApiOperation("Atualiza um grupo por Id")
 	@ApiResponses({
-		@ApiResponse(code = 200, message = "Grupo atualizada"),
-		@ApiResponse(code = 404, message = "Grupo não encontrada", response = Problem.class)
+		@ApiResponse(code = 200, message = "Grupo atualizado"),
+		@ApiResponse(code = 404, message = "Grupo não encontrado", response = Problem.class)
 	})
 	public GrupoModel atualizar(
 			@ApiParam(value = "ID de um grupo", example = "0") Long grupoId, 
