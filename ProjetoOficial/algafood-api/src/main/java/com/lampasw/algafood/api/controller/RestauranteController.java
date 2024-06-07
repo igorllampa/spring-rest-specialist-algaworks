@@ -37,6 +37,7 @@ import com.lampasw.algafood.api.assembler.RestauranteModelAssembler;
 import com.lampasw.algafood.api.model.RestauranteModel;
 import com.lampasw.algafood.api.model.input.RestauranteInput;
 import com.lampasw.algafood.api.model.view.RestauranteView;
+import com.lampasw.algafood.api.openapi.controller.RestauranteControllerOpenApi;
 import com.lampasw.algafood.core.validation.ValidacaoException;
 import com.lampasw.algafood.domain.exception.CidadeNaoEncontradaException;
 import com.lampasw.algafood.domain.exception.CozinhaNaoEncontradaException;
@@ -46,14 +47,10 @@ import com.lampasw.algafood.domain.model.Restaurante;
 import com.lampasw.algafood.domain.repository.RestauranteRepository;
 import com.lampasw.algafood.domain.service.CadastroRestauranteService;
 
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
-
 //@CrossOrigin(methods = {RequestMethod.OPTIONS, RequestMethod.PUT}, origins = "*")
 @RestController
 @RequestMapping("restaurantes")
-public class RestauranteController {
+public class RestauranteController implements RestauranteControllerOpenApi{
 	
 	private RestauranteRepository restauranteRepository;
 	private CadastroRestauranteService cadastroRestaurante;
@@ -75,12 +72,7 @@ public class RestauranteController {
 		
 	//@CrossOrigin(origins = {"http://www.matafome.local:8001", "http://www.algafood.local:8001", "http://localhost:8001"}) //Habilita apenas para essas três origens
 	//@CrossOrigin(origins = "*")//Habilita para todas as origens
-	//@CrossOrigin//Sem parametros tb habilita para todas as origens
-	@ApiOperation(value = "Lista restaurantes")
-	@ApiImplicitParams({
-		@ApiImplicitParam(value = "Nome da projeção de pedidos", 
-				name = "projecao", paramType = "query", type = "string", allowableValues = "apenas-nome, resumo")
-	})
+	//@CrossOrigin//Sem parametros tb habilita para todas as origens	
 	@GetMapping
 	public List<RestauranteModel> listar(){
 		return restauranteModelAssembler.toCollectionModel(restauranteRepository.findAll());
@@ -96,15 +88,13 @@ public class RestauranteController {
 //				.body(restaurantesModel);
 //	}
 	
-	
-	@ApiOperation(value = "Lista restaurantes", hidden = true)	
+		
 	@JsonView(RestauranteView.Resumo.class)
 	@GetMapping(params = "projecao=resumo")
 	public List<RestauranteModel> listarResumido(){
 		return listar();
 	}
-	
-	@ApiOperation(value = "Lista restaurantes", hidden = true)
+		
 	@JsonView(RestauranteView.ApenasNome.class)
 	@GetMapping(params = "projecao=apenas-nome")
 	public List<RestauranteModel> listarApenasNomes(){
