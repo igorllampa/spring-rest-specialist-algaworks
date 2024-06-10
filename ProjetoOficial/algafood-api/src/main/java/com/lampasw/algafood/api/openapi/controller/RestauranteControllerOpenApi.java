@@ -89,23 +89,27 @@ public interface RestauranteControllerOpenApi {
 		public Optional<Restaurante> primeiroRestaurante();
 				
 		@ApiOperation("Busca restaurante por Id")
-		public RestauranteModel buscar(@PathVariable Long restauranteId);
+		public RestauranteModel buscar(@ApiParam(value = "Id de um restaurante", example = "0") @PathVariable Long restauranteId);
 			
 		@ApiOperation("Adiciona restaurante")
 		public RestauranteModel adicionar(@RequestBody @Valid RestauranteInput restauranteInput);
 				
 		@ApiOperation("Atualiza restaurante")
-		public RestauranteModel atualizar(@PathVariable Long restauranteId, @RequestBody @Valid RestauranteInput restauranteInput);	
+		public RestauranteModel atualizar(
+				@ApiParam(value = "Id de um restaurante", example = "0") @PathVariable Long restauranteId, 
+				@RequestBody @Valid RestauranteInput restauranteInput);	
 				
 		@ApiOperation("Atualiza restaurante parcialmente")
-		public RestauranteModel atualizarParcial(@PathVariable Long restauranteId, 
-				@RequestBody Map<String, Object> campos, HttpServletRequest request);
+		public RestauranteModel atualizarParcial(
+				@ApiParam(value = "Id de um restaurante", example = "0") @PathVariable Long restauranteId, 
+				@RequestBody Map<String, Object> campos, 
+				HttpServletRequest request);
 		
 		@ApiOperation("Ativa restaurante por Id")
-		public void ativar(@PathVariable Long restauranteId);
+		public void ativar(@ApiParam(value = "Id de um restaurante", example = "0") @PathVariable Long restauranteId);
 				
 		@ApiOperation("Inativa restaurante por Id")
-		public void inativar(@PathVariable Long restauranteId);
+		public void inativar(@ApiParam(value = "Id de um restaurante", example = "0") @PathVariable Long restauranteId);
 						
 		@ApiOperation("Ativar multiplos restaurantes por Ids")
 		public void ativarMultiplos(@RequestBody List<Long> restauranteIds);
@@ -114,8 +118,8 @@ public interface RestauranteControllerOpenApi {
 		public void desativarMultiplos(@RequestBody List<Long> restauranteIds);
 				
 		@ApiOperation("Abrir restaurante")
-		public void abrir(@PathVariable Long restauranteId);
+		public void abrir(@ApiParam(value = "Id de um restaurante", example = "0") @PathVariable Long restauranteId);
 		
 		@ApiOperation("Fechar restaurante")
-		public void fechar(@PathVariable Long restauranteId);
+		public void fechar(@ApiParam(value = "Id de um restaurante", example = "0") @PathVariable Long restauranteId);
 }
