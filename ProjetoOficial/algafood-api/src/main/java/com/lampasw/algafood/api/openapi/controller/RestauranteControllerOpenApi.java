@@ -21,6 +21,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 @Api(tags = "Restaurantes")
 public interface RestauranteControllerOpenApi {
@@ -42,28 +43,37 @@ public interface RestauranteControllerOpenApi {
 		public MappingJacksonValue listarDinamicamente(@RequestParam(required = false) String projecao);
 				
 		@ApiOperation("Busca restaurantes por taxa")
-		public List<RestauranteModel> buscarPorTaxa(@RequestParam BigDecimal taxaInicial, @RequestParam BigDecimal taxaFinal);
+		public List<RestauranteModel> buscarPorTaxa(
+				@ApiParam(value = "Valor da taxa inicial", example = "1.00") @RequestParam BigDecimal taxaInicial, 
+				@ApiParam(value = "Valor da taxa final", example = "100.50") @RequestParam BigDecimal taxaFinal);
 				
 		@ApiOperation("Busca restaurantes por nome, cozinha ou taxa")
-		public List<RestauranteModel> buscarPorNomeCozinhaTaxa(@RequestParam String nome, @RequestParam Long cozinhaId, @RequestParam BigDecimal taxaFrete);
+		public List<RestauranteModel> buscarPorNomeCozinhaTaxa(
+				@ApiParam(value = "Nome da cozinha", example = "Brasileira") @RequestParam String nome, 
+				@ApiParam(value = "Id da cozinha", example = "0") @RequestParam Long cozinhaId, 
+				@ApiParam(value = "Valor da taxa de frete", example = "7.80") @RequestParam BigDecimal taxaFrete);
 				
 		@ApiOperation("Total de restaurantes por cozinha")
-		public int totalRestaurantesPorCozinha(@RequestParam Long cozinhaId);
+		public int totalRestaurantesPorCozinha(@ApiParam(value = "ID de uma cozinha", example = "0") @RequestParam Long cozinhaId);
 				
 		@ApiOperation("Busca primeiro restaurante por nome")
-		public Optional<Restaurante> buscarPrimeiroRestaurantePorNome(@RequestParam String nome);
+		public Optional<Restaurante> buscarPrimeiroRestaurantePorNome(@ApiParam(value = "Nome de uma cozinha", example = "Francesa") @RequestParam String nome);
 				
 		@ApiOperation("Busca último restaurante por nome")
-		public Optional<Restaurante> buscarUltimoRestaurantePorNome(@RequestParam String nome);
+		public Optional<Restaurante> buscarUltimoRestaurantePorNome(@ApiParam(value = "Nome de uma cozinha", example = "Brasileira") @RequestParam String nome);
 				
 		@ApiOperation("Busca top três restaurantes por nome")
-		public List<RestauranteModel> buscarTopTresRestaurantePorNome(@RequestParam String nome);
+		public List<RestauranteModel> buscarTopTresRestaurantePorNome(@ApiParam(value = "Nome de uma cozinha", example = "Italiana") @RequestParam String nome);
 				
 		@ApiOperation("Busca restaurantes por nome e cozinha")
-		public List<RestauranteModel> consultarRestaurantePorNome(@RequestParam String nome, @RequestParam Long cozinhaId);
+		public List<RestauranteModel> consultarRestaurantePorNome(
+				@ApiParam(value = "Nome de uma cozinha", example = "Brasileira") @RequestParam String nome, 
+				@ApiParam(value = "Id de uma cozinha", example = "0") @RequestParam Long cozinhaId);
 				
 		@ApiOperation("Consulta restaurante por nome via xml")
-		public List<RestauranteModel> consultarRestaurantePorNomeConsultaViaXML(@RequestParam String nome, @RequestParam Long cozinhaId);
+		public List<RestauranteModel> consultarRestaurantePorNomeConsultaViaXML(
+				@ApiParam(value = "Nome de uma cozinha", example = "Brasileira") @RequestParam String nome, 
+				@ApiParam(value = "Id de uma cozinha", example = "0") @RequestParam Long cozinhaId);
 		
 		@ApiOperation("Buaca restaurante por nome, taxa frete")
 		public List<RestauranteModel> consultarRestaurantePorNomeTaxaFreteComMetodoImplementadoEspecifico(
