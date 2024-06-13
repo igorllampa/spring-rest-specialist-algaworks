@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import com.lampasw.algafood.core.validation.Multiplo;
 import com.lampasw.algafood.core.validation.TaxaFrete;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,14 +17,16 @@ import lombok.Setter;
 @Setter
 public class RestauranteInput {
 
-	@NotBlank
+	@ApiModelProperty(example = "Monte Altvs Fast Food", required = true)
+	@NotBlank	
 	private String nome;
 		
+	@ApiModelProperty(example = "12.80", required = true)
 	@TaxaFrete
 	@Multiplo(numero = 5)
 	@NotNull
 	private BigDecimal taxaFrete;
-	
+		
 	@Valid
 	@NotNull	
 	private CozinhaIdInput cozinha;
