@@ -39,14 +39,14 @@ public interface PedidoControllerOpenApi {
 		@ApiResponse(code = 400, message = "ID do pedido inválido", response = Problem.class),
 		@ApiResponse(code = 404, message = "Pedido não encontrada", response = Problem.class)
 	})
-	public PedidoModel buscar(@ApiParam(value = "ID de um pedido", example = "f9981ca4-5a5e-4da3-af04-933861df3e55") String codigoPedido);
+	public PedidoModel buscar(@ApiParam(value = "ID de um pedido", example = "f9981ca4-5a5e-4da3-af04-933861df3e55", required = true) String codigoPedido);
 		
 	@ApiOperation("Adicionar um pedido")
 	@ApiResponses({
 		@ApiResponse(code = 201, message = "Pedido cadastrado")
 	})
 	public PedidoModel adicionar(
-			@ApiParam(name="corpo", value = "Representação de um novo pedido") PedidoInput pedidoInput);
+			@ApiParam(name="corpo", value = "Representação de um novo pedido", required = true) PedidoInput pedidoInput);
 			
 	@ApiOperation("Atualizar um pedido por Id")
 	@ApiResponses({
@@ -54,13 +54,13 @@ public interface PedidoControllerOpenApi {
 		@ApiResponse(code = 404, message = "Pedido não encontrada", response = Problem.class)
 	})
 	public Pedido atualizar(
-			@ApiParam(value = "ID de um pedido", example = "f9981ca4-5a5e-4da3-af04-933861df3e55") Long pedidoId, 
-			@ApiParam(name="corpo", value = "Representação de um pedido com os novos dados") Pedido pedido);
+			@ApiParam(value = "ID de um pedido", example = "f9981ca4-5a5e-4da3-af04-933861df3e55", required = true) Long pedidoId, 
+			@ApiParam(name="corpo", value = "Representação de um pedido com os novos dados", required = true) Pedido pedido);
 		
 	@ApiOperation("Remover um pedido por Id")
 	@ApiResponses({
 		@ApiResponse(code = 204, message = "Pedido excluído"),
 		@ApiResponse(code = 404, message = "Pedido não encontrado", response = Problem.class)
 	})
-	public void remover(@ApiParam(value = "ID de um pedido", example = "f9981ca4-5a5e-4da3-af04-933861df3e55") Long pedidoId);
+	public void remover(@ApiParam(value = "ID de um pedido", example = "f9981ca4-5a5e-4da3-af04-933861df3e55", required = true) Long pedidoId);
 }
