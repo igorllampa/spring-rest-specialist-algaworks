@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +25,7 @@ import com.lampasw.algafood.domain.repository.EstadoRepository;
 import com.lampasw.algafood.domain.service.CadastroEstadoService;
 
 @RestController
-@RequestMapping("estados")
+@RequestMapping(path = "/estados", produces = MediaType.APPLICATION_JSON_VALUE)
 public class EstadoController {
 
 	private EstadoRepository estadoRepository;
