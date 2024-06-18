@@ -20,13 +20,14 @@ import com.lampasw.algafood.api.assembler.EstadoInputDisassembler;
 import com.lampasw.algafood.api.assembler.EstadoModelAssembler;
 import com.lampasw.algafood.api.model.EstadoModel;
 import com.lampasw.algafood.api.model.input.EstadoInput;
+import com.lampasw.algafood.api.openapi.controller.EstadoControllerOpenApi;
 import com.lampasw.algafood.domain.model.Estado;
 import com.lampasw.algafood.domain.repository.EstadoRepository;
 import com.lampasw.algafood.domain.service.CadastroEstadoService;
 
 @RestController
 @RequestMapping(path = "/estados", produces = MediaType.APPLICATION_JSON_VALUE)
-public class EstadoController {
+public class EstadoController implements EstadoControllerOpenApi{
 
 	private EstadoRepository estadoRepository;
 	private CadastroEstadoService cadastroEstado;
@@ -44,7 +45,7 @@ public class EstadoController {
 	}
 
 	@GetMapping
-	private List<EstadoModel> listar(){
+	public List<EstadoModel> listar(){
 		List<Estado> estados = estadoRepository.findAll();
 		
 		return estadoModelAssembler.toCollectionModel(estados);
