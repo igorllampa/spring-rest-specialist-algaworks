@@ -11,6 +11,7 @@ import javax.validation.Valid;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.http.server.ServletServerHttpRequest;
@@ -49,7 +50,7 @@ import com.lampasw.algafood.domain.service.CadastroRestauranteService;
 
 //@CrossOrigin(methods = {RequestMethod.OPTIONS, RequestMethod.PUT}, origins = "*")
 @RestController
-@RequestMapping("restaurantes")
+@RequestMapping(path = "/restaurantes", produces = MediaType.APPLICATION_JSON_VALUE)
 public class RestauranteController implements RestauranteControllerOpenApi{
 	
 	private RestauranteRepository restauranteRepository;
