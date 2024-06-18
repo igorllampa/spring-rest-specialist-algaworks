@@ -44,13 +44,13 @@ public interface CozinhaControllerOpenApi {
 		@ApiResponse(code = 404, message = "Cozinha não encontrada", response = Problem.class)
 	})
 	@ApiOperation("Busca uma cozinha por ID")
-	public CozinhaModel buscar(@ApiParam(value = "Id de uma cozinha", example = "0") Long cozinhaId);
+	public CozinhaModel buscar(@ApiParam(value = "Id de uma cozinha", example = "0", required = true) Long cozinhaId);
 		
 	@ApiResponses({
 		@ApiResponse(code = 201, message = "Cozinha cadastrada")
 	})
 	@ApiOperation("Adiciona uma nova cozinha")
-	public CozinhaModel adicionar(@ApiParam(name="corpo", value = "Representação de uma nova cozinha")  CozinhaInput cozinhaInput);
+	public CozinhaModel adicionar(@ApiParam(name="corpo", value = "Representação de uma nova cozinha", required = true)  CozinhaInput cozinhaInput);
 		
 	@ApiResponses({
 		@ApiResponse(code = 200, message = "Cozinha atualizada"),
@@ -59,13 +59,13 @@ public interface CozinhaControllerOpenApi {
 	@ApiOperation("Atualiza uma cozinha por ID com os novos dados")
 	public CozinhaModel atualizar(
 			@ApiParam(name="corpo", value = "Representação de uma cozinha com os novos dados") CozinhaInput cozinhaInput, 
-			@ApiParam(value = "Id de uma cozinha", example = "0") Long cozinhaId);
+			@ApiParam(value = "Id de uma cozinha", example = "0", required = true) Long cozinhaId);
 			
 	@ApiResponses({
 		@ApiResponse(code = 204, message = "Cozinha excluída"),
 		@ApiResponse(code = 404, message = "Cozinha não encontrada", response = Problem.class)
 	})
 	@ApiOperation("Exclui uma cozinha por ID")
-	public void remover(@ApiParam(value = "Id de uma cozinha", example = "0") Long cozinhaId);
+	public void remover(@ApiParam(value = "Id de uma cozinha", example = "0", required = true) Long cozinhaId);
 	
 }
