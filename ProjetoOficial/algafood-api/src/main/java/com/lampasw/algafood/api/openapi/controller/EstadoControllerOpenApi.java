@@ -8,6 +8,7 @@ import com.lampasw.algafood.api.model.input.EstadoInput;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
@@ -22,25 +23,28 @@ public interface EstadoControllerOpenApi {
 		@ApiResponse(code = 400, message = "ID do estado é inválido", response = Problem.class),
 		@ApiResponse(code = 404, message = "Estado não encontrado", response = Problem.class)
 	})
-	public EstadoModel buscar(Long estadoId);
+	public EstadoModel buscar(@ApiParam(value = "ID de um estado", example = "0", required = true) Long estadoId);
 		
 	@ApiOperation("Adicionar um estado")
 	@ApiResponses({
 		@ApiResponse(code = 201, message = "Estado cadastrado")
 	})
-	public EstadoModel adicionar(EstadoInput estadoInput);
+	public EstadoModel adicionar(
+			@ApiParam(name="corpo", value = "Representação de um novo estado", required = true) EstadoInput estadoInput);
 		
 	@ApiOperation("Atualizar um estado por Id")
 	@ApiResponses({
 		@ApiResponse(code = 200, message = "Estado atualizado"),
 		@ApiResponse(code = 404, message = "Estado não encontrado", response = Problem.class)
 	})
-	public EstadoModel atualizar(Long estadoId, EstadoInput estadoInput);
+	public EstadoModel atualizar(
+			@ApiParam(value = "ID de um estado", example = "0", required = true) Long estadoId, 
+			@ApiParam(name="corpo", value = "Representação de um estado com os novos dados", required = true) EstadoInput estadoInput);
 		
-	@ApiOperation("Remover um estado por Id")
+	@ApiOperation("Remover um estado por Id") 
 	@ApiResponses({
 		@ApiResponse(code = 204, message = "Estado excluído"),
 		@ApiResponse(code = 404, message = "Estado não encontrado", response = Problem.class)
 	})
-	public void remover(Long estadoId);
+	public void remover(@ApiParam(value = "ID de um estado", example = "0", required = true) Long estadoId);
 }
