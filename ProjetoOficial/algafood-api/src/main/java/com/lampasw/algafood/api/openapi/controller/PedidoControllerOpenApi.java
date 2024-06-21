@@ -54,7 +54,7 @@ public interface PedidoControllerOpenApi {
 		@ApiResponse(code = 404, message = "Pedido não encontrada", response = Problem.class)
 	})
 	public Pedido atualizar(
-			@ApiParam(value = "ID de um pedido", example = "f9981ca4-5a5e-4da3-af04-933861df3e55", required = true) Long pedidoId, 
+			@ApiParam(value = "ID de um pedido", example = "1", required = true) Long pedidoId, 
 			@ApiParam(name="corpo", value = "Representação de um pedido com os novos dados", required = true) Pedido pedido);
 		
 	@ApiOperation("Remover um pedido por Id")
@@ -62,5 +62,5 @@ public interface PedidoControllerOpenApi {
 		@ApiResponse(code = 204, message = "Pedido excluído"),
 		@ApiResponse(code = 404, message = "Pedido não encontrado", response = Problem.class)
 	})
-	public void remover(@ApiParam(value = "ID de um pedido", example = "f9981ca4-5a5e-4da3-af04-933861df3e55", required = true) Long pedidoId);
+	public void remover(@ApiParam(value = "ID de um pedido", example = "1", required = true) Long pedidoId);
 }

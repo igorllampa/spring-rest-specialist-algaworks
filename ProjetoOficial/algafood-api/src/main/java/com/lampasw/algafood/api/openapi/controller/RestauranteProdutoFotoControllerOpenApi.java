@@ -6,12 +6,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpMediaTypeNotAcceptableException;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.lampasw.algafood.api.exceptionhandler.Problem;
 import com.lampasw.algafood.api.model.FotoProdutoModel;
 import com.lampasw.algafood.api.model.input.FotoProdutoInput;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
@@ -44,8 +46,10 @@ public interface RestauranteProdutoFotoControllerOpenApi {
     })
 	public FotoProdutoModel atualizarFoto(
 			@ApiParam(value = "ID do restaurante", example = "1", required = true) Long restauranteId, 
-			 @ApiParam(value = "ID do produto", example = "1", required = true) Long produtoId, 
-			FotoProdutoInput fotoProdutoInput)throws IOException;
+			@ApiParam(value = "ID do produto", example = "1", required = true) Long produtoId, 
+			FotoProdutoInput fotoProdutoInput,
+			@ApiParam(value = "Arquivo da foto do produto (máximo 500KB, apenas JPG e PNG)",
+			required = true) MultipartFile arquivo)throws IOException;
 		
 	 @ApiOperation("Exclui a foto do produto de um restaurante")
 	    @ApiResponses({
