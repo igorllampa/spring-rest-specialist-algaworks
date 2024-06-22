@@ -2,16 +2,47 @@ package com.lampasw.algafood.api.openapi.controller;
 
 import java.util.List;
 
+import com.lampasw.algafood.api.exceptionhandler.Problem;
 import com.lampasw.algafood.api.model.GrupoModel;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @Api(tags = "Usuários")
 public interface UsuarioGrupoControllerOpenApi {
 	
-	public List<GrupoModel> listar(Long usuarioId);
+	@ApiOperation("Lista os grupos associados a um usuário")
+	    @ApiResponses({
+	        @ApiResponse(code = 404, message = "Usuário não encontrado", response = Problem.class)
+	    })
+	public List<GrupoModel> listar(
+			@ApiParam(value = "Id do usuário", example = "1", required = true) 
+			Long usuarioId);
 		
-	public void associar(Long usuarioId, Long grupoId);
+	@ApiOperation("Associação de grupo com usuário")
+    @ApiResponses({
+        @ApiResponse(code = 204, message = "Associação realizada com sucesso"),
+        @ApiResponse(code = 404, message = "Usuário ou grupo não encontrado", 
+            response = Problem.class)
+    })
+	public void associar(
+			@ApiParam(value = "Id do usuário", example = "1", required = true)
+			Long usuarioId, 
+			@ApiParam(value = "Id do grupo", example = "2", required = true)
+			Long grupoId);
 	
-	public void desassociar(Long usuarioId, Long grupoId);
+	 @ApiOperation("Desassociação de grupo com usuário")
+	    @ApiResponses({
+	        @ApiResponse(code = 204, message = "Desassociação realizada com sucesso"),
+	        @ApiResponse(code = 404, message = "Usuário ou grupo não encontrado", 
+	            response = Problem.class)
+	    })
+	public void desassociar(
+			@ApiParam(value = "Id do usuário", example = "1", required = true)
+			Long usuarioId,
+			@ApiParam(value = "Id do grupo", example = "7", required = true)
+			Long grupoId);
 }
