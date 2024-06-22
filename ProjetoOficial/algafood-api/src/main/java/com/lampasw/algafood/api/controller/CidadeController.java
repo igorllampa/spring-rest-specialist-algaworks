@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lampasw.algafood.api.ResourceUriHelper;
 import com.lampasw.algafood.api.assembler.CidadeInputDisassembler;
 import com.lampasw.algafood.api.assembler.CidadeModelAssembler;
 import com.lampasw.algafood.api.exceptionhandler.Problem;
@@ -50,54 +51,39 @@ public class CidadeController implements CidadeControllerOpenApi {
 	@Autowired
 	private CidadeInputDisassembler cidadeInputDisassembler;
 	
-	
-	@ApiOperation("Lista as cidades")
 	@GetMapping
 	public List<CidadeModel> listar(){
 		List<Cidade> cidades = cidadeRepository.findAll(); 
 		
 		return cidadeModelAssembler.toCollectionModel(cidades);
 	}
-	
-	@ApiOperation("Busca uma cidade por ID")	
-	@ApiResponses({
-		@ApiResponse(code = 400, message = "ID da cidade inválido", response = Problem.class),
-		@ApiResponse(code = 404, message = "Cidade não encontrada", response = Problem.class)
-	})
+		
 	@GetMapping("/{cidadeId}")
-	public CidadeModel buscar(@ApiParam(value = "ID de uma cidade", example = "0") Long cidadeId){
+	public CidadeModel buscar(@PathVariable Long cidadeId){
 		Cidade cidade = cadastroCidade.buscarOuFalhar(cidadeId); 
 		
 		return cidadeModelAssembler.toModel(cidade);		
 	}
-	
-	@ApiOperation("Cadastra uma cidade")
-	@ApiResponses({
-		@ApiResponse(code = 201, message = "Cidade cadastrada")
-	})
+		
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public CidadeModel adicionar(@ApiParam(name="corpo", value = "Representação de uma nova cidade")
+	public CidadeModel adicionar(
 			@RequestBody @Valid CidadeInput cidadeInput){		
 		try {
 			Cidade cidade = cidadeInputDisassembler.toDomainObject(cidadeInput);
-			cidade = cadastroCidade.salvar(cidade); 
+			cidade = cadastroCidade.salvar(cidade);
+			
+			ResourceUriHelper.addUriInReponseHeader(cidade.getId());
+			
 			return cidadeModelAssembler.toModel(cidade);	
 		}catch (EstadoNaoEncontradoException e) {
 			throw new NegocioException(e.getMessage(), e);
 		}
 	}
-	
-	@ApiOperation("Atualiza uma cidade por ID")
-	@ApiResponses({
-		@ApiResponse(code = 200, message = "Cidade atualizada"),
-		@ApiResponse(code = 404, message = "Cidade não encontrada", response = Problem.class)
-	})
+		
 	@PutMapping("/{cidadeId}")
-	public CidadeModel atualizar(
-			@ApiParam(value = "ID de uma cidade", example = "0") 
-			@PathVariable Long cidadeId,
-			@ApiParam(name="corpo", value = "Representação de uma cidade com os novos dados")
+	public CidadeModel atualizar(			
+			@PathVariable Long cidadeId,			
 			@RequestBody @Valid CidadeInput cidadeInput){
 					
 		Cidade cidadeAtual = cadastroCidade.buscarOuFalhar(cidadeId);
@@ -114,12 +100,7 @@ public class CidadeController implements CidadeControllerOpenApi {
 			throw new NegocioException(e.getMessage(), e);
 		}
 	}
-	
-	@ApiOperation("Exclui uma cidade por ID")
-	@ApiResponses({
-		@ApiResponse(code = 204, message = "Cidade excluída"),
-		@ApiResponse(code = 404, message = "Cidade não encontrada", response = Problem.class)
-	})
+		
 	@DeleteMapping("/{cidadeId}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	public void remover(@ApiParam(value = "ID de uma cidade", example = "0") @PathVariable Long cidadeId){		
