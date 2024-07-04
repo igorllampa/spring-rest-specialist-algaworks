@@ -39,9 +39,6 @@ import com.lampasw.algafood.domain.repository.PedidoRepository;
 import com.lampasw.algafood.domain.service.EmissaoPedidoService;
 import com.lampasw.algafood.infrastructure.repository.spec.PedidoSpecs;
 
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-
 @RestController
 @RequestMapping(path = "/pedidos", produces = MediaType.APPLICATION_JSON_VALUE)
 public class PedidoController implements PedidoControllerOpenApi {

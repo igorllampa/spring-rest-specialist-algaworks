@@ -30,7 +30,6 @@ import com.lampasw.algafood.api.openapi.model.PedidosResumoModelOpenApi;
 
 import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
 import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.builders.ResponseMessageBuilder;
@@ -49,22 +48,22 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Import(BeanValidatorPluginsConfiguration.class)
 public class SpringFoxConfig implements WebMvcConfigurer {
 
-	@Bean
-	public Docket apiDocket() {
-		
-		TypeResolver typeResolver = new TypeResolver();
-		
-		return new Docket(DocumentationType.SWAGGER_2)
-				.select()
-					.apis(RequestHandlerSelectors.basePackage("com.lampasw.algafood.api.controller"))
-					.paths(PathSelectors.any())
-					//.paths(PathSelectors.ant("/restaurantes/*")) //especify the path that only will be considered to generate doc
-					.build()
-				.useDefaultResponseMessages(false)
-				.globalResponseMessage(RequestMethod.GET, globalGetResponseMessages())
-				.globalResponseMessage(RequestMethod.POST, globalPostPutResponseMessages())
-				.globalResponseMessage(RequestMethod.PUT, globalPostPutResponseMessages())
-				.globalResponseMessage(RequestMethod.DELETE, globalDeleteResponseMessages())
+    @Bean
+    Docket apiDocket() {
+
+        TypeResolver typeResolver = new TypeResolver();
+
+        return new Docket(DocumentationType.SWAGGER_2)
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.lampasw.algafood.api.controller"))
+                .paths(PathSelectors.any())
+                //.paths(PathSelectors.ant("/restaurantes/*")) //especify the path that only will be considered to generate doc
+                .build()
+                .useDefaultResponseMessages(false)
+                .globalResponseMessage(RequestMethod.GET, globalGetResponseMessages())
+                .globalResponseMessage(RequestMethod.POST, globalPostPutResponseMessages())
+                .globalResponseMessage(RequestMethod.PUT, globalPostPutResponseMessages())
+                .globalResponseMessage(RequestMethod.DELETE, globalDeleteResponseMessages())
 //				.globalOperationParameters(Arrays.asList(
 //						new ParameterBuilder()
 //							.name("campos")
@@ -73,25 +72,25 @@ public class SpringFoxConfig implements WebMvcConfigurer {
 //							.modelRef(new ModelRef("string"))
 //						.build()											
 //					))
-				.additionalModels(typeResolver.resolve(Problem.class))
-				.ignoredParameterTypes(ServletWebRequest.class, URL.class, URI.class, URLStreamHandler.class, Resource.class, File.class, InputStream.class)
-				.directModelSubstitute(Pageable.class, PageableModelOpenApi.class)
-				.alternateTypeRules(AlternateTypeRules.newRule(typeResolver.resolve(Page.class, CozinhaModel.class), CozinhasModelOpenApi.class))
-				.alternateTypeRules(AlternateTypeRules.newRule(typeResolver.resolve(Page.class, PedidoResumoModel.class), PedidosResumoModelOpenApi.class))
-				.apiInfo(apiInfo())
-				.tags(
-						new Tag("Cidades", "Gerencia as cidades"),
-						new Tag("Estados", "Gerencia os estados"),
-						new Tag("Grupos", "Gerencia os grupos de usuários"),
-						new Tag("Usuários", "Gerencia os usuários"),
-						new Tag("Cozinhas", "Gerencia os tipos de cozinhas"),
-						new Tag("Formas de Pagamento", "Gerencia as formas de pagamento"),
-						new Tag("Pedidos", "Gerencia os pedidos"),
-						new Tag("Restaurantes", "Gerencia os restaurantes"),
-						new Tag("Produtos", "Gerencia os produtos de restaurantes"),
-						new Tag("Estatísticas", "Estatísticas do Algafood")
-						);				
-	}
+                .additionalModels(typeResolver.resolve(Problem.class))
+                .ignoredParameterTypes(ServletWebRequest.class, URL.class, URI.class, URLStreamHandler.class, Resource.class, File.class, InputStream.class)
+                .directModelSubstitute(Pageable.class, PageableModelOpenApi.class)
+                .alternateTypeRules(AlternateTypeRules.newRule(typeResolver.resolve(Page.class, CozinhaModel.class), CozinhasModelOpenApi.class))
+                .alternateTypeRules(AlternateTypeRules.newRule(typeResolver.resolve(Page.class, PedidoResumoModel.class), PedidosResumoModelOpenApi.class))
+                .apiInfo(apiInfo())
+                .tags(
+                        new Tag("Cidades", "Gerencia as cidades"),
+                        new Tag("Estados", "Gerencia os estados"),
+                        new Tag("Grupos", "Gerencia os grupos de usuários"),
+                        new Tag("Usuários", "Gerencia os usuários"),
+                        new Tag("Cozinhas", "Gerencia os tipos de cozinhas"),
+                        new Tag("Formas de Pagamento", "Gerencia as formas de pagamento"),
+                        new Tag("Pedidos", "Gerencia os pedidos"),
+                        new Tag("Restaurantes", "Gerencia os restaurantes"),
+                        new Tag("Produtos", "Gerencia os produtos de restaurantes"),
+                        new Tag("Estatísticas", "Estatísticas do Algafood")
+                );
+    }
 	
 	private List<ResponseMessage> globalGetResponseMessages(){
 		return Arrays.asList(
