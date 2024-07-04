@@ -5,6 +5,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.IanaLinkRelations;
+import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.lampasw.algafood.api.ResourceUriHelper;
 import com.lampasw.algafood.api.assembler.CidadeInputDisassembler;
 import com.lampasw.algafood.api.assembler.CidadeModelAssembler;
-import com.lampasw.algafood.api.exceptionhandler.Problem;
 import com.lampasw.algafood.api.model.CidadeModel;
 import com.lampasw.algafood.api.model.input.CidadeInput;
 import com.lampasw.algafood.api.openapi.controller.CidadeControllerOpenApi;
@@ -30,10 +31,7 @@ import com.lampasw.algafood.domain.model.Cidade;
 import com.lampasw.algafood.domain.repository.CidadeRepository;
 import com.lampasw.algafood.domain.service.CadastroCidadeService;
 
-import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping(path = "cidades", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -62,7 +60,13 @@ public class CidadeController implements CidadeControllerOpenApi {
 	public CidadeModel buscar(@PathVariable Long cidadeId){
 		Cidade cidade = cadastroCidade.buscarOuFalhar(cidadeId); 
 		
-		return cidadeModelAssembler.toModel(cidade);		
+		CidadeModel cidadeModel = cidadeModelAssembler.toModel(cidade);
+		
+		cidadeModel.add(Link.of("localhost:8080/cidades/1", IanaLinkRelations.SELF));
+		cidadeModel.add(Link.of("http://api.algafood.local:8080/cidades", IanaLinkRelations.COLLECTION));		
+		cidadeModel.getEstado().add(Link.of("http://api.algafood.local:8080/estados/1"));
+		
+		return cidadeModel;
 	}
 		
 	@PostMapping
