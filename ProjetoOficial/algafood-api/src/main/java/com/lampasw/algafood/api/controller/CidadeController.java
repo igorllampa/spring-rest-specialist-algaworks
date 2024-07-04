@@ -61,15 +61,9 @@ public class CidadeController implements CidadeControllerOpenApi {
 		Cidade cidade = cadastroCidade.buscarOuFalhar(cidadeId);
 
 		CidadeModel cidadeModel = cidadeModelAssembler.toModel(cidade);
-
-		// cidadeModel.add(Link.of("localhost:8080/cidades/1", IanaLinkRelations.SELF));
+		
 		cidadeModel.add(linkTo(CidadeController.class).slash(cidadeModel.getId()).withSelfRel());
-
-		// cidadeModel.add(Link.of("http://api.algafood.local:8080/cidades",
-		// IanaLinkRelations.COLLECTION));
-		cidadeModel.add(linkTo(CidadeController.class).withRel("cidades"));
-
-		// cidadeModel.getEstado().add(Link.of("http://api.algafood.local:8080/estados/1"));
+		cidadeModel.add(linkTo(CidadeController.class).withRel("cidades"));	
 		cidadeModel.getEstado()
 				.add(linkTo(EstadoController.class).slash(cidadeModel.getEstado().getId()).withSelfRel());
 
