@@ -75,7 +75,7 @@ public class FormaDePagamentoController implements FormaDePagamentoControllerOpe
 	}
 	
 	@GetMapping("/{formaDePagamentoId}")
-	public ResponseEntity<FormaDePagamentoModel> buscar(ServletWebRequest request, @PathVariable Long formaDePagamentoId) {
+	public ResponseEntity<FormaDePagamentoModel> buscar(@PathVariable Long formaDePagamentoId, ServletWebRequest request) {
 		
 		ShallowEtagHeaderFilter.disableContentCaching(request.getRequest());
   		
