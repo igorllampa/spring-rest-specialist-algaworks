@@ -40,6 +40,6 @@ public class FormaDePagamentoModelAssembler
     @Override
     public CollectionModel<FormaDePagamentoModel> toCollectionModel(Iterable<? extends FormaDePagamento> entities) {
         return super.toCollectionModel(entities)
-            .add(algaLinks.linkToFormasPagamento());
+            .add(algaLinks.linkToFormasDePagamento());
     }   
 }
