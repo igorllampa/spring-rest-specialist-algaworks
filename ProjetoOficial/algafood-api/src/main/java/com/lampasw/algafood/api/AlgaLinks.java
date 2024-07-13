@@ -18,6 +18,7 @@ import com.lampasw.algafood.api.controller.FluxoPedidoController;
 import com.lampasw.algafood.api.controller.FormaDePagamentoController;
 import com.lampasw.algafood.api.controller.PedidoController;
 import com.lampasw.algafood.api.controller.RestauranteController;
+import com.lampasw.algafood.api.controller.RestauranteFormaDePagamentoController;
 import com.lampasw.algafood.api.controller.RestauranteProdutoController;
 import com.lampasw.algafood.api.controller.RestauranteUsuarioResponsavelController;
 import com.lampasw.algafood.api.controller.UsuarioController;
@@ -160,5 +161,31 @@ public class AlgaLinks {
 	public Link linkToCancelamentoPedido(String codigoPedido, String rel) {
 		return linkTo(methodOn(FluxoPedidoController.class).cancelar(codigoPedido)).withRel(rel);		
 	}
+
+	public Link linkToRestaurantes(String rel) {
+	    return linkTo(RestauranteController.class).withRel(rel);
+	}
+
+	public Link linkToRestaurantes() {
+	    return linkToRestaurantes(IanaLinkRelations.SELF.value());
+	}
+
+	public Link linkToRestauranteFormasDePagamento(Long restauranteId, String rel) {
+	    return linkTo(methodOn(RestauranteFormaDePagamentoController.class)
+	            .listar(restauranteId)).withRel(rel);
+	}
 	
+	public Link linkToRestauranteResponsaveis(Long restauranteId, String rel) {
+	    return linkTo(methodOn(RestauranteUsuarioResponsavelController.class)
+	            .listar(restauranteId)).withRel(rel);
+	}
+
+	public Link linkToCozinha(Long cozinhaId, String rel) {
+	    return linkTo(methodOn(CozinhaController.class)
+	            .buscar(cozinhaId)).withRel(rel);
+	}
+
+	public Link linkToCozinha(Long cozinhaId) {
+	    return linkToCozinha(cozinhaId, IanaLinkRelations.SELF.value());
+	}   
 }

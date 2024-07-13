@@ -51,5 +51,7 @@ public class PedidoModel extends RepresentationModel<PedidoModel> {
 		
 	private EnderecoModel enderecoEntrega;
 		
-	private List<ItemPedidoModel> itens;	
+	private List<ItemPedidoModel> itens;
+	
+	private RestauranteApenasNomeModel restauranteNome;
 }
