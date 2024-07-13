@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -47,7 +48,7 @@ public class FormaDePagamentoController implements FormaDePagamentoControllerOpe
 	FormaDePagamentoInputDisassembler formaDePagamentoInputDisassembler;
 	
 	@GetMapping
-	public ResponseEntity<List<FormaDePagamentoModel>> listar(ServletWebRequest request){
+	public ResponseEntity<CollectionModel<FormaDePagamentoModel>> listar(ServletWebRequest request){
 		
 		ShallowEtagHeaderFilter.disableContentCaching(request.getRequest());
 		
@@ -64,7 +65,7 @@ public class FormaDePagamentoController implements FormaDePagamentoControllerOpe
 		}
 		
 		List<FormaDePagamento> formasDePagamento = formaDePagamentoRepository.findAll();
-		List<FormaDePagamentoModel> formasDePagamentoModel = formaDePagamentoModelAssembler
+		CollectionModel<FormaDePagamentoModel> formasDePagamentoModel = formaDePagamentoModelAssembler
 				.toCollectionModel(formasDePagamento);
 		
 		return ResponseEntity.ok()
