@@ -9,10 +9,12 @@ import org.springframework.hateoas.TemplateVariable;
 import org.springframework.hateoas.TemplateVariable.VariableType;
 import org.springframework.hateoas.TemplateVariables;
 import org.springframework.hateoas.UriTemplate;
+import org.springframework.stereotype.Component;
 
 import com.lampasw.algafood.api.controller.CidadeController;
 import com.lampasw.algafood.api.controller.CozinhaController;
 import com.lampasw.algafood.api.controller.EstadoController;
+import com.lampasw.algafood.api.controller.FluxoPedidoController;
 import com.lampasw.algafood.api.controller.FormaDePagamentoController;
 import com.lampasw.algafood.api.controller.PedidoController;
 import com.lampasw.algafood.api.controller.RestauranteController;
@@ -21,6 +23,7 @@ import com.lampasw.algafood.api.controller.RestauranteUsuarioResponsavelControll
 import com.lampasw.algafood.api.controller.UsuarioController;
 import com.lampasw.algafood.api.controller.UsuarioGrupoController;
 
+@Component
 public class AlgaLinks {
 
 	public static final TemplateVariables PAGINACAO_VARIABLES = new TemplateVariables(
@@ -145,4 +148,17 @@ public class AlgaLinks {
 	public Link linkToCozinhas() {
 	    return linkToCozinhas(IanaLinkRelations.SELF.value());
 	}
+	
+	public Link linkToConfirmacaoPedido(String codigoPedido, String rel) {
+		return linkTo(methodOn(FluxoPedidoController.class).confirmar(codigoPedido)).withRel(rel);		
+	}
+	
+	public Link linkToEntregaPedido(String codigoPedido, String rel) {
+		return linkTo(methodOn(FluxoPedidoController.class).entregar(codigoPedido)).withRel(rel);		
+	}
+	
+	public Link linkToCancelamentoPedido(String codigoPedido, String rel) {
+		return linkTo(methodOn(FluxoPedidoController.class).cancelar(codigoPedido)).withRel(rel);		
+	}
+	
 }
