@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.json.MappingJacksonValue;
 
 import com.lampasw.algafood.api.model.RestauranteApenasNomeModel;
 import com.lampasw.algafood.api.model.RestauranteBasicoModel;
@@ -78,8 +77,8 @@ public interface RestauranteControllerOpenApi {
 			@ApiParam(value = "Id de uma cozinha", example = "0") Long cozinhaId);
 
 	@ApiOperation("Buaca restaurante por nome, taxa frete")
-	public CollectionModel<RestauranteModel> consultarRestaurantePorNomeTaxaFreteComMetodoImplementadoEspecifico(String nome,
-			BigDecimal taxaFreteInicial, BigDecimal taxaFreteFinal);
+	public CollectionModel<RestauranteModel> consultarRestaurantePorNomeTaxaFreteComMetodoImplementadoEspecifico(
+			String nome, BigDecimal taxaFreteInicial, BigDecimal taxaFreteFinal);
 
 	@ApiOperation("Consulta restaurantes com criteria")
 	public CollectionModel<RestauranteModel> consultarRestauranteComCriteria(String nome, BigDecimal taxaFreteInicial,

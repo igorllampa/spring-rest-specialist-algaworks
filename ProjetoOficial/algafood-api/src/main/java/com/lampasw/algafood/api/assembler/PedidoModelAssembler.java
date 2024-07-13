@@ -1,25 +1,15 @@
 package com.lampasw.algafood.api.assembler;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.Link;
-import org.springframework.hateoas.UriTemplate;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
 import com.lampasw.algafood.api.AlgaLinks;
-import com.lampasw.algafood.api.controller.CidadeController;
-import com.lampasw.algafood.api.controller.FormaDePagamentoController;
 import com.lampasw.algafood.api.controller.PedidoController;
-import com.lampasw.algafood.api.controller.RestauranteController;
-import com.lampasw.algafood.api.controller.RestauranteProdutoController;
-import com.lampasw.algafood.api.controller.UsuarioController;
 import com.lampasw.algafood.api.model.PedidoModel;
 import com.lampasw.algafood.domain.model.Pedido;
 

@@ -3,9 +3,6 @@ package com.lampasw.algafood.api.model;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.hateoas.server.core.Relation;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.lampasw.algafood.api.model.view.RestauranteView;
-
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;

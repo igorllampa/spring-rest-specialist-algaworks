@@ -16,7 +16,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.validation.BeanPropertyBindingResult;
@@ -43,7 +42,6 @@ import com.lampasw.algafood.api.model.RestauranteApenasNomeModel;
 import com.lampasw.algafood.api.model.RestauranteBasicoModel;
 import com.lampasw.algafood.api.model.RestauranteModel;
 import com.lampasw.algafood.api.model.input.RestauranteInput;
-import com.lampasw.algafood.api.model.view.RestauranteView;
 import com.lampasw.algafood.api.openapi.controller.RestauranteControllerOpenApi;
 import com.lampasw.algafood.core.validation.ValidacaoException;
 import com.lampasw.algafood.domain.exception.CidadeNaoEncontradaException;
@@ -63,8 +61,8 @@ public class RestauranteController implements RestauranteControllerOpenApi {
 	private RestauranteBasicoModelAssembler restauranteBasicoModelAssembler;
 
 	@Autowired
-	private RestauranteApenasNomeModelAssembler restauranteApenasNomeModelAssembler;   
-	
+	private RestauranteApenasNomeModelAssembler restauranteApenasNomeModelAssembler;
+
 	private RestauranteRepository restauranteRepository;
 	private CadastroRestauranteService cadastroRestaurante;
 	private SmartValidator validator;
@@ -88,10 +86,9 @@ public class RestauranteController implements RestauranteControllerOpenApi {
 	// @CrossOrigin(origins = "*")//Habilita para todas as origens
 	// @CrossOrigin//Sem parametros tb habilita para todas as origens
 	@GetMapping
-    public CollectionModel<RestauranteBasicoModel> listar() {
-        return restauranteBasicoModelAssembler
-                .toCollectionModel(restauranteRepository.findAll());
-    }
+	public CollectionModel<RestauranteBasicoModel> listar() {
+		return restauranteBasicoModelAssembler.toCollectionModel(restauranteRepository.findAll());
+	}
 
 //	@GetMapping
 //	public ResponseEntity<List<RestauranteModel>> listar(){
@@ -112,8 +109,7 @@ public class RestauranteController implements RestauranteControllerOpenApi {
 	// @JsonView(RestauranteView.ApenasNome.class)
 	@GetMapping(params = "projecao=apenas-nome")
 	public CollectionModel<RestauranteApenasNomeModel> listarApenasNomes() {
-		 return restauranteApenasNomeModelAssembler
-	                .toCollectionModel(restauranteRepository.findAll());
+		return restauranteApenasNomeModelAssembler.toCollectionModel(restauranteRepository.findAll());
 	}
 
 //	@GetMapping("/listagem-dinamica")
@@ -142,8 +138,8 @@ public class RestauranteController implements RestauranteControllerOpenApi {
 	}
 
 	@GetMapping("/por-nome-cozinha-taxa-frete")
-	public CollectionModel<RestauranteModel> buscarPorNomeCozinhaTaxa(@RequestParam String nome, @RequestParam Long cozinhaId,
-			@RequestParam BigDecimal taxaFrete) {
+	public CollectionModel<RestauranteModel> buscarPorNomeCozinhaTaxa(@RequestParam String nome,
+			@RequestParam Long cozinhaId, @RequestParam BigDecimal taxaFrete) {
 		return restauranteModelAssembler.toCollectionModel(restauranteRepository
 				.findByNomeContainingAndCozinhaIdAndTaxaFreteGreaterThanEqual(nome, cozinhaId, taxaFrete));
 	}
@@ -170,7 +166,8 @@ public class RestauranteController implements RestauranteControllerOpenApi {
 	}
 
 	@GetMapping("/consultar-por-nome")
-	public CollectionModel<RestauranteModel> consultarRestaurantePorNome(@RequestParam String nome, @RequestParam Long cozinhaId) {
+	public CollectionModel<RestauranteModel> consultarRestaurantePorNome(@RequestParam String nome,
+			@RequestParam Long cozinhaId) {
 		return restauranteModelAssembler.toCollectionModel(restauranteRepository.consultarPorNome(nome, cozinhaId));
 	}
 
@@ -190,8 +187,8 @@ public class RestauranteController implements RestauranteControllerOpenApi {
 	}
 
 	@GetMapping("/consultar-com-criteria")
-	public CollectionModel<RestauranteModel> consultarRestauranteComCriteria(@RequestParam(required = false) String nome,
-			@RequestParam(required = false) BigDecimal taxaFreteInicial,
+	public CollectionModel<RestauranteModel> consultarRestauranteComCriteria(
+			@RequestParam(required = false) String nome, @RequestParam(required = false) BigDecimal taxaFreteInicial,
 			@RequestParam(required = false) BigDecimal taxaFreteFinal) {
 		return restauranteModelAssembler
 				.toCollectionModel(restauranteRepository.consultarComCriteria(nome, taxaFreteInicial, taxaFreteFinal));
