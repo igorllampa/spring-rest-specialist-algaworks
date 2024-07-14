@@ -3,6 +3,7 @@ package com.lampasw.algafood.api.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,28 +31,29 @@ public class GrupoController implements GrupoControllerOpenApi {
 
 	@Autowired
 	private GrupoRepository grupoRepository;
-	
+
 	@Autowired
 	private CadastroGrupoService cadastroGrupo;
-	
+
 	@Autowired
 	private GrupoModelAssembler grupoModelAssembler;
-	
+
 	@Autowired
 	private GrupoInputDisassembler grupoInputDisassembler;
-	
+
 	@GetMapping
-	public List<GrupoModel> listar() {
-		List<Grupo> grupos = grupoRepository.findAll();
-		return grupoModelAssembler.toCollectionModel(grupos);
+	public CollectionModel<GrupoModel> listar() {
+		List<Grupo> todosGrupos = grupoRepository.findAll();
+
+		return grupoModelAssembler.toCollectionModel(todosGrupos);
 	}
-	
+
 	@GetMapping("/{grupoId}")
 	public GrupoModel buscar(@PathVariable Long grupoId) {
 		Grupo grupo = cadastroGrupo.buscarOuFalhar(grupoId);
-		return grupoModelAssembler.toModel(grupo);		
+		return grupoModelAssembler.toModel(grupo);
 	}
-	
+
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public GrupoModel adicionar(@RequestBody GrupoInput grupoInput) {
@@ -59,18 +61,18 @@ public class GrupoController implements GrupoControllerOpenApi {
 		grupo = cadastroGrupo.salvar(grupo);
 		return grupoModelAssembler.toModel(grupo);
 	}
-	
+
 	@PutMapping("/{grupoId}")
 	public GrupoModel atualizar(@PathVariable Long grupoId, @RequestBody GrupoInput grupoInput) {
 		Grupo grupoAtual = cadastroGrupo.buscarOuFalhar(grupoId);
 		grupoInputDisassembler.copyToDomainObject(grupoInput, grupoAtual);
 		grupoAtual = cadastroGrupo.salvar(grupoAtual);
-		return grupoModelAssembler.toModel(grupoAtual);		
+		return grupoModelAssembler.toModel(grupoAtual);
 	}
-	
+
 	@DeleteMapping("/{grupoId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover(@PathVariable Long grupoId) {
 		cadastroGrupo.remover(grupoId);
-	}	
+	}
 }
