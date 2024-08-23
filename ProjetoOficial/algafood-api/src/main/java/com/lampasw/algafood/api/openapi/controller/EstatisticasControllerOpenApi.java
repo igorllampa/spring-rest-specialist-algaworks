@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 
+import com.lampasw.algafood.api.model.EstatisticasModel;
 import com.lampasw.algafood.domain.filter.VendaDiariaFilter;
 import com.lampasw.algafood.domain.model.dto.VendaDiaria;
 
@@ -18,6 +19,7 @@ import io.swagger.annotations.ApiParam;
 @Api(tags = "Estatísticas")
 public interface EstatisticasControllerOpenApi {
 
+		
 	@ApiOperation("Consulta estatísticas de vendas diárias")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "restauranteId", value = "ID do restaurante", 
@@ -32,7 +34,10 @@ public interface EstatisticasControllerOpenApi {
 			@ApiParam(value = "Deslocamento de horário a ser considerado na consulta em relação ao UTC",
             defaultValue = "+00:00")
 			String timeOffset);
-		
+
+	@ApiOperation(value = "Estatísticas", hidden = true)
+	public EstatisticasModel estatisticas();
+	
 	public ResponseEntity<byte[]> consultarVendasDiariasPdf(VendaDiariaFilter filtro, 			
 			String timeOffset);
 }

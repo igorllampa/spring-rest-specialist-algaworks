@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import com.lampasw.algafood.api.controller.CidadeController;
 import com.lampasw.algafood.api.controller.CozinhaController;
 import com.lampasw.algafood.api.controller.EstadoController;
+import com.lampasw.algafood.api.controller.EstatisticasController;
 import com.lampasw.algafood.api.controller.FluxoPedidoController;
 import com.lampasw.algafood.api.controller.FormaDePagamentoController;
 import com.lampasw.algafood.api.controller.GrupoController;
@@ -300,5 +301,24 @@ public class AlgaLinks {
 	public Link linkToUsuarioGrupoDesassociacao(Long usuarioId, Long grupoId, String rel) {
 	    return linkTo(methodOn(UsuarioGrupoController.class)
 	            .desassociar(usuarioId, grupoId)).withRel(rel);
-	}  
+	}
+
+	public Link linkToEstatisticas(String rel) {
+	    return linkTo(EstatisticasController.class).withRel(rel);
+	}
+
+	public Link linkToEstatisticasVendasDiarias(String rel) {
+	    TemplateVariables filtroVariables = new TemplateVariables(
+	            new TemplateVariable("restauranteId", VariableType.REQUEST_PARAM),
+	            new TemplateVariable("dataCriacaoInicio", VariableType.REQUEST_PARAM),
+	            new TemplateVariable("dataCriacaoFim", VariableType.REQUEST_PARAM),
+	            new TemplateVariable("timeOffset", VariableType.REQUEST_PARAM));
+	    
+	    String pedidosUrl = linkTo(methodOn(EstatisticasController.class)
+	            .consultarVendasDiarias(null, null)).toUri().toString();
+	 
+	    UriTemplate uriTemplate = UriTemplate.of(pedidosUrl, filtroVariables);
+	    return Link.of(uriTemplate.expand().toString(), rel);		  	    	    	 
+	}
+
 }
