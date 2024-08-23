@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PlainHtmlController {
 
 	
-	@RequestMapping("/")
+	@RequestMapping("/interface-visual")
     public String ola() {
         return "client-js/index.html";
     }
