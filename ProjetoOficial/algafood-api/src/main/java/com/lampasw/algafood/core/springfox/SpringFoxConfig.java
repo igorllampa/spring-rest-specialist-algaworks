@@ -32,10 +32,12 @@ import com.lampasw.algafood.api.model.FormaDePagamentoModel;
 import com.lampasw.algafood.api.model.GrupoModel;
 import com.lampasw.algafood.api.model.PedidoResumoModel;
 import com.lampasw.algafood.api.model.PermissaoModel;
+import com.lampasw.algafood.api.model.ProdutoModel;
 import com.lampasw.algafood.api.openapi.controller.EstadoModelOpenApi.EstadosModelOpenApi;
 import com.lampasw.algafood.api.openapi.controller.FormasDePagamentoModelOpenApi;
 import com.lampasw.algafood.api.openapi.controller.GruposModelOpenApi;
 import com.lampasw.algafood.api.openapi.controller.PermissoesModelOpenApi;
+import com.lampasw.algafood.api.openapi.controller.ProdutosModelOpenApi;
 import com.lampasw.algafood.api.openapi.model.CidadesModelOpenApi;
 import com.lampasw.algafood.api.openapi.model.CozinhasModelOpenApi;
 import com.lampasw.algafood.api.openapi.model.LinksModelOpenApi;
@@ -102,6 +104,12 @@ public class SpringFoxConfig implements WebMvcConfigurer {
                 	.alternateTypeRules(AlternateTypeRules.newRule(
                 	        typeResolver.resolve(CollectionModel.class, PermissaoModel.class),
                 	        PermissoesModelOpenApi.class))
+                	.alternateTypeRules(AlternateTypeRules.newRule(
+                		    typeResolver.resolve(PagedModel.class, PedidoResumoModel.class),
+                		    PedidosResumoModelOpenApi.class))
+                	.alternateTypeRules(AlternateTypeRules.newRule(
+                		    typeResolver.resolve(CollectionModel.class, ProdutoModel.class),
+                		    ProdutosModelOpenApi.class))
                 .apiInfo(apiInfo())
                 .tags(
                         new Tag("Cidades", "Gerencia as cidades"),
