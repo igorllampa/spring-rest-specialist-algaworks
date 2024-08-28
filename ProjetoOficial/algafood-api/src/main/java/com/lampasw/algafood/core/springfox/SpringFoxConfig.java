@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.Links;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.ServletWebRequest;
@@ -25,6 +26,7 @@ import com.lampasw.algafood.api.exceptionhandler.Problem;
 import com.lampasw.algafood.api.model.CozinhaModel;
 import com.lampasw.algafood.api.model.PedidoResumoModel;
 import com.lampasw.algafood.api.openapi.model.CozinhasModelOpenApi;
+import com.lampasw.algafood.api.openapi.model.LinksModelOpenApi;
 import com.lampasw.algafood.api.openapi.model.PageableModelOpenApi;
 import com.lampasw.algafood.api.openapi.model.PedidosResumoModelOpenApi;
 
@@ -75,6 +77,7 @@ public class SpringFoxConfig implements WebMvcConfigurer {
                 .additionalModels(typeResolver.resolve(Problem.class))
                 .ignoredParameterTypes(ServletWebRequest.class, URL.class, URI.class, URLStreamHandler.class, Resource.class, File.class, InputStream.class)
                 .directModelSubstitute(Pageable.class, PageableModelOpenApi.class)
+                .directModelSubstitute(Links.class, LinksModelOpenApi.class)
                 .alternateTypeRules(AlternateTypeRules.newRule(typeResolver.resolve(Page.class, CozinhaModel.class), CozinhasModelOpenApi.class))
                 .alternateTypeRules(AlternateTypeRules.newRule(typeResolver.resolve(Page.class, PedidoResumoModel.class), PedidosResumoModelOpenApi.class))
                 .apiInfo(apiInfo())
