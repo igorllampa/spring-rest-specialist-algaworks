@@ -5,6 +5,6 @@ import com.lampasw.algafood.api.model.PedidoResumoModel;
 import io.swagger.annotations.ApiModel;
 
 @ApiModel("PedidoResumoModel")
-public class PedidosResumoModelOpenApi extends PageModelOpenApi<PedidoResumoModel> {
+public class PedidosResumoModelOpenApi extends PagedModelOpenApi<PedidoResumoModel> {
 
 }

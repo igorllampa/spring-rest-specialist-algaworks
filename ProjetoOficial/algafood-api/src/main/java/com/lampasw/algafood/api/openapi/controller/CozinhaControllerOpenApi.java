@@ -21,8 +21,8 @@ public interface CozinhaControllerOpenApi {
 	@ApiOperation("Lista as cozinhas")
 	public PagedModel<CozinhaModel> listar(Pageable pageable);
 
-	@ApiOperation("Lista cozinhas em formato xml")
-	public CozinhasXmlWrapper listarXml();
+//	@ApiOperation("Lista cozinhas em formato xml")
+//	public CozinhasXmlWrapper listarXml();
 
 	@ApiOperation("Busca cozinha(s) por Nome")
 	@ApiResponses({ @ApiResponse(code = 400, message = "Nome da cozinha inválido", response = Problem.class),
