@@ -28,8 +28,10 @@ import com.lampasw.algafood.api.exceptionhandler.Problem;
 import com.lampasw.algafood.api.model.CidadeModel;
 import com.lampasw.algafood.api.model.CozinhaModel;
 import com.lampasw.algafood.api.model.EstadoModel;
+import com.lampasw.algafood.api.model.FormaDePagamentoModel;
 import com.lampasw.algafood.api.model.PedidoResumoModel;
 import com.lampasw.algafood.api.openapi.controller.EstadoModelOpenApi.EstadosModelOpenApi;
+import com.lampasw.algafood.api.openapi.controller.FormasDePagamentoModelOpenApi;
 import com.lampasw.algafood.api.openapi.model.CidadesModelOpenApi;
 import com.lampasw.algafood.api.openapi.model.CozinhasModelOpenApi;
 import com.lampasw.algafood.api.openapi.model.LinksModelOpenApi;
@@ -88,6 +90,7 @@ public class SpringFoxConfig implements WebMvcConfigurer {
                 .alternateTypeRules(AlternateTypeRules.newRule(typeResolver.resolve(Page.class, PedidoResumoModel.class), PedidosResumoModelOpenApi.class))
                 .alternateTypeRules(AlternateTypeRules.newRule(typeResolver.resolve(CollectionModel.class, CidadeModel.class), CidadesModelOpenApi.class))
                 .alternateTypeRules(AlternateTypeRules.newRule(typeResolver.resolve(CollectionModel.class, EstadoModel.class), EstadosModelOpenApi.class))
+                .alternateTypeRules(AlternateTypeRules.newRule(typeResolver.resolve(CollectionModel.class, FormaDePagamentoModel.class), FormasDePagamentoModelOpenApi.class))
                 .apiInfo(apiInfo())
                 .tags(
                         new Tag("Cidades", "Gerencia as cidades"),

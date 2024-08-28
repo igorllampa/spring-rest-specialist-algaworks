@@ -17,7 +17,7 @@ import io.swagger.annotations.ApiResponses;
 @Api(tags = "Formas de Pagamento")
 public interface FormaDePagamentoControllerOpenApi {
 	
-	@ApiOperation("Lista as formas de pagamento")
+	@ApiOperation(value = "Lista as formas de pagamento", response = FormasDePagamentoModelOpenApi.class)
 	public ResponseEntity<CollectionModel<FormaDePagamentoModel>> listar(ServletWebRequest request);
 		
 	@ApiOperation("Busca uma forma de pagamento por ID")	

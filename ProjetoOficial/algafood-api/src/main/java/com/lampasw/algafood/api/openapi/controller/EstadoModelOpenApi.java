@@ -9,6 +9,8 @@ import com.lampasw.algafood.api.model.EstadoModel;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
+@ApiModel("EstadosModel")
+@Data
 public class EstadoModelOpenApi {
 
 	@ApiModel("EstadosModel")
