@@ -1,4 +1,4 @@
-package com.lampasw.algafood.api.openapi.controller;
+package com.lampasw.algafood.api.v1.openapi.controller;
 
 import java.io.IOException;
 
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.lampasw.algafood.api.exceptionhandler.Problem;
-import com.lampasw.algafood.api.model.FotoProdutoModel;
-import com.lampasw.algafood.api.model.input.FotoProdutoInput;
+import com.lampasw.algafood.api.v1.model.FotoProdutoModel;
+import com.lampasw.algafood.api.v1.model.input.FotoProdutoInput;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

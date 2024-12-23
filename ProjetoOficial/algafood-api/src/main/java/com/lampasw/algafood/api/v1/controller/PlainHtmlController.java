@@ -1,4 +1,4 @@
-package com.lampasw.algafood.api.controller;
+package com.lampasw.algafood.api.v1.controller;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;

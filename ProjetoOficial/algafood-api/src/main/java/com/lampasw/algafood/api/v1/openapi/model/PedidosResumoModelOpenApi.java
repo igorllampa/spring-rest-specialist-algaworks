@@ -1,6 +1,6 @@
-package com.lampasw.algafood.api.openapi.model;
+package com.lampasw.algafood.api.v1.openapi.model;
 
-import com.lampasw.algafood.api.model.PedidoResumoModel;
+import com.lampasw.algafood.api.v1.model.PedidoResumoModel;
 
 import io.swagger.annotations.ApiModel;
 

@@ -1,10 +1,10 @@
-package com.lampasw.algafood.api.openapi.controller;
+package com.lampasw.algafood.api.v1.openapi.controller;
 
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 
-import com.lampasw.algafood.api.model.EstatisticasModel;
+import com.lampasw.algafood.api.v1.model.EstatisticasModel;
 import com.lampasw.algafood.domain.filter.VendaDiariaFilter;
 import com.lampasw.algafood.domain.model.dto.VendaDiaria;
 

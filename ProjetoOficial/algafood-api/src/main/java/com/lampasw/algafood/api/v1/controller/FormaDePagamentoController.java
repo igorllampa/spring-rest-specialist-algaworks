@@ -1,4 +1,4 @@
-package com.lampasw.algafood.api.controller;
+package com.lampasw.algafood.api.v1.controller;
 
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -22,11 +22,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.filter.ShallowEtagHeaderFilter;
 
-import com.lampasw.algafood.api.assembler.FormaDePagamentoInputDisassembler;
-import com.lampasw.algafood.api.assembler.FormaDePagamentoModelAssembler;
-import com.lampasw.algafood.api.model.FormaDePagamentoModel;
-import com.lampasw.algafood.api.model.input.FormaDePagamentoInput;
-import com.lampasw.algafood.api.openapi.controller.FormaDePagamentoControllerOpenApi;
+import com.lampasw.algafood.api.v1.assembler.FormaDePagamentoInputDisassembler;
+import com.lampasw.algafood.api.v1.assembler.FormaDePagamentoModelAssembler;
+import com.lampasw.algafood.api.v1.model.FormaDePagamentoModel;
+import com.lampasw.algafood.api.v1.model.input.FormaDePagamentoInput;
+import com.lampasw.algafood.api.v1.openapi.controller.FormaDePagamentoControllerOpenApi;
 import com.lampasw.algafood.domain.model.FormaDePagamento;
 import com.lampasw.algafood.domain.repository.FormaDePagamentoRepository;
 import com.lampasw.algafood.domain.service.CadastroFormaDePagamentoService;

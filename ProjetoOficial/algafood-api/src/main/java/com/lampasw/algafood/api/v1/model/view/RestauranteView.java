@@ -1,4 +1,4 @@
-package com.lampasw.algafood.api.model.view;
+package com.lampasw.algafood.api.v1.model.view;
 
 public interface RestauranteView {
 

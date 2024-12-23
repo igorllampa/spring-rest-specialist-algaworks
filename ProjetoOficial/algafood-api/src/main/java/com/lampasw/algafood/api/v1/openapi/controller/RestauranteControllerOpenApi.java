@@ -1,4 +1,4 @@
-package com.lampasw.algafood.api.openapi.controller;
+package com.lampasw.algafood.api.v1.openapi.controller;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
 
-import com.lampasw.algafood.api.model.RestauranteApenasNomeModel;
-import com.lampasw.algafood.api.model.RestauranteBasicoModel;
-import com.lampasw.algafood.api.model.RestauranteModel;
-import com.lampasw.algafood.api.model.input.RestauranteInput;
-import com.lampasw.algafood.api.openapi.model.RestauranteBasicoModelOpenApi;
+import com.lampasw.algafood.api.v1.model.RestauranteApenasNomeModel;
+import com.lampasw.algafood.api.v1.model.RestauranteBasicoModel;
+import com.lampasw.algafood.api.v1.model.RestauranteModel;
+import com.lampasw.algafood.api.v1.model.input.RestauranteInput;
+import com.lampasw.algafood.api.v1.openapi.model.RestauranteBasicoModelOpenApi;
 import com.lampasw.algafood.domain.model.Restaurante;
 
 import io.swagger.annotations.Api;
@@ -22,6 +22,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import springfox.documentation.annotations.ApiIgnore;
 
 @Api(tags = "Restaurantes")
 public interface RestauranteControllerOpenApi {
@@ -31,9 +32,11 @@ public interface RestauranteControllerOpenApi {
 			@ApiImplicitParam(value = "Nome da projeção de pedidos", name = "projecao", paramType = "query", type = "string", allowableValues = "apenas-nome, resumo") })
 	public CollectionModel<RestauranteBasicoModel> listar();
 
+	@ApiIgnore
 	@ApiOperation(value = "Lista restaurantes", hidden = true, response = RestauranteBasicoModelOpenApi.class)
 	public CollectionModel<RestauranteBasicoModel> listarResumido();
 
+	@ApiIgnore
 	@ApiOperation(value = "Lista restaurantes", hidden = true)
 	public CollectionModel<RestauranteApenasNomeModel> listarApenasNomes();
 

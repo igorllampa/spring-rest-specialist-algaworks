@@ -1,4 +1,4 @@
-package com.lampasw.algafood.api.controller;
+package com.lampasw.algafood.api.v1.controller;
 
 import java.util.List;
 
@@ -18,12 +18,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lampasw.algafood.api.AlgaLinks;
-import com.lampasw.algafood.api.assembler.ProdutoInputDisassembler;
-import com.lampasw.algafood.api.assembler.ProdutoModelAssembler;
-import com.lampasw.algafood.api.model.ProdutoModel;
-import com.lampasw.algafood.api.model.input.ProdutoInput;
-import com.lampasw.algafood.api.openapi.controller.RestauranteProdutoControllerOpenApi;
+import com.lampasw.algafood.api.v1.AlgaLinks;
+import com.lampasw.algafood.api.v1.assembler.ProdutoInputDisassembler;
+import com.lampasw.algafood.api.v1.assembler.ProdutoModelAssembler;
+import com.lampasw.algafood.api.v1.model.ProdutoModel;
+import com.lampasw.algafood.api.v1.model.input.ProdutoInput;
+import com.lampasw.algafood.api.v1.openapi.controller.RestauranteProdutoControllerOpenApi;
 import com.lampasw.algafood.domain.model.Produto;
 import com.lampasw.algafood.domain.model.Restaurante;
 import com.lampasw.algafood.domain.repository.ProdutoRepository;

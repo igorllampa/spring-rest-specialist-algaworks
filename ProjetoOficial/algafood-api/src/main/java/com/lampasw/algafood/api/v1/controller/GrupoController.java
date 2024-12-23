@@ -1,4 +1,4 @@
-package com.lampasw.algafood.api.controller;
+package com.lampasw.algafood.api.v1.controller;
 
 import java.util.List;
 
@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lampasw.algafood.api.assembler.GrupoInputDisassembler;
-import com.lampasw.algafood.api.assembler.GrupoModelAssembler;
-import com.lampasw.algafood.api.model.GrupoModel;
-import com.lampasw.algafood.api.model.input.GrupoInput;
-import com.lampasw.algafood.api.openapi.controller.GrupoControllerOpenApi;
+import com.lampasw.algafood.api.v1.assembler.GrupoInputDisassembler;
+import com.lampasw.algafood.api.v1.assembler.GrupoModelAssembler;
+import com.lampasw.algafood.api.v1.model.GrupoModel;
+import com.lampasw.algafood.api.v1.model.input.GrupoInput;
+import com.lampasw.algafood.api.v1.openapi.controller.GrupoControllerOpenApi;
 import com.lampasw.algafood.domain.model.Grupo;
 import com.lampasw.algafood.domain.repository.GrupoRepository;
 import com.lampasw.algafood.domain.service.CadastroGrupoService;

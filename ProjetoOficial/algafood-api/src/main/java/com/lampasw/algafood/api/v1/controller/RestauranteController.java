@@ -1,4 +1,4 @@
-package com.lampasw.algafood.api.controller;
+package com.lampasw.algafood.api.v1.controller;
 
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
@@ -34,15 +34,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.lampasw.algafood.api.assembler.RestauranteApenasNomeModelAssembler;
-import com.lampasw.algafood.api.assembler.RestauranteBasicoModelAssembler;
-import com.lampasw.algafood.api.assembler.RestauranteInputDisassembler;
-import com.lampasw.algafood.api.assembler.RestauranteModelAssembler;
-import com.lampasw.algafood.api.model.RestauranteApenasNomeModel;
-import com.lampasw.algafood.api.model.RestauranteBasicoModel;
-import com.lampasw.algafood.api.model.RestauranteModel;
-import com.lampasw.algafood.api.model.input.RestauranteInput;
-import com.lampasw.algafood.api.openapi.controller.RestauranteControllerOpenApi;
+import com.lampasw.algafood.api.v1.assembler.RestauranteApenasNomeModelAssembler;
+import com.lampasw.algafood.api.v1.assembler.RestauranteBasicoModelAssembler;
+import com.lampasw.algafood.api.v1.assembler.RestauranteInputDisassembler;
+import com.lampasw.algafood.api.v1.assembler.RestauranteModelAssembler;
+import com.lampasw.algafood.api.v1.model.RestauranteApenasNomeModel;
+import com.lampasw.algafood.api.v1.model.RestauranteBasicoModel;
+import com.lampasw.algafood.api.v1.model.RestauranteModel;
+import com.lampasw.algafood.api.v1.model.input.RestauranteInput;
+import com.lampasw.algafood.api.v1.openapi.controller.RestauranteControllerOpenApi;
 import com.lampasw.algafood.core.validation.ValidacaoException;
 import com.lampasw.algafood.domain.exception.CidadeNaoEncontradaException;
 import com.lampasw.algafood.domain.exception.CozinhaNaoEncontradaException;

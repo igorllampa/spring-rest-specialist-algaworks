@@ -1,13 +1,13 @@
-package com.lampasw.algafood.api.openapi.controller;
+package com.lampasw.algafood.api.v1.openapi.controller;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.hateoas.PagedModel;
 
 import com.lampasw.algafood.api.exceptionhandler.Problem;
-import com.lampasw.algafood.api.model.PedidoModel;
-import com.lampasw.algafood.api.model.PedidoResumoModel;
-import com.lampasw.algafood.api.model.input.PedidoInput;
+import com.lampasw.algafood.api.v1.model.PedidoModel;
+import com.lampasw.algafood.api.v1.model.PedidoResumoModel;
+import com.lampasw.algafood.api.v1.model.input.PedidoInput;
 import com.lampasw.algafood.domain.filter.PedidoFilter;
 import com.lampasw.algafood.domain.model.Pedido;
 

@@ -1,4 +1,4 @@
-package com.lampasw.algafood.api.controller;
+package com.lampasw.algafood.api.v1.controller;
 
 import java.util.List;
 
@@ -24,18 +24,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lampasw.algafood.api.assembler.CozinhaInputDisassembler;
-import com.lampasw.algafood.api.assembler.CozinhaModelAssembler;
-import com.lampasw.algafood.api.model.CozinhaModel;
-import com.lampasw.algafood.api.model.CozinhasXmlWrapper;
-import com.lampasw.algafood.api.model.input.CozinhaInput;
-import com.lampasw.algafood.api.openapi.controller.CozinhaControllerOpenApi;
+import com.lampasw.algafood.api.v1.assembler.CozinhaInputDisassembler;
+import com.lampasw.algafood.api.v1.assembler.CozinhaModelAssembler;
+import com.lampasw.algafood.api.v1.model.CozinhaModel;
+import com.lampasw.algafood.api.v1.model.CozinhasXmlWrapper;
+import com.lampasw.algafood.api.v1.model.input.CozinhaInput;
+import com.lampasw.algafood.api.v1.openapi.controller.CozinhaControllerOpenApi;
 import com.lampasw.algafood.domain.model.Cozinha;
 import com.lampasw.algafood.domain.repository.CozinhaRepository;
 import com.lampasw.algafood.domain.service.CadastroCozinhaService;
 
 @RestController
-@RequestMapping(value = "cozinhas")
+@RequestMapping(value = {"/cozinhas", "/gastronomias"})
 public class CozinhaController implements CozinhaControllerOpenApi {
 
 	@Autowired

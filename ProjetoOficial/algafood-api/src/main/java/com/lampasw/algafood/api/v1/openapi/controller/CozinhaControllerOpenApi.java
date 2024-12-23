@@ -1,13 +1,12 @@
-package com.lampasw.algafood.api.openapi.controller;
+package com.lampasw.algafood.api.v1.openapi.controller;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.PagedModel;
 
 import com.lampasw.algafood.api.exceptionhandler.Problem;
-import com.lampasw.algafood.api.model.CozinhaModel;
-import com.lampasw.algafood.api.model.CozinhasXmlWrapper;
-import com.lampasw.algafood.api.model.input.CozinhaInput;
+import com.lampasw.algafood.api.v1.model.CozinhaModel;
+import com.lampasw.algafood.api.v1.model.input.CozinhaInput;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

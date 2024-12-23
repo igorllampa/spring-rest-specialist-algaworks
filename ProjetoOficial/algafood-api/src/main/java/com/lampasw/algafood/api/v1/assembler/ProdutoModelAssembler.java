@@ -1,4 +1,4 @@
-package com.lampasw.algafood.api.assembler;
+package com.lampasw.algafood.api.v1.assembler;
 
 import java.util.List;
 
@@ -8,9 +8,9 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
-import com.lampasw.algafood.api.AlgaLinks;
-import com.lampasw.algafood.api.controller.RestauranteProdutoController;
-import com.lampasw.algafood.api.model.ProdutoModel;
+import com.lampasw.algafood.api.v1.AlgaLinks;
+import com.lampasw.algafood.api.v1.controller.RestauranteProdutoController;
+import com.lampasw.algafood.api.v1.model.ProdutoModel;
 import com.lampasw.algafood.domain.model.Produto;
 
 @Component

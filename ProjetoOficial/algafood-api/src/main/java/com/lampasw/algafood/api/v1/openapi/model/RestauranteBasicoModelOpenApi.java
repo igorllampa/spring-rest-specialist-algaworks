@@ -1,8 +1,8 @@
-package com.lampasw.algafood.api.openapi.model;
+package com.lampasw.algafood.api.v1.openapi.model;
 
 import java.math.BigDecimal;
 
-import com.lampasw.algafood.api.model.CozinhaModel;
+import com.lampasw.algafood.api.v1.model.CozinhaModel;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

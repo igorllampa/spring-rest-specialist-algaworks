@@ -1,4 +1,4 @@
-package com.lampasw.algafood.api.controller;
+package com.lampasw.algafood.api.v1.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lampasw.algafood.api.AlgaLinks;
-import com.lampasw.algafood.api.assembler.FormaDePagamentoModelAssembler;
-import com.lampasw.algafood.api.model.FormaDePagamentoModel;
-import com.lampasw.algafood.api.openapi.controller.RestauranteFormaDePagamentoControllerOpenApi;
+import com.lampasw.algafood.api.v1.AlgaLinks;
+import com.lampasw.algafood.api.v1.assembler.FormaDePagamentoModelAssembler;
+import com.lampasw.algafood.api.v1.model.FormaDePagamentoModel;
+import com.lampasw.algafood.api.v1.openapi.controller.RestauranteFormaDePagamentoControllerOpenApi;
 import com.lampasw.algafood.domain.model.Restaurante;
 import com.lampasw.algafood.domain.service.CadastroRestauranteService;
 

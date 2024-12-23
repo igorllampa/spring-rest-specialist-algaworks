@@ -1,4 +1,4 @@
-package com.lampasw.algafood.api.controller;
+package com.lampasw.algafood.api.v1.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -23,10 +23,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.lampasw.algafood.api.assembler.FotoProdutoModelAssembler;
-import com.lampasw.algafood.api.model.FotoProdutoModel;
-import com.lampasw.algafood.api.model.input.FotoProdutoInput;
-import com.lampasw.algafood.api.openapi.controller.RestauranteProdutoFotoControllerOpenApi;
+import com.lampasw.algafood.api.v1.assembler.FotoProdutoModelAssembler;
+import com.lampasw.algafood.api.v1.model.FotoProdutoModel;
+import com.lampasw.algafood.api.v1.model.input.FotoProdutoInput;
+import com.lampasw.algafood.api.v1.openapi.controller.RestauranteProdutoFotoControllerOpenApi;
 import com.lampasw.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.lampasw.algafood.domain.model.FotoProduto;
 import com.lampasw.algafood.domain.model.Produto;

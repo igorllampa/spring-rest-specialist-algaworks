@@ -1,4 +1,4 @@
-package com.lampasw.algafood.api.controller;
+package com.lampasw.algafood.api.v1.controller;
 
 import java.util.List;
 
@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lampasw.algafood.api.assembler.EstadoInputDisassembler;
-import com.lampasw.algafood.api.assembler.EstadoModelAssembler;
-import com.lampasw.algafood.api.model.EstadoModel;
-import com.lampasw.algafood.api.model.input.EstadoInput;
-import com.lampasw.algafood.api.openapi.controller.EstadoControllerOpenApi;
+import com.lampasw.algafood.api.v1.assembler.EstadoInputDisassembler;
+import com.lampasw.algafood.api.v1.assembler.EstadoModelAssembler;
+import com.lampasw.algafood.api.v1.model.EstadoModel;
+import com.lampasw.algafood.api.v1.model.input.EstadoInput;
+import com.lampasw.algafood.api.v1.openapi.controller.EstadoControllerOpenApi;
 import com.lampasw.algafood.domain.model.Estado;
 import com.lampasw.algafood.domain.repository.EstadoRepository;
 import com.lampasw.algafood.domain.service.CadastroEstadoService;

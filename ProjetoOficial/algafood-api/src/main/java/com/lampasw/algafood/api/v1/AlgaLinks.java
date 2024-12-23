@@ -1,4 +1,4 @@
-package com.lampasw.algafood.api;
+package com.lampasw.algafood.api.v1;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -11,23 +11,23 @@ import org.springframework.hateoas.TemplateVariables;
 import org.springframework.hateoas.UriTemplate;
 import org.springframework.stereotype.Component;
 
-import com.lampasw.algafood.api.controller.CidadeController;
-import com.lampasw.algafood.api.controller.CozinhaController;
-import com.lampasw.algafood.api.controller.EstadoController;
-import com.lampasw.algafood.api.controller.EstatisticasController;
-import com.lampasw.algafood.api.controller.FluxoPedidoController;
-import com.lampasw.algafood.api.controller.FormaDePagamentoController;
-import com.lampasw.algafood.api.controller.GrupoController;
-import com.lampasw.algafood.api.controller.GrupoPermissaoController;
-import com.lampasw.algafood.api.controller.PedidoController;
-import com.lampasw.algafood.api.controller.PermissaoController;
-import com.lampasw.algafood.api.controller.RestauranteController;
-import com.lampasw.algafood.api.controller.RestauranteFormaDePagamentoController;
-import com.lampasw.algafood.api.controller.RestauranteProdutoController;
-import com.lampasw.algafood.api.controller.RestauranteProdutoFotoController;
-import com.lampasw.algafood.api.controller.RestauranteUsuarioResponsavelController;
-import com.lampasw.algafood.api.controller.UsuarioController;
-import com.lampasw.algafood.api.controller.UsuarioGrupoController;
+import com.lampasw.algafood.api.v1.controller.CidadeController;
+import com.lampasw.algafood.api.v1.controller.CozinhaController;
+import com.lampasw.algafood.api.v1.controller.EstadoController;
+import com.lampasw.algafood.api.v1.controller.EstatisticasController;
+import com.lampasw.algafood.api.v1.controller.FluxoPedidoController;
+import com.lampasw.algafood.api.v1.controller.FormaDePagamentoController;
+import com.lampasw.algafood.api.v1.controller.GrupoController;
+import com.lampasw.algafood.api.v1.controller.GrupoPermissaoController;
+import com.lampasw.algafood.api.v1.controller.PedidoController;
+import com.lampasw.algafood.api.v1.controller.PermissaoController;
+import com.lampasw.algafood.api.v1.controller.RestauranteController;
+import com.lampasw.algafood.api.v1.controller.RestauranteFormaDePagamentoController;
+import com.lampasw.algafood.api.v1.controller.RestauranteProdutoController;
+import com.lampasw.algafood.api.v1.controller.RestauranteProdutoFotoController;
+import com.lampasw.algafood.api.v1.controller.RestauranteUsuarioResponsavelController;
+import com.lampasw.algafood.api.v1.controller.UsuarioController;
+import com.lampasw.algafood.api.v1.controller.UsuarioGrupoController;
 
 @Component
 public class AlgaLinks {

@@ -1,10 +1,10 @@
-package com.lampasw.algafood.api.openapi.model;
+package com.lampasw.algafood.api.v1.openapi.model;
 
 import java.util.List;
 
 import org.springframework.hateoas.Links;
 
-import com.lampasw.algafood.api.model.CozinhaModel;
+import com.lampasw.algafood.api.v1.model.CozinhaModel;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.lampasw.algafood.api.model.input;
+package com.lampasw.algafood.api.v1.model.input;
 
 import java.math.BigDecimal;
 

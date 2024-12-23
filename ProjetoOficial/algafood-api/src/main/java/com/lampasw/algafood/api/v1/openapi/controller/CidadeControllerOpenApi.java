@@ -1,10 +1,10 @@
-package com.lampasw.algafood.api.openapi.controller;
+package com.lampasw.algafood.api.v1.openapi.controller;
 
 import org.springframework.hateoas.CollectionModel;
 
 import com.lampasw.algafood.api.exceptionhandler.Problem;
-import com.lampasw.algafood.api.model.CidadeModel;
-import com.lampasw.algafood.api.model.input.CidadeInput;
+import com.lampasw.algafood.api.v1.model.CidadeModel;
+import com.lampasw.algafood.api.v1.model.input.CidadeInput;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

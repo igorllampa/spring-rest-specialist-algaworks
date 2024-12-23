@@ -1,4 +1,4 @@
-package com.lampasw.algafood.api.controller;
+package com.lampasw.algafood.api.v1.controller;
 
 import java.util.List;
 
@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lampasw.algafood.api.assembler.PermissaoModelAssembler;
-import com.lampasw.algafood.api.model.PermissaoModel;
-import com.lampasw.algafood.api.openapi.controller.PermissaoControllerOpenApi;
+import com.lampasw.algafood.api.v1.assembler.PermissaoModelAssembler;
+import com.lampasw.algafood.api.v1.model.PermissaoModel;
+import com.lampasw.algafood.api.v1.openapi.controller.PermissaoControllerOpenApi;
 import com.lampasw.algafood.domain.model.Permissao;
 import com.lampasw.algafood.domain.repository.PermissaoRepository;
 

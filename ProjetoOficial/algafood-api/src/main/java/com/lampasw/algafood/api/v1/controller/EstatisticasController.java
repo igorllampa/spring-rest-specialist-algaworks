@@ -1,4 +1,4 @@
-package com.lampasw.algafood.api.controller;
+package com.lampasw.algafood.api.v1.controller;
 
 import java.util.List;
 
@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lampasw.algafood.api.AlgaLinks;
-import com.lampasw.algafood.api.model.EstatisticasModel;
-import com.lampasw.algafood.api.openapi.controller.EstatisticasControllerOpenApi;
+import com.lampasw.algafood.api.v1.AlgaLinks;
+import com.lampasw.algafood.api.v1.model.EstatisticasModel;
+import com.lampasw.algafood.api.v1.openapi.controller.EstatisticasControllerOpenApi;
 import com.lampasw.algafood.domain.filter.VendaDiariaFilter;
 import com.lampasw.algafood.domain.model.dto.VendaDiaria;
 import com.lampasw.algafood.domain.service.VendaQueryService;

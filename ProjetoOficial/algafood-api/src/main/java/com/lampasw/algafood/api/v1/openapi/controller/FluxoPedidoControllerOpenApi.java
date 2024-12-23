@@ -1,4 +1,4 @@
-package com.lampasw.algafood.api.openapi.controller;
+package com.lampasw.algafood.api.v1.openapi.controller;
 
 import org.springframework.http.ResponseEntity;
 

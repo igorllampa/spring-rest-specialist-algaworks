@@ -1,12 +1,12 @@
-package com.lampasw.algafood.api.openapi.controller;
+package com.lampasw.algafood.api.v1.openapi.controller;
 
 import org.springframework.hateoas.CollectionModel;
 
 import com.lampasw.algafood.api.exceptionhandler.Problem;
-import com.lampasw.algafood.api.model.UsuarioModel;
-import com.lampasw.algafood.api.model.input.SenhaInput;
-import com.lampasw.algafood.api.model.input.UsuarioComSenhaInput;
-import com.lampasw.algafood.api.model.input.UsuarioInput;
+import com.lampasw.algafood.api.v1.model.UsuarioModel;
+import com.lampasw.algafood.api.v1.model.input.SenhaInput;
+import com.lampasw.algafood.api.v1.model.input.UsuarioComSenhaInput;
+import com.lampasw.algafood.api.v1.model.input.UsuarioInput;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

@@ -3,8 +3,8 @@ package com.lampasw.algafood.core.jackson;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.lampasw.algafood.api.model.mixin.CidadeMixin;
-import com.lampasw.algafood.api.model.mixin.CozinhaMixin;
+import com.lampasw.algafood.api.v1.model.mixin.CidadeMixin;
+import com.lampasw.algafood.api.v1.model.mixin.CozinhaMixin;
 import com.lampasw.algafood.domain.model.Cidade;
 import com.lampasw.algafood.domain.model.Cozinha;
 

@@ -1,4 +1,4 @@
-package com.lampasw.algafood.api.assembler;
+package com.lampasw.algafood.api.v1.assembler;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
@@ -8,9 +8,9 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
-import com.lampasw.algafood.api.AlgaLinks;
-import com.lampasw.algafood.api.controller.UsuarioController;
-import com.lampasw.algafood.api.model.UsuarioModel;
+import com.lampasw.algafood.api.v1.AlgaLinks;
+import com.lampasw.algafood.api.v1.controller.UsuarioController;
+import com.lampasw.algafood.api.v1.model.UsuarioModel;
 import com.lampasw.algafood.domain.model.Usuario;
 
 @Component

@@ -1,4 +1,4 @@
-package com.lampasw.algafood.api.controller;
+package com.lampasw.algafood.api.v1.controller;
 
 import java.util.List;
 
@@ -18,13 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lampasw.algafood.api.assembler.UsuarioInputDisassembler;
-import com.lampasw.algafood.api.assembler.UsuarioModelAssembler;
-import com.lampasw.algafood.api.model.UsuarioModel;
-import com.lampasw.algafood.api.model.input.SenhaInput;
-import com.lampasw.algafood.api.model.input.UsuarioComSenhaInput;
-import com.lampasw.algafood.api.model.input.UsuarioInput;
-import com.lampasw.algafood.api.openapi.controller.UsuarioControllerOpenApi;
+import com.lampasw.algafood.api.v1.assembler.UsuarioInputDisassembler;
+import com.lampasw.algafood.api.v1.assembler.UsuarioModelAssembler;
+import com.lampasw.algafood.api.v1.model.UsuarioModel;
+import com.lampasw.algafood.api.v1.model.input.SenhaInput;
+import com.lampasw.algafood.api.v1.model.input.UsuarioComSenhaInput;
+import com.lampasw.algafood.api.v1.model.input.UsuarioInput;
+import com.lampasw.algafood.api.v1.openapi.controller.UsuarioControllerOpenApi;
 import com.lampasw.algafood.domain.model.Usuario;
 import com.lampasw.algafood.domain.repository.UsuarioRepository;
 import com.lampasw.algafood.domain.service.CadastroUsuarioService;

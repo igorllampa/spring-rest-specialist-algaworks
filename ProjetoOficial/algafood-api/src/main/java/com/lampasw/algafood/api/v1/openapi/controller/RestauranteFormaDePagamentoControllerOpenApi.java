@@ -1,10 +1,10 @@
-package com.lampasw.algafood.api.openapi.controller;
+package com.lampasw.algafood.api.v1.openapi.controller;
 
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
 
 import com.lampasw.algafood.api.exceptionhandler.Problem;
-import com.lampasw.algafood.api.model.FormaDePagamentoModel;
+import com.lampasw.algafood.api.v1.model.FormaDePagamentoModel;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

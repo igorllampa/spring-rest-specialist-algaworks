@@ -1,4 +1,4 @@
-package com.lampasw.algafood.api.assembler;
+package com.lampasw.algafood.api.v1.assembler;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,9 +6,9 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
-import com.lampasw.algafood.api.AlgaLinks;
-import com.lampasw.algafood.api.controller.EstadoController;
-import com.lampasw.algafood.api.model.EstadoModel;
+import com.lampasw.algafood.api.v1.AlgaLinks;
+import com.lampasw.algafood.api.v1.controller.EstadoController;
+import com.lampasw.algafood.api.v1.model.EstadoModel;
 import com.lampasw.algafood.domain.model.Estado;
 
 @Component

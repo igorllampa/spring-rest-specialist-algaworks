@@ -1,4 +1,4 @@
-package com.lampasw.algafood.api.model.mixin;
+package com.lampasw.algafood.api.v1.model.mixin;
 
 import java.util.ArrayList;
 import java.util.List;

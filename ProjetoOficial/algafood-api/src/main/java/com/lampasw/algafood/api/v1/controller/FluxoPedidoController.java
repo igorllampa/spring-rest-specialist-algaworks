@@ -1,4 +1,4 @@
-package com.lampasw.algafood.api.controller;
+package com.lampasw.algafood.api.v1.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lampasw.algafood.api.openapi.controller.FluxoPedidoControllerOpenApi;
+import com.lampasw.algafood.api.v1.openapi.controller.FluxoPedidoControllerOpenApi;
 import com.lampasw.algafood.domain.service.FluxoPedidoService;
 
 @RestController

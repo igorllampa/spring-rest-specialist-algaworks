@@ -1,4 +1,4 @@
-package com.lampasw.algafood.api.controller;
+package com.lampasw.algafood.api.v1.controller;
 
 import javax.validation.Valid;
 
@@ -21,13 +21,13 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.common.collect.ImmutableMap;
-import com.lampasw.algafood.api.assembler.PedidoInputDisassembler;
-import com.lampasw.algafood.api.assembler.PedidoModelAssembler;
-import com.lampasw.algafood.api.assembler.PedidoResumoModelAssembler;
-import com.lampasw.algafood.api.model.PedidoModel;
-import com.lampasw.algafood.api.model.PedidoResumoModel;
-import com.lampasw.algafood.api.model.input.PedidoInput;
-import com.lampasw.algafood.api.openapi.controller.PedidoControllerOpenApi;
+import com.lampasw.algafood.api.v1.assembler.PedidoInputDisassembler;
+import com.lampasw.algafood.api.v1.assembler.PedidoModelAssembler;
+import com.lampasw.algafood.api.v1.assembler.PedidoResumoModelAssembler;
+import com.lampasw.algafood.api.v1.model.PedidoModel;
+import com.lampasw.algafood.api.v1.model.PedidoResumoModel;
+import com.lampasw.algafood.api.v1.model.input.PedidoInput;
+import com.lampasw.algafood.api.v1.openapi.controller.PedidoControllerOpenApi;
 import com.lampasw.algafood.core.data.PageWrapper;
 import com.lampasw.algafood.core.data.PageableTranslator;
 import com.lampasw.algafood.domain.exception.EntidadeNaoEncontradaException;
